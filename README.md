@@ -1,4 +1,4 @@
-# attendence_event
+# Shelf
 
 A new Flutter project.
 
