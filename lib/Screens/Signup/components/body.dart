@@ -15,6 +15,8 @@ class Body extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final TextEditingController usernameController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
     Size size = MediaQuery.of(context).size;
     return Background(
         child: SingleChildScrollView(
@@ -77,7 +79,10 @@ class Body extends StatelessWidget {
             ],
           ),
           RoundedInputField(
-              icon: Icons.person, hintText: "My Name", onChanged: (value) {}),
+              controller: usernameController,
+              icon: Icons.person,
+              hintText: "My Name",
+              onChanged: (value) {}),
           SizedBox(height: size.height * 0.025),
           Row(
             children: [
@@ -91,6 +96,7 @@ class Body extends StatelessWidget {
             ],
           ),
           RoundedInputField(
+              controller: usernameController,
               icon: Icons.mail,
               hintText: "myemail@gmail.com",
               onChanged: (value) {}),
@@ -106,7 +112,8 @@ class Body extends StatelessWidget {
               ),
             ],
           ),
-          RoundedPasswordField(onChanged: (value) {}),
+          RoundedPasswordField(
+              controller: passwordController, onChanged: (value) {}),
           SizedBox(height: size.height * 0.025),
           AlreadyHaveAnAccountCheck(
               login: false,

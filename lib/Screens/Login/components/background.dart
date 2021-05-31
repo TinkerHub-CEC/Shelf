@@ -7,19 +7,21 @@ class Background extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
-      width: double.infinity,
-      height: size.height,
-      child: Stack(
-        alignment: Alignment.center,
-        children: <Widget>[
-          Positioned(
-            top: 50,
-            child:
-                Image.asset("assets/images/login.png", width: size.width * 1),
-          ),
-          child,
-        ],
+    return SingleChildScrollView(
+      child: Container(
+        width: double.infinity,
+        height: size.height,
+        child: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            Positioned(
+              top: 50,
+              child:
+                  Image.asset("assets/images/login.png", width: size.width * 1),
+            ),
+            child,
+          ],
+        ),
       ),
     );
   }

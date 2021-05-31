@@ -1,5 +1,6 @@
-import 'package:attendence_event/components/text_field_container.dart';
 import 'package:flutter/material.dart';
+
+import 'package:attendence_event/components/text_field_container.dart';
 
 import '../constants.dart';
 
@@ -9,9 +10,11 @@ class RoundedPasswordField extends StatefulWidget {
   final ValueChanged<String> onChanged;
   const RoundedPasswordField({
     Key? key,
+    required this.controller,
     required this.onChanged,
   }) : super(key: key);
 
+  final TextEditingController controller;
   @override
   _RoundedPasswordFieldState createState() => _RoundedPasswordFieldState();
 }
@@ -22,6 +25,7 @@ class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextField(
+        controller: widget.controller,
         obscureText: _isHiddenPassword,
         onChanged: widget.onChanged,
         decoration: InputDecoration(
