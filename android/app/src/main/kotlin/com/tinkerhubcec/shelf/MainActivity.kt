@@ -1,4 +1,4 @@
-package com.tinkerhubcec.attendence_event
+package com.tinkerhubcec.shelf
 
 import io.flutter.embedding.android.FlutterActivity
 

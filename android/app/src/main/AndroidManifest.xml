@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tinkerhubcec.attendence_event">
+    package="com.tinkerhubcec.shelf">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="attendence_event"
+        android:label="shelf"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
