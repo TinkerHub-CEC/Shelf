@@ -1,21 +1,32 @@
-import 'package:attendence_event/Screens/Login/login_screen.dart';
-import 'package:attendence_event/Screens/Signup/components/background.dart';
-import 'package:attendence_event/components/already_have_an_account.dart';
-import 'package:attendence_event/components/rounded_button.dart';
-import 'package:attendence_event/components/rounded_input_field.dart';
-import 'package:attendence_event/components/rounded_password_field.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shelf/Screens/Login/login_screen.dart';
+import 'package:shelf/Screens/Signup/components/background.dart';
+import 'package:shelf/components/already_have_an_account.dart';
+import 'package:shelf/components/rounded_button.dart';
+import 'package:shelf/components/rounded_input_field.dart';
+import 'package:shelf/components/rounded_password_field.dart';
+import 'package:shelf/constants.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   final Widget child;
 
   const Body({
     Key? key,
     required this.child,
   }) : super(key: key);
+
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
-    final TextEditingController usernameController = TextEditingController();
+    final TextEditingController nameController = TextEditingController();
+    final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
     Size size = MediaQuery.of(context).size;
     return Background(
@@ -79,7 +90,7 @@ class Body extends StatelessWidget {
             ],
           ),
           RoundedInputField(
-              controller: usernameController,
+              controller: nameController,
               icon: Icons.person,
               hintText: "My Name",
               onChanged: (value) {}),
@@ -96,7 +107,7 @@ class Body extends StatelessWidget {
             ],
           ),
           RoundedInputField(
-              controller: usernameController,
+              controller: emailController,
               icon: Icons.mail,
               hintText: "myemail@gmail.com",
               onChanged: (value) {}),
@@ -123,9 +134,55 @@ class Body extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => LoginScreen()),
                 );
               }),
-          RoundedButton(text: "Register", press: () {}),
+          RoundedButton(
+              text: "Register",
+              press: () {
+                signUp(nameController.text, emailController.text,
+                    passwordController.text);
+              }),
         ],
       ),
     ));
+  }
+
+  signUp(String name, String email, String password) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    Map data = {'username': name, 'email': email, 'password': password};
+
+    print(data);
+    var jsonResponse;
+    Map<String, String> headers = {"Content-Type": "application/json"};
+
+    final msg = jsonEncode({
+      "first_name": "none",
+      "last_name": "none",
+      "roll_no": "none",
+      "semester": "4",
+      "batch": "",
+      "username": name,
+      "email": email,
+      "password": password
+    });
+
+    var response = await http.post(Uri.parse("${baseUrl}users/"),
+        body: msg, headers: headers);
+    jsonResponse = json.decode(response.body);
+
+    // String refreshToken = jsonResponse['refresh'];
+    // Map<String, dynamic> decodedToken = JwtDecoder.decode(yourToken);
+
+    // print('Decoded Token: ${decodedToken['name']}');
+    print('JSON Response: $jsonResponse');
+    print('Response Status: ${response.statusCode}');
+    print('Response Body: ${response.body}');
+
+    if (jsonResponse != null) {
+      // sharedPreferences.setString("token", refreshToken);
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+          (Route<dynamic> route) => false);
+    } else {
+      print(response.body);
+    }
   }
 }

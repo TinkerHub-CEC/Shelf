@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:attendence_event/components/text_field_container.dart';
+import 'package:shelf/components/text_field_container.dart';
 
 import '../constants.dart';
 

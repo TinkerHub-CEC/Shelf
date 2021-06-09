@@ -1,8 +1,8 @@
-import 'package:attendence_event/Screens/Login/login_screen.dart';
-import 'package:attendence_event/Screens/Signup/signup_screen.dart';
-import 'package:attendence_event/Screens/Welcome/components/background.dart';
-import 'package:attendence_event/components/rounded_button.dart';
-import 'package:attendence_event/constants.dart';
+import 'package:shelf/Screens/Login/login_screen.dart';
+import 'package:shelf/Screens/Signup/signup_screen.dart';
+import 'package:shelf/Screens/Welcome/components/background.dart';
+import 'package:shelf/components/rounded_button.dart';
+import 'package:shelf/constants.dart';
 import 'package:flutter/material.dart';
 
 class Body extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:attendence_event/Screens/Login/login_screen.dart';
+import 'package:shelf/Screens/Login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -31,9 +31,10 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('JWT TOKEN'),
         actions: <Widget>[
-          FlatButton(
+          TextButton(
             onPressed: () {
               sharedPreferences.clear();
+              // ignore: deprecated_member_use
               sharedPreferences.commit();
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(
