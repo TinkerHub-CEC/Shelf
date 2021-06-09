@@ -1,16 +1,17 @@
 import 'dart:convert';
-import 'package:flutter/services.dart';
-import 'package:attendence_event/Screens/Home/home_screen.dart';
-import 'package:attendence_event/Screens/Login/components/background.dart';
-import 'package:attendence_event/Screens/Signup/signup_screen.dart';
-import 'package:attendence_event/components/already_have_an_account.dart';
-import 'package:attendence_event/components/rounded_button.dart';
-import 'package:attendence_event/components/rounded_input_field.dart';
-import 'package:attendence_event/components/rounded_password_field.dart';
+
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:shelf/Screens/ProfilePage/ProfilePage.dart';
+import 'package:shelf/Screens/Home/homepage.dart';
+import 'package:shelf/Screens/Login/components/background.dart';
+import 'package:shelf/Screens/Signup/signup_screen.dart';
+import 'package:shelf/components/already_have_an_account.dart';
+import 'package:shelf/components/rounded_button.dart';
+import 'package:shelf/components/rounded_input_field.dart';
+import 'package:shelf/components/rounded_password_field.dart';
+import 'package:shelf/constants.dart';
 
 class Body extends StatefulWidget {
   const Body({
@@ -22,7 +23,7 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -74,7 +75,7 @@ class _BodyState extends State<Body> {
               ],
             ),
             RoundedInputField(
-                controller: usernameController,
+                controller: emailController,
                 icon: Icons.mail,
                 hintText: "myemail@gmail.com",
                 onChanged: (value) {}),
@@ -118,7 +119,7 @@ class _BodyState extends State<Body> {
             RoundedButton(
                 text: "Login",
                 press: () {
-                  signIn(usernameController.text, passwordController.text);
+                  signIn(emailController.text, passwordController.text);
                 }),
           ],
         ),
@@ -126,17 +127,17 @@ class _BodyState extends State<Body> {
     );
   }
 
-  signIn(String username, String password) async {
+  signIn(String email, String password) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    Map data = {'username': username, 'password': password};
+    Map data = {'email': email, 'password': password};
 
     print(data);
     var jsonResponse;
     Map<String, String> headers = {"Content-Type": "application/json"};
 
-    final msg = jsonEncode({"username": username, "password": password});
+    final msg = jsonEncode({"email": email, "password": password});
 
-    var response = await http.post(Uri.parse("http://10.0.2.2:8000/api/token/"),
+    var response = await http.post(Uri.parse("${baseUrl}token/"),
         body: msg, headers: headers);
     jsonResponse = json.decode(response.body);
 
@@ -151,7 +152,7 @@ class _BodyState extends State<Body> {
     if (jsonResponse != null) {
       sharedPreferences.setString("token", refreshToken);
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (BuildContext context) => HomeScreen()),
+          MaterialPageRoute(builder: (BuildContext context) => Homepage()),
           (Route<dynamic> route) => false);
     } else {
       print(response.body);

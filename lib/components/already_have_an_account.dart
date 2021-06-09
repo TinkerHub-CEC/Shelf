@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
-
 //A Statless Widget for displaying whether the login is created or not.
 
 class AlreadyHaveAnAccountCheck extends StatelessWidget {

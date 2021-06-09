@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shelf/Screens/Login/login_screen.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -6,8 +8,27 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  late SharedPreferences sharedPreferences;
+
+  @override
+  void initState() {
+    super.initState();
+    checkLoginStatus();
+  }
+
+  checkLoginStatus() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    if (sharedPreferences.getString("token") == null) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+          (Route<dynamic> route) => false);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         drawer: Drawer(
           child: ListView(children: [Text('data')]),
@@ -19,6 +40,20 @@ class _ProfilePageState extends State<ProfilePage> {
                 color: Colors.black,
               )),
           iconTheme: IconThemeData(color: Colors.black),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                sharedPreferences.clear();
+                // ignore: deprecated_member_use
+                sharedPreferences.commit();
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => LoginScreen()),
+                    (Route<dynamic> route) => false);
+              },
+              child: Text('Logout'),
+            ),
+          ],
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,7 +62,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Padding(
                 padding: const EdgeInsets.only(top: 30.0),
                 child: CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/h.png'),
+                  backgroundImage: AssetImage('assets/images/h_photo.png'),
                   radius: 40.0,
                 ),
               ),
@@ -92,22 +127,22 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ],
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.emoji_events),
-              label: 'Events',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle_outlined),
-              label: 'Profile',
-            ),
-          ],
-        ),
+        // bottomNavigationBar: BottomNavigationBar(
+        //   items: const <BottomNavigationBarItem>[
+        //     BottomNavigationBarItem(
+        //       icon: Icon(Icons.home),
+        //       label: 'Home',
+        //     ),
+        //     BottomNavigationBarItem(
+        //       icon: Icon(Icons.emoji_events),
+        //       label: 'Events',
+        //     ),
+        //     BottomNavigationBarItem(
+        //       icon: Icon(Icons.account_circle_outlined),
+        //       label: 'Profile',
+        //     ),
+        //   ],
+        // ),
       ),
     );
   }
