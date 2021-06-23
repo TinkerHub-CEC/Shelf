@@ -14,8 +14,9 @@ class Body extends StatelessWidget {
           //mainAxisAlignment: MainAxisAlignment.center,
           //children: [
           ListView(
-        scrollDirection: Axis.vertical,
-        children: <Widget>[
+            physics: ScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          children: <Widget>[
           SizedBox(height: size.height * 0.04),
           TopBox(),
           SizedBox(height: size.height * 0.04),
@@ -33,7 +34,8 @@ class Body extends StatelessWidget {
               ),
             ],
           ),
-          EventCard(),
+            SizedBox(height: size.height * 0.02),
+            EventCard(),
           SizedBox(height: size.height * 0.04),
           // Row(
           //   mainAxisAlignment: MainAxisAlignment.center,
@@ -60,7 +62,7 @@ class Body extends StatelessWidget {
           //     )
           //   ],
           // ),
-          SizedBox(height: size.height * 0.04),
+          //SizedBox(height: size.height * 0.04),
         ],
       ),
       //  ],

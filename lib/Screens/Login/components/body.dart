@@ -137,7 +137,7 @@ class _BodyState extends State<Body> {
 
     final msg = jsonEncode({"email": email, "password": password});
 
-    var response = await http.post(Uri.parse("${baseUrl}token/"),
+    var response = await http.post(Uri.parse("${baseUrl}api/token/"),
         body: msg, headers: headers);
     jsonResponse = json.decode(response.body);
 
