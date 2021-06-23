@@ -1,6 +1,11 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
+import 'topbar.dart';
+
 
 
 void main() {
@@ -21,17 +26,31 @@ class CreateEvent extends StatefulWidget {
 class _CreateEventState extends State<CreateEvent> {
 
 Attendance? Type=Attendance.None;
+final picker=ImagePicker();
+ File? _image;
+Future getImage() async{
+  final image=await picker.getImage(source:ImageSource.gallery);
+  setState(() {
+    if (image!=null){
+    _image=File(image.path);}
+    else{
+      print("no image selected");
+    }
+  });
+}
 
   Widget build(BuildContext context) {
 
     return MaterialApp(
-        home: Scaffold(
+        home: SafeArea(
+        top :true,
+            child:Scaffold(
 
           drawer: Drawer(
             child: ListView(
                 children: [Text('data')]),
           ),
-          appBar: AppBar(
+         /* appBar: AppBar(
             backgroundColor: Colors.white,
             title: Text(
                 'Create Event',
@@ -40,7 +59,7 @@ Attendance? Type=Attendance.None;
                 )
             ),
             iconTheme: IconThemeData(color: Colors.black),
-          ),
+          ),*/
     //Size size=MediaQuery.of(context).size;
     /* return Container(
       margin: EdgeInsets.symmetric(
@@ -86,43 +105,83 @@ Attendance? Type=Attendance.None;
 
 
                            body:SingleChildScrollView(
+                         child: Column(
+                             children: [
+                               TopBox(),
+                              /* Padding(
+                           padding: const EdgeInsets.all(30.0),
+          child: Container(
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.black),
+                borderRadius: BorderRadius.circular(20.0)
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Create Event",
+                  style: TextStyle(
+                  fontSize: 15.0,
+                    fontWeight: FontWeight.bold
+                ),
+          ),
 
-                         child:  Column(
+              ],
+            ),
+          ),
+                           ),*/
+
+
+                         Column(
                              children: <Widget>[
                                Padding(
-                                 padding: const EdgeInsets.all(8.0),
+                                 padding: const EdgeInsets.all(30.0),
                                  child: Container(
                                    decoration: BoxDecoration(
                                      border: Border.all(color: Colors.black),
                                        borderRadius:BorderRadius.circular(20.0)
                                    ),
 
-                                   child:
+                                  /*child:
                                    Column(
                   children: <Widget>[
 
                     Center(
                       child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Center(
+                        padding: const EdgeInsets.all(16.0),*/
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Center(child: Text("Upload Files")),
-                              IconButton(
-                                onPressed: (){},
-                                icon: Center(child: Icon(Icons.file_copy)),
+                               Text("Upload Files"),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                /*child: _image==null?Text("select an image"):Image.file(_image)*/
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right:10.0),
+                                child:   RaisedButton.icon(
+                                  label: Text(""),
+                                  onPressed:
+                                    getImage,
+
+                                  icon: Center(child: Icon(Icons.file_copy)),
+                                    color:Colors.white,
+                                  shape: CircleBorder(
+
+                                  ),
+                                ),
                               )
                             ],
                           ),
-                        ),
-                      ),
+
+                     /* ),
                     ),
       ],
-    ),
+    ),*/
                                  ),
                                ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(30.0),
                       child: Container(
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.black),
@@ -174,7 +233,7 @@ Attendance? Type=Attendance.None;
                               setState(() {
                                 Type=value;
                               });
-                            },
+                            },//
 
 
                           ),
@@ -194,9 +253,11 @@ Attendance? Type=Attendance.None;
 
 
 
-
+],
 
                            ),
+
+    ),
 
 
 
@@ -218,6 +279,7 @@ Attendance? Type=Attendance.None;
           ),
           floatingActionButtonLocation:FloatingActionButtonLocation.centerFloat,
         ),
+    ),
     );
 
 
