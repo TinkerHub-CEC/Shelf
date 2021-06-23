@@ -2,11 +2,12 @@ import 'package:shelf/Screens/ProfilePage/ProfilePage.dart';
 import 'package:shelf/Screens/EventsPage/event_screen.dart';
 import 'package:shelf/Screens/Home/homepage.dart';
 import 'package:shelf/Screens/Login/login_screen.dart';
-
+import 'package:shelf/Screens/Welcome/welcome_screen.dart';
 import 'package:shelf/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; //for using device orientation
-import 'package:device_preview/device_preview.dart'; //device_preview package
+import 'package:device_preview/device_preview.dart';
+import 'Screens/Home/components/eventcard.dart'; //device_preview package
 
 void main() {
   //device orientation set to portrait
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: LoginScreen(),
+      home: WelcomeScreen(),
     );
   }
 }
