@@ -8,10 +8,6 @@ import 'topbar.dart';
 
 
 
-void main() {
-  runApp(CreateEvent()
-  );
-   }
 
 enum Attendance{Method1,Method2,None}
 
