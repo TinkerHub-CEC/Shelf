@@ -76,7 +76,7 @@ class _BodyState extends State<Body> {
             ),
             RoundedInputField(
                 controller: emailController,
-                icon: Icons.mail,
+                icon: Icons.email_outlined,
                 hintText: "myemail@gmail.com",
                 onChanged: (value) {}),
             SizedBox(height: size.height * 0.025),
@@ -94,19 +94,19 @@ class _BodyState extends State<Body> {
             ),
             RoundedPasswordField(
                 controller: passwordController, onChanged: (value) {}),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
-                  child: Text(
-                    "Forgot Password?",
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
-                  ),
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.end,
+            //   children: [
+            //     Container(
+            //       margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
+            //       child: Text(
+            //         "Forgot Password?",
+            //         style:
+            //             TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+            //       ),
+            //     ),
+            //   ],
+            // ),
             SizedBox(height: size.height * 0.075),
             AlreadyHaveAnAccountCheck(
               press: () {
@@ -127,7 +127,7 @@ class _BodyState extends State<Body> {
     );
   }
 
-  signIn(String email, String password) async {
+  Future signIn(String email, String password) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     Map data = {'email': email, 'password': password};
 
@@ -137,7 +137,7 @@ class _BodyState extends State<Body> {
 
     final msg = jsonEncode({"email": email, "password": password});
 
-    var response = await http.post(Uri.parse("${baseUrl}token/"),
+    var response = await http.post(Uri.parse("$baseUrl/api/token/"),
         body: msg, headers: headers);
     jsonResponse = json.decode(response.body);
 

@@ -31,7 +31,7 @@ class _RoundedPasswordFieldState extends State<RoundedPasswordField> {
         decoration: InputDecoration(
           hintText: "Password",
           icon: Icon(
-            Icons.lock,
+            Icons.lock_outline,
             color: kPrimaryColor,
           ),
           suffixIcon: InkWell(

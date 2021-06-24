@@ -11,40 +11,43 @@ class SliderBox extends StatelessWidget {
           options: CarouselOptions(
             enlargeCenterPage: true,
             autoPlay: true,
-            height: size.height * 0.25,
+            height: size.height * 0.21,
             aspectRatio: 16 / 9,
             autoPlayCurve: Curves.fastLinearToSlowEaseIn,
             enableInfiniteScroll: true,
             autoPlayAnimationDuration: Duration(milliseconds: 800),
-            viewportFraction: 0.8,
+            viewportFraction: 0.89,
           ),
           items: [
             Container(
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.black12),
+                border: Border.all(color: Colors.black12, width: 4),
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
                   image: AssetImage("assets/images/event-utsav.png"),
-                  fit: BoxFit.fitHeight,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
             Container(
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.black12),
+                border: Border.all(
+                  color: Colors.black12,
+                  width: 4,
+                ),
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
                     image: AssetImage("assets/images/event-hacktober.png"),
-                    fit: BoxFit.fitWidth),
+                    fit: BoxFit.cover),
               ),
             ),
             Container(
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.black12),
+                border: Border.all(color: Colors.black12, width: 4),
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
                   image: AssetImage("assets/images/event-uyilo.png"),
-                  fit: BoxFit.fitHeight,
+                  fit: BoxFit.fill,
                 ),
               ),
             )
