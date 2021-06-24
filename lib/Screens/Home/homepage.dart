@@ -1,4 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shelf/Screens/AnalyticsPage/analytics_screen.dart';
+import 'package:shelf/Screens/CreateEvent/CreateEvent.dart';
 import 'package:shelf/Screens/EventsPage/event_screen.dart';
 import 'package:shelf/Screens/Home/components/body.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +15,7 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage>
     with SingleTickerProviderStateMixin {
+  bool adminUser = true; //change to false if you want to view it as user
   late TabController _tabController;
   late SharedPreferences sharedPreferences;
 
@@ -20,7 +23,9 @@ class _HomepageState extends State<Homepage>
   void initState() {
     // TODO: implement initState
     super.initState();
-    _tabController = new TabController(length: 3, vsync: this);
+    _tabController = adminUser
+        ? new TabController(length: 4, vsync: this)
+        : new TabController(length: 3, vsync: this);
     checkLoginStatus();
   }
 
@@ -42,13 +47,63 @@ class _HomepageState extends State<Homepage>
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButton: adminUser
+          ? Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(width: size.width * 0.06),
+                      Center(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(
+                            vertical: 28,
+                          ),
+                          height: size.height * 0.1,
+                          width: size.width * 0.13,
+                          child: FloatingActionButton(
+                            backgroundColor: Colors.white,
+                            child: Container(
+                              child: Icon(
+                                Icons.add_circle,
+                                color: Color(0xffFF7A45),
+                                size: 58,
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CreateEvent()),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            )
+          : Container(),
       body: TabBarView(
-        children: <Widget>[
-          Body(),
-          EventScreen(),
-          ProfilePage(),
-        ],
+        children: adminUser
+            ? <Widget>[
+                Body(),
+                EventScreen(),
+                AnalyticsScreen(),
+                ProfilePage(),
+              ]
+            : <Widget>[
+                Body(),
+                EventScreen(),
+                ProfilePage(),
+              ],
         physics: NeverScrollableScrollPhysics(),
         controller: _tabController,
       ),
@@ -103,29 +158,60 @@ class _HomepageState extends State<Homepage>
               insets: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 10.0),
             ),
             indicatorColor: Colors.black,
-            tabs: <Widget>[
-              Tab(
-                icon: Icon(
-                  Icons.home,
-                  size: 24.0,
-                ),
-                text: "Home",
-              ),
-              Tab(
-                icon: Icon(
-                  Icons.emoji_events,
-                  size: 24.0,
-                ),
-                text: "Event",
-              ),
-              Tab(
-                icon: Icon(
-                  Icons.account_circle_outlined,
-                  size: 24.0,
-                ),
-                text: "Profile",
-              ),
-            ],
+            tabs: adminUser
+                ? <Widget>[
+                    Tab(
+                      icon: Icon(
+                        Icons.home,
+                        size: 24.0,
+                      ),
+                      text: "Home",
+                    ),
+                    Tab(
+                      icon: Icon(
+                        Icons.emoji_events,
+                        size: 24.0,
+                      ),
+                      text: "Event",
+                    ),
+                    Tab(
+                      icon: Icon(
+                        Icons.analytics_outlined,
+                        size: 24.0,
+                      ),
+                      text: "Analytics",
+                    ),
+                    Tab(
+                      icon: Icon(
+                        Icons.account_circle_outlined,
+                        size: 24.0,
+                      ),
+                      text: "Profile",
+                    ),
+                  ]
+                : <Widget>[
+                    Tab(
+                      icon: Icon(
+                        Icons.home,
+                        size: 24.0,
+                      ),
+                      text: "Home",
+                    ),
+                    Tab(
+                      icon: Icon(
+                        Icons.emoji_events,
+                        size: 24.0,
+                      ),
+                      text: "Event",
+                    ),
+                    Tab(
+                      icon: Icon(
+                        Icons.account_circle_outlined,
+                        size: 24.0,
+                      ),
+                      text: "Profile",
+                    ),
+                  ],
             controller: _tabController,
           ),
         ),

@@ -1,6 +1,6 @@
-import 'package:shelf/Screens/Home/components/eventcard.dart';
-import 'package:shelf/Screens/Home/components/slider.dart';
-import 'package:shelf/Screens/Home/components/topbar.dart';
+import 'eventcard.dart';
+import 'slider.dart';
+import 'topbar.dart';
 import 'package:flutter/material.dart';
 
 class Body extends StatelessWidget {
@@ -14,6 +14,7 @@ class Body extends StatelessWidget {
           //mainAxisAlignment: MainAxisAlignment.center,
           //children: [
           ListView(
+        physics: ScrollPhysics(),
         scrollDirection: Axis.vertical,
         children: <Widget>[
           SizedBox(height: size.height * 0.04),
@@ -33,6 +34,7 @@ class Body extends StatelessWidget {
               ),
             ],
           ),
+          SizedBox(height: size.height * 0.02),
           EventCard(),
           SizedBox(height: size.height * 0.04),
           // Row(
@@ -60,7 +62,7 @@ class Body extends StatelessWidget {
           //     )
           //   ],
           // ),
-          SizedBox(height: size.height * 0.04),
+          //SizedBox(height: size.height * 0.04),
         ],
       ),
       //  ],
