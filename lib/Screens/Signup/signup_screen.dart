@@ -22,7 +22,7 @@ class SignUpScreen extends StatelessWidget {
           controller: _pageController,
           children: [
             Body(child: Column()),
-            MoreBody(child: Column()),
+            MoreBody(),
           ],
         ),
       ),

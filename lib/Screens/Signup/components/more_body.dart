@@ -12,11 +12,8 @@ import 'package:shelf/components/text_field_container.dart';
 import 'package:shelf/constants.dart';
 
 class MoreBody extends StatefulWidget {
-  final Widget child;
-
   const MoreBody({
     Key? key,
-    required this.child,
   }) : super(key: key);
 
   @override
@@ -24,9 +21,9 @@ class MoreBody extends StatefulWidget {
 }
 
 class _MoreBodyState extends State<MoreBody> {
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  var nameController = TextEditingController();
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

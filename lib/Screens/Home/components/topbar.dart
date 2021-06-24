@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TopBox extends StatelessWidget {
+  bool adminUser = true;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -60,16 +61,27 @@ class TopBox extends StatelessWidget {
                                   color: Colors.deepOrange, width: 1)),
                         ),
                         SizedBox(width: 10),
-                        Container(
-                            //color: Colors.black,
-                            alignment: Alignment.centerLeft,
-                            width: size.width * .73, // .58,
-                            height: 30,
-                            //color: Colors.red,
-                            child: Text("Dashboard",
-                                style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.bold))),
+                        adminUser
+                            ? Container(
+                                //color: Colors.black,
+                                alignment: Alignment.centerLeft,
+                                width: size.width * .73, // .58,
+                                height: 30,
+                                //color: Colors.red,
+                                child: Text("Admin Dashboard",
+                                    style: TextStyle(
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.bold)))
+                            : Container(
+                                //color: Colors.black,
+                                alignment: Alignment.centerLeft,
+                                width: size.width * .73, // .58,
+                                height: 30,
+                                //color: Colors.red,
+                                child: Text("Dashboard",
+                                    style: TextStyle(
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.bold))),
                       ],
                     ),
                   ),

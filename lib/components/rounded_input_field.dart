@@ -5,7 +5,7 @@ import '../constants.dart';
 
 //Rounded Input Field Stateless Widget is created below
 
-class RoundedInputField extends StatelessWidget {
+class RoundedInputField extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
   final IconData icon;
@@ -19,16 +19,19 @@ class RoundedInputField extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _RoundedInputFieldState createState() => _RoundedInputFieldState();
+}
+
+class _RoundedInputFieldState extends State<RoundedInputField> {
+  @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextField(
-        controller: controller,
-        onChanged: (onChanged) {
-          print('First text field: $onChanged');
-        },
+        controller: widget.controller,
+        onChanged: widget.onChanged,
         decoration: InputDecoration(
-            icon: Icon(icon, color: kPrimaryColor),
-            hintText: hintText,
+            icon: Icon(widget.icon, color: kPrimaryColor),
+            hintText: widget.hintText,
             border: InputBorder.none),
       ),
     );

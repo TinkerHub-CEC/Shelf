@@ -24,7 +24,7 @@ class _HomepageState extends State<Homepage>
     // TODO: implement initState
     super.initState();
     _tabController = adminUser
-        ? new TabController(length: 4, vsync: this)
+        ? new TabController(length: 2, vsync: this)
         : new TabController(length: 3, vsync: this);
     checkLoginStatus();
   }
@@ -95,8 +95,8 @@ class _HomepageState extends State<Homepage>
         children: adminUser
             ? <Widget>[
                 Body(),
-                EventScreen(),
-                AnalyticsScreen(),
+                // EventScreen(),
+                // AnalyticsScreen(),
                 ProfilePage(),
               ]
             : <Widget>[
@@ -167,20 +167,20 @@ class _HomepageState extends State<Homepage>
                       ),
                       text: "Home",
                     ),
-                    Tab(
-                      icon: Icon(
-                        Icons.emoji_events,
-                        size: 24.0,
-                      ),
-                      text: "Event",
-                    ),
-                    Tab(
-                      icon: Icon(
-                        Icons.analytics_outlined,
-                        size: 24.0,
-                      ),
-                      text: "Analytics",
-                    ),
+                    // Tab(
+                    //   icon: Icon(
+                    //     Icons.emoji_events,
+                    //     size: 24.0,
+                    //   ),
+                    //   text: "Event",
+                    // ),
+                    // Tab(
+                    //   icon: Icon(
+                    //     Icons.analytics_outlined,
+                    //     size: 24.0,
+                    //   ),
+                    //   text: "Analytics",
+                    // ),
                     Tab(
                       icon: Icon(
                         Icons.account_circle_outlined,

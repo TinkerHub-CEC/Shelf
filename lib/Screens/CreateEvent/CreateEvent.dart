@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:shelf/Screens/CreateEventMethod/CreateEventMethod.dart';
 
 class CreateEvent extends StatefulWidget {
   @override
@@ -181,7 +182,12 @@ class _CreateEventState extends State<CreateEvent> {
 
         floatingActionButton: FloatingActionButton(
           child: Text('Next'),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CreateEventMethod()),
+            );
+          },
         ),
       ),
     );

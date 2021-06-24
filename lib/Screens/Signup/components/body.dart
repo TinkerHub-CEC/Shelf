@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelf/Screens/Login/login_screen.dart';
 import 'package:shelf/Screens/Signup/components/background.dart';
+import 'package:shelf/Screens/Signup/components/more_body.dart';
 import 'package:shelf/components/already_have_an_account.dart';
 import 'package:shelf/components/rounded_button.dart';
 
@@ -26,13 +27,18 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  final TextEditingController firstNameController = TextEditingController();
+  var firstNameController = TextEditingController();
 
-  final TextEditingController lastNameController = TextEditingController();
+  var lastNameController = TextEditingController();
 
-  final TextEditingController registerNumberController =
-      TextEditingController();
+  var registerNumberController = TextEditingController();
+  String firstName = '';
+  String lastName = '';
+  String regNo = '';
+  Object? semChoosen;
+  Object? valueChoosen;
 
+  var _listItems = ["1", "2", "3", "4", "5", "6", "7", "8"];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -102,13 +108,17 @@ class _BodyState extends State<Body> {
                 margin: EdgeInsets.symmetric(vertical: 5, horizontal: 36),
                 child: SmallRoundedInputField(
                     hintText: "First Name",
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      firstName = value;
+                    },
                     controller: firstNameController),
               ),
               Container(
                 child: SmallRoundedInputField(
                     hintText: "Last Name",
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      lastName = value;
+                    },
                     controller: lastNameController),
               ),
             ],
@@ -126,10 +136,14 @@ class _BodyState extends State<Body> {
             ],
           ),
           RoundedInputField(
-              controller: registerNumberController,
-              icon: Icons.confirmation_number,
-              hintText: "eg CHN19CS057",
-              onChanged: (value) {}),
+            icon: Icons.confirmation_number,
+            hintText: "eg CHN19CS057",
+            onChanged: (value) {
+              print(value);
+              regNo = value;
+            },
+            controller: registerNumberController,
+          ),
           SizedBox(height: size.height * 0.025),
           Row(
             children: [
@@ -142,7 +156,27 @@ class _BodyState extends State<Body> {
               ),
             ],
           ),
-          SelectDropDown(),
+          Container(
+            child: TextFieldContainer(
+              child: DropdownButton(
+                items: _listItems.map((dropDownItem) {
+                  return DropdownMenuItem(
+                    value: dropDownItem,
+                    child: Text(dropDownItem),
+                  );
+                }).toList(),
+                onChanged: (newValue) {
+                  setState(() {
+                    print(jsonEncode(newValue));
+                    this.valueChoosen = newValue;
+                    semChoosen = valueChoosen;
+                  });
+                },
+                hint: Text("Select"),
+                value: valueChoosen,
+              ),
+            ),
+          ),
           SizedBox(height: size.height * 0.025),
           AlreadyHaveAnAccountCheck(
               login: false,
@@ -161,7 +195,12 @@ class _BodyState extends State<Body> {
                 padding: const EdgeInsets.all(8),
                 child: IconButton(
                   color: Colors.white,
-                  onPressed: () {},
+                  onPressed: () {
+                    print(firstName);
+                    print(lastName);
+                    print(regNo);
+                    print(semChoosen);
+                  },
                   icon: Icon(
                     Icons.arrow_forward,
                     size: 32,
@@ -173,41 +212,5 @@ class _BodyState extends State<Body> {
         ],
       ),
     ));
-  }
-}
-
-class SelectDropDown extends StatefulWidget {
-  SelectDropDown({Key? key}) : super(key: key);
-
-  @override
-  _SelectDropDownState createState() => _SelectDropDownState();
-}
-
-class _SelectDropDownState extends State<SelectDropDown> {
-  Object? valueChoosen;
-
-  final List _listItems = ["1", "2", "3", "4", "5", "6", "7", "8"];
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: TextFieldContainer(
-        child: DropdownButton(
-          items: _listItems.map((dropDownItem) {
-            return DropdownMenuItem(
-              value: dropDownItem,
-              child: Text(dropDownItem),
-            );
-          }).toList(),
-          onChanged: (newValue) {
-            setState(() {
-              print(jsonEncode(newValue));
-              this.valueChoosen = newValue;
-            });
-          },
-          hint: Text("Select"),
-          value: valueChoosen,
-        ),
-      ),
-    );
   }
 }
