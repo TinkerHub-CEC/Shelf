@@ -6,36 +6,31 @@ import 'package:shelf/Screens/Login/login_screen.dart';
 import 'package:shelf/Screens/Signup/components/background.dart';
 import 'package:shelf/components/already_have_an_account.dart';
 import 'package:shelf/components/rounded_button.dart';
-
 import 'package:shelf/components/rounded_input_field.dart';
 import 'package:shelf/components/rounded_password_field.dart';
-import 'package:shelf/components/small_rounded_input_field.dart';
 import 'package:shelf/components/text_field_container.dart';
 import 'package:shelf/constants.dart';
 
-class Body extends StatefulWidget {
+class MoreBody extends StatefulWidget {
   final Widget child;
 
-  const Body({
+  const MoreBody({
     Key? key,
     required this.child,
   }) : super(key: key);
 
   @override
-  _BodyState createState() => _BodyState();
+  _MoreBodyState createState() => _MoreBodyState();
 }
 
-class _BodyState extends State<Body> {
-  final TextEditingController firstNameController = TextEditingController();
-
-  final TextEditingController lastNameController = TextEditingController();
-
-  final TextEditingController registerNumberController =
-      TextEditingController();
-
+class _MoreBodyState extends State<MoreBody> {
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Background(
         child: SingleChildScrollView(
       child: Column(
@@ -90,53 +85,7 @@ class _BodyState extends State<Body> {
               Container(
                 margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
                 child: Text(
-                  "Your Name",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
-                ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 36),
-                child: SmallRoundedInputField(
-                    hintText: "First Name",
-                    onChanged: (value) {},
-                    controller: firstNameController),
-              ),
-              Container(
-                child: SmallRoundedInputField(
-                    hintText: "Last Name",
-                    onChanged: (value) {},
-                    controller: lastNameController),
-              ),
-            ],
-          ),
-          SizedBox(height: size.height * 0.025),
-          Row(
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
-                child: Text(
-                  "Registration No",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
-                ),
-              ),
-            ],
-          ),
-          RoundedInputField(
-              controller: registerNumberController,
-              icon: Icons.confirmation_number,
-              hintText: "eg CHN19CS057",
-              onChanged: (value) {}),
-          SizedBox(height: size.height * 0.025),
-          Row(
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
-                child: Text(
-                  "Your Semster",
+                  "Department",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
                 ),
               ),
@@ -144,35 +93,78 @@ class _BodyState extends State<Body> {
           ),
           SelectDropDown(),
           SizedBox(height: size.height * 0.025),
-          AlreadyHaveAnAccountCheck(
-              login: false,
-              press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()),
-                );
-              }),
-          SizedBox(height: size.height * 0.025),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(50),
-            child: Container(
-              color: kPrimaryColor,
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: IconButton(
-                  color: Colors.white,
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.arrow_forward,
-                    size: 32,
-                  ),
+          Row(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
+                child: Text(
+                  "Your Email",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
                 ),
               ),
-            ),
+            ],
           ),
+          RoundedInputField(
+              controller: emailController,
+              icon: Icons.mail,
+              hintText: "myemail@gmail.com",
+              onChanged: (value) {}),
+          SizedBox(height: size.height * 0.025),
+          Row(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
+                child: Text(
+                  "Password",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                ),
+              ),
+            ],
+          ),
+          RoundedPasswordField(
+              controller: passwordController, onChanged: (value) {}),
+          SizedBox(height: size.height * 0.025),
+          RoundedButton(
+              text: "Register",
+              press: () {
+                signUp(nameController.text, emailController.text,
+                    passwordController.text);
+              }),
         ],
       ),
     ));
+  }
+
+  signUp(String name, String email, String password) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    Map data = {'username': name, 'email': email, 'password': password};
+
+    print(data);
+    var jsonResponse;
+    Map<String, String> headers = {"Content-Type": "application/json"};
+
+    final msg = jsonEncode({
+      "first_name": "none",
+      "last_name": "none",
+      "roll_no": "none",
+      "semester": "4",
+      "batch": "",
+      "username": name,
+      "email": email,
+      "password": password
+    });
+
+    var response = await http.post(Uri.parse("${baseUrl}/api/users/"),
+        body: msg, headers: headers);
+    jsonResponse = json.decode(response.body);
+
+    // String refreshToken = jsonResponse['refresh'];
+    // Map<String, dynamic> decodedToken = JwtDecoder.decode(yourToken);
+
+    // print('Decoded Token: ${decodedToken['name']}');
+    print('JSON Response: $jsonResponse');
+    print('Response Status: ${response.statusCode}');
+    print('Response MoreBody: ${response.body}');
   }
 }
 
@@ -186,7 +178,7 @@ class SelectDropDown extends StatefulWidget {
 class _SelectDropDownState extends State<SelectDropDown> {
   Object? valueChoosen;
 
-  final List _listItems = ["1", "2", "3", "4", "5", "6", "7", "8"];
+  final List _listItems = ["A", "B", "C", "D", "E", "F", "G"];
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -11,6 +11,11 @@ class TextFieldContainer extends StatelessWidget {
     required this.child,
   }) : super(key: key);
 
+//   @override
+//   _TextFieldContainerState createState() => _TextFieldContainerState();
+// }
+
+// class _TextFieldContainerState extends State<TextFieldContainer> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
