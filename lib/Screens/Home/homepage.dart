@@ -15,7 +15,7 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage>
     with SingleTickerProviderStateMixin {
-  bool adminUser = true; //change to false if you want to view it as user
+  bool adminUser = false; //change to false if you want to view it as user
   late TabController _tabController;
   late SharedPreferences sharedPreferences;
 

@@ -40,9 +40,9 @@ class TopBox extends StatelessWidget {
                         //     Icons.menu_sharp,
                         //   ),
                         // ),
-                        SizedBox(width: 10),
+                        SizedBox(width: size.width* .05),
                         Container(
-                          width: 26,
+                          width: size.width* .07,
                           alignment: Alignment.center,
                           child: Text(
                             "A",
@@ -60,12 +60,12 @@ class TopBox extends StatelessWidget {
                               border: Border.all(
                                   color: Colors.deepOrange, width: 1)),
                         ),
-                        SizedBox(width: 10),
+                        SizedBox(width: size.width* .05),
                         adminUser
                             ? Container(
                                 //color: Colors.black,
                                 alignment: Alignment.centerLeft,
-                                width: size.width * .73, // .58,
+                                width: size.width * .70, // .58,
                                 height: 30,
                                 //color: Colors.red,
                                 child: Text("Admin Dashboard",
@@ -75,7 +75,7 @@ class TopBox extends StatelessWidget {
                             : Container(
                                 //color: Colors.black,
                                 alignment: Alignment.centerLeft,
-                                width: size.width * .73, // .58,
+                                width: size.width * .70, // .58,
                                 height: 30,
                                 //color: Colors.red,
                                 child: Text("Dashboard",
