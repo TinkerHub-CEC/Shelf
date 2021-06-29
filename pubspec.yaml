@@ -30,10 +30,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   carousel_slider: ^4.0.0-nullsafety.0
   http: ^0.13.3
+  image_picker: ^0.8.0+4
   
   shared_preferences: ^2.0.6
   device_preview: ^0.7.0
   jwt_decoder: ^2.0.1
+  
 
   
 dev_dependencies:

@@ -4,18 +4,19 @@ import '../constants.dart';
 
 //Text Field Container Stateless Widget is created below
 
-class TextFieldContainer extends StatelessWidget {
+class SmallTextFieldContainer extends StatelessWidget {
   final Widget child;
-  const TextFieldContainer({
+  const SmallTextFieldContainer({
     Key? key,
     required this.child,
   }) : super(key: key);
 
 //   @override
-//   _TextFieldContainerState createState() => _TextFieldContainerState();
+//   _SmallTextFieldContainerState createState() =>
+//       _SmallTextFieldContainerState();
 // }
 
-// class _TextFieldContainerState extends State<TextFieldContainer> {
+// class _SmallTextFieldContainerState extends State<SmallTextFieldContainer> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -23,7 +24,7 @@ class TextFieldContainer extends StatelessWidget {
       margin: EdgeInsets.symmetric(
         vertical: 10,
       ),
-      width: size.width * 0.85,
+      width: size.width * 0.39,
       padding: EdgeInsets.symmetric(
         horizontal: 20,
         vertical: 5,
