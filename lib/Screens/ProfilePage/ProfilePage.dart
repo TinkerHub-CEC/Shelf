@@ -9,11 +9,9 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   late SharedPreferences sharedPreferences;
-
   @override
   void initState() {
     super.initState();
-    checkLoginStatus();
   }
 
   checkLoginStatus() async {
@@ -43,9 +41,6 @@ class _ProfilePageState extends State<ProfilePage> {
           actions: <Widget>[
             TextButton(
               onPressed: () {
-                sharedPreferences.clear();
-                // ignore: deprecated_member_use
-                sharedPreferences.commit();
                 Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
                         builder: (BuildContext context) => LoginScreen()),

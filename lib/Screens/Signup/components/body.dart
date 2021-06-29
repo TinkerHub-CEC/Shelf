@@ -1,15 +1,14 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
+
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:shelf/Screens/Login/login_screen.dart';
 import 'package:shelf/Screens/Signup/components/background.dart';
-import 'package:shelf/Screens/Signup/components/more_body.dart';
+
 import 'package:shelf/components/already_have_an_account.dart';
-import 'package:shelf/components/rounded_button.dart';
 
 import 'package:shelf/components/rounded_input_field.dart';
-import 'package:shelf/components/rounded_password_field.dart';
+
 import 'package:shelf/components/small_rounded_input_field.dart';
 import 'package:shelf/components/text_field_container.dart';
 import 'package:shelf/constants.dart';

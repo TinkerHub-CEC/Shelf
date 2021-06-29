@@ -1,9 +1,6 @@
-import 'dart:convert';
-
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shelf/Screens/ProfilePage/ProfilePage.dart';
+
 import 'package:shelf/Screens/Home/homepage.dart';
 import 'package:shelf/Screens/Login/components/background.dart';
 import 'package:shelf/Screens/Signup/signup_screen.dart';
@@ -11,7 +8,8 @@ import 'package:shelf/components/already_have_an_account.dart';
 import 'package:shelf/components/rounded_button.dart';
 import 'package:shelf/components/rounded_input_field.dart';
 import 'package:shelf/components/rounded_password_field.dart';
-import 'package:shelf/constants.dart';
+
+import 'package:shelf/providers/login_auth.dart';
 
 class Body extends StatefulWidget {
   const Body({
@@ -25,6 +23,7 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  late SharedPreferences sharedPreferences;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -118,44 +117,20 @@ class _BodyState extends State<Body> {
             ),
             RoundedButton(
                 text: "Login",
-                press: () {
+                press: () async {
+                  SharedPreferences sharedPreferences =
+                      await SharedPreferences.getInstance();
                   signIn(emailController.text, passwordController.text);
+                  if (sharedPreferences.getBool('islogged') == true) {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => Homepage()),
+                        (Route<dynamic> route) => false);
+                  }
                 }),
           ],
         ),
       ),
     );
-  }
-
-  Future signIn(String email, String password) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    Map data = {'email': email, 'password': password};
-
-    print(data);
-    var jsonResponse;
-    Map<String, String> headers = {"Content-Type": "application/json"};
-
-    final msg = jsonEncode({"email": email, "password": password});
-
-    var response = await http.post(Uri.parse("$baseUrl/api/token/"),
-        body: msg, headers: headers);
-    jsonResponse = json.decode(response.body);
-
-    String refreshToken = jsonResponse['refresh'];
-    // Map<String, dynamic> decodedToken = JwtDecoder.decode(yourToken);
-
-    // print('Decoded Token: ${decodedToken['name']}');
-
-    print('Response Status: ${response.statusCode}');
-    print('Response Body: ${response.body}');
-
-    if (jsonResponse != null) {
-      sharedPreferences.setString("token", refreshToken);
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (BuildContext context) => Homepage()),
-          (Route<dynamic> route) => false);
-    } else {
-      print(response.body);
-    }
   }
 }

@@ -1,8 +1,6 @@
 import 'package:shelf/components/small_text_field_container.dart';
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
-
 //Rounded Input Field Stateless Widget is created below
 
 class SmallRoundedInputField extends StatelessWidget {

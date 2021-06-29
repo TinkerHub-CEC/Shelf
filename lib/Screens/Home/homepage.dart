@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shelf/Screens/AnalyticsPage/analytics_screen.dart';
+import 'package:shelf/Api/api.dart';
+
 import 'package:shelf/Screens/CreateEvent/CreateEvent.dart';
 import 'package:shelf/Screens/EventsPage/event_screen.dart';
 import 'package:shelf/Screens/Home/components/body.dart';
@@ -15,12 +16,13 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage>
     with SingleTickerProviderStateMixin {
-  bool adminUser = true; //change to false if you want to view it as user
+  bool adminUser = getBoolData('isAdminUser') as bool;
   late TabController _tabController;
   late SharedPreferences sharedPreferences;
 
   @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
     super.initState();
     _tabController = adminUser
@@ -31,6 +33,7 @@ class _HomepageState extends State<Homepage>
 
   @override
   void dispose() {
+    // ignore: todo
     // TODO: implement dispose
     super.dispose();
     _tabController.dispose();
@@ -39,6 +42,15 @@ class _HomepageState extends State<Homepage>
   checkLoginStatus() async {
     sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.getString("token") == null) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+          (Route<dynamic> route) => false);
+    }
+  }
+
+  checkUserAdmin() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    if (sharedPreferences.getBool("isAdminUser") == true) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
           (Route<dynamic> route) => false);
