@@ -9,24 +9,15 @@ class SignUpScreen extends StatelessWidget {
 // }
 
 // class _SignUpScreenState extends State<SignUpScreen> {
-  PageController _pageController = PageController(initialPage: 0);
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(new FocusNode());
       },
-      child: Scaffold(
-        resizeToAvoidBottomInset: true,
-        body: PageView(
-          reverse: false,
-          controller: _pageController,
-          children: [
-            Body(child: Column()),
-            MoreBody(),
-          ],
-        ),
-      ),
+      child:
+          Scaffold(resizeToAvoidBottomInset: true, body: Body(child: Column())),
     );
   }
 }

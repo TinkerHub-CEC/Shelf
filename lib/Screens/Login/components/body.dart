@@ -120,13 +120,8 @@ class _BodyState extends State<Body> {
                 press: () async {
                   SharedPreferences sharedPreferences =
                       await SharedPreferences.getInstance();
-                  signIn(emailController.text, passwordController.text);
-                  if (sharedPreferences.getBool('islogged') == true) {
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => Homepage()),
-                        (Route<dynamic> route) => false);
-                  }
+                  signIn(
+                      context, emailController.text, passwordController.text);
                 }),
           ],
         ),

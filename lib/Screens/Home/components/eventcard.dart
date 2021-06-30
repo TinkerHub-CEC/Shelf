@@ -65,7 +65,7 @@ class _EventCardState extends State<EventCard> {
     var title = events['title'];
     var date = events['start_datetime'];
     var description = events['short_description'];
-    var image = "$baseUrl" + events['poster'];
+    var image = events['poster'];
     return GestureDetector(
       onTap: () {
         print("object");
