@@ -1,6 +1,8 @@
 import 'dart:convert';
+//import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shelf/Screens/EventsPage/event_screen.dart';
 import '../../../constants.dart';
 
 class EventCard extends StatefulWidget {
@@ -61,13 +63,17 @@ class _EventCardState extends State<EventCard> {
 
   Widget getCard(events) {
     Size size = MediaQuery.of(context).size;
+    var id = events['id'];
     var title = events['title'];
     var date = events['start_datetime'];
     var description = events['short_description'];
     var image = "$baseUrl" + events['poster'];
     return GestureDetector(
       onTap: () {
-        print("object");
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => EventScreen( events : id)),
+        );
       },
       child: Container(
         width: size.width * .85,
@@ -90,7 +96,7 @@ class _EventCardState extends State<EventCard> {
             children: <Widget>[
               Container(
                 width: size.width * .88,
-                height: 175,
+                height: size.height* .25,
                 decoration: BoxDecoration(
                     color: kPrimaryColor,
                     borderRadius: BorderRadius.circular(10),
