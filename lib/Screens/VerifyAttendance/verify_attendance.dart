@@ -1,31 +1,11 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatefulWidget {
+class VerifyAttendanceScreen extends StatefulWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  _VerifyAttendanceScreenState createState() => _VerifyAttendanceScreenState();
 }
 
-class _MyAppState extends State<MyApp> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        //use MaterialApp() widget like this
-        home: Home() //create new widget class for this 'home' to
-        // escape 'No MediaQuery widget found' error
-        );
-  }
-}
-
-class Home extends StatefulWidget {
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
+class _VerifyAttendanceScreenState extends State<VerifyAttendanceScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -123,7 +103,7 @@ class _HomeState extends State<Home> {
               children: [
                 CircleAvatar(
                   radius: 15,
-                  backgroundImage: AssetImage('assets/girl.jpg'),
+                  backgroundImage: AssetImage('assets/images/emma.jpg'),
                 ),
                 SizedBox(width: 15),
                 Text(

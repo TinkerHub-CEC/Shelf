@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelf/Screens/Login/login_screen.dart';
+import 'package:shelf/Screens/VerifyAttendance/verify_attendance.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -9,11 +10,9 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   late SharedPreferences sharedPreferences;
-
   @override
   void initState() {
     super.initState();
-    checkLoginStatus();
   }
 
   checkLoginStatus() async {
@@ -31,7 +30,17 @@ class _ProfilePageState extends State<ProfilePage> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         drawer: Drawer(
-          child: ListView(children: [Text('data')]),
+          child: ListView(children: [
+            TextButton(
+                child: Text('Attendance Page'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => VerifyAttendanceScreen()),
+                  );
+                })
+          ]),
         ),
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -43,9 +52,6 @@ class _ProfilePageState extends State<ProfilePage> {
           actions: <Widget>[
             TextButton(
               onPressed: () {
-                sharedPreferences.clear();
-                // ignore: deprecated_member_use
-                sharedPreferences.commit();
                 Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
                         builder: (BuildContext context) => LoginScreen()),

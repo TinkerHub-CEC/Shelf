@@ -13,6 +13,7 @@ class _EventCardState extends State<EventCard> {
   bool isLoading = false;
   @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
     super.initState();
     this.fetchEvents();
@@ -22,7 +23,7 @@ class _EventCardState extends State<EventCard> {
     setState(() {
       isLoading = true;
     });
-    var url = "${baseUrl}/api/events/active";
+    var url = "$baseUrl/api/events/active";
     var response = await http.get(Uri.parse(url));
     print(response.body);
     if (response.statusCode == 200) {
@@ -64,7 +65,7 @@ class _EventCardState extends State<EventCard> {
     var title = events['title'];
     var date = events['start_datetime'];
     var description = events['short_description'];
-    var image = "$baseUrl" + events['poster'];
+    var image = events['poster'];
     return GestureDetector(
       onTap: () {
         print("object");
