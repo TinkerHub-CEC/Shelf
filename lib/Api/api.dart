@@ -13,10 +13,3 @@ Future<String?> getData(String key) async {
 
   return data;
 }
-
-Future<String?> getBoolData(String key) async {
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  String? data = sharedPreferences.getBool(key) as String?;
-
-  return data;
-}

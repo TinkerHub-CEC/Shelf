@@ -1,12 +1,14 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelf/Api/api.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:shelf/Screens/Home/homepage.dart';
 import '../constants.dart';
 
-Future signIn(String email, String password) async {
+Future signIn(BuildContext context, String email, String password) async {
   final uri = Uri.parse('$baseUrl/api/token');
   print(uri);
 
@@ -34,6 +36,7 @@ Future signIn(String email, String password) async {
   print('Response Body: ${response.body}');
   if (response.statusCode == 200) {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
     storeData('auth_data', jsonResponse['access']);
     storeData('token', jsonResponse['refresh']);
     sharedPreferences.setString('refresh', jsonResponse['refresh']);
@@ -49,6 +52,13 @@ Future signIn(String email, String password) async {
     Map<String?, dynamic> decodedrefreshToken =
         JwtDecoder.decode(jsonResponse['refresh']);
     // Now you can use your decoded token
+    sharedPreferences.setBool(
+        'isAdminUser', decodedrefreshToken['is_superuser']);
+    final snackBar = SnackBar(
+      content: Text('Sucessfully Logged In'),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
     bool isTokenExpired = JwtDecoder.isExpired(jsonResponse['refresh']);
 
@@ -69,12 +79,21 @@ Future signIn(String email, String password) async {
     print(decodedauthToken);
     print(decodedrefreshToken);
     print(decodedrefreshToken['is_superuser']);
-    sharedPreferences.setBool(
-        'isAdminUser', decodedrefreshToken['is_superuser']);
+    // sharedPreferences.setBool(
+    //     'isAdminUser', decodedrefreshToken['is_superuser']);
+
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (BuildContext context) => Homepage()),
+        (Route<dynamic> route) => false);
 
     return true;
   } else {
     print(response.body);
+    final snackBar = SnackBar(
+      content: Text('You have given incorrect details'),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
 
