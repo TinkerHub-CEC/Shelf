@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:image_picker/image_picker.dart';
 import 'components/topbar.dart';
 
@@ -14,8 +14,10 @@ class CreateEventMethod extends StatefulWidget {
 }
 
 class _CreateEventMethodState extends State<CreateEventMethod> {
+  // ignore: non_constant_identifier_names
   Attendance? Type = Attendance.None;
   final picker = ImagePicker();
+  // ignore: unused_field
   File? _image;
   Future getImage() async {
     final image = await picker.getImage(source: ImageSource.gallery);
@@ -122,7 +124,7 @@ class _CreateEventMethodState extends State<CreateEventMethod> {
                             borderRadius: BorderRadius.circular(20.0)),
 
                         /*child:
-                                   Column(
+                                  Column(
                   children: <Widget>[
 
                     Center(

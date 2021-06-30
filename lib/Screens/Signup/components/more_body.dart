@@ -1,10 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shelf/Screens/Login/login_screen.dart';
+
 import 'package:shelf/Screens/Signup/components/background.dart';
-import 'package:shelf/components/already_have_an_account.dart';
+
 import 'package:shelf/components/rounded_button.dart';
 import 'package:shelf/components/rounded_input_field.dart';
 import 'package:shelf/components/rounded_password_field.dart';
@@ -22,8 +21,7 @@ class MoreBody extends StatefulWidget {
 
 class _MoreBodyState extends State<MoreBody> {
   var nameController = TextEditingController();
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -90,78 +88,9 @@ class _MoreBodyState extends State<MoreBody> {
           ),
           SelectDropDown(),
           SizedBox(height: size.height * 0.025),
-          Row(
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
-                child: Text(
-                  "Your Email",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
-                ),
-              ),
-            ],
-          ),
-          RoundedInputField(
-              controller: emailController,
-              icon: Icons.mail,
-              hintText: "myemail@gmail.com",
-              onChanged: (value) {}),
-          SizedBox(height: size.height * 0.025),
-          Row(
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
-                child: Text(
-                  "Password",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
-                ),
-              ),
-            ],
-          ),
-          RoundedPasswordField(
-              controller: passwordController, onChanged: (value) {}),
-          SizedBox(height: size.height * 0.025),
-          RoundedButton(
-              text: "Register",
-              press: () {
-                signUp(nameController.text, emailController.text,
-                    passwordController.text);
-              }),
         ],
       ),
     ));
-  }
-
-  signUp(String name, String email, String password) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    Map data = {'username': name, 'email': email, 'password': password};
-
-    print(data);
-    var jsonResponse;
-    Map<String, String> headers = {"Content-Type": "application/json"};
-
-    final msg = jsonEncode({
-      "first_name": "none",
-      "last_name": "none",
-      "roll_no": "none",
-      "semester": "4",
-      "batch": "",
-      "username": name,
-      "email": email,
-      "password": password
-    });
-
-    var response = await http.post(Uri.parse("${baseUrl}/api/users/"),
-        body: msg, headers: headers);
-    jsonResponse = json.decode(response.body);
-
-    // String refreshToken = jsonResponse['refresh'];
-    // Map<String, dynamic> decodedToken = JwtDecoder.decode(yourToken);
-
-    // print('Decoded Token: ${decodedToken['name']}');
-    print('JSON Response: $jsonResponse');
-    print('Response Status: ${response.statusCode}');
-    print('Response MoreBody: ${response.body}');
   }
 }
 

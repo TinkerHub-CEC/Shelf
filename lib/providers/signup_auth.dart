@@ -1,0 +1,59 @@
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+import 'package:shelf/Screens/Login/login_screen.dart';
+import '../constants.dart';
+
+signUp(BuildContext context, String firstname, String lastname, String email,
+    String password) async {
+  Map data = {
+    'firstname': firstname,
+    'lastname': lastname,
+    'email': email,
+    'password': password
+  };
+
+  print(data);
+  var jsonResponse;
+  Map<String, String> headers = {"Content-Type": "application/json"};
+
+  final msg = jsonEncode({
+    "first_name": firstname,
+    "last_name": lastname,
+    "roll_no": "10",
+    "semester": "4",
+    "batch": "D",
+    "username": (firstname + lastname).toLowerCase(),
+    "email": email,
+    "password": password
+  });
+  print(msg);
+  var response = await http.post(Uri.parse("$baseUrl/api/users/"),
+      body: msg, headers: headers);
+  jsonResponse = json.decode(response.body);
+  if (response.statusCode == 201) {
+    final snackBar = SnackBar(
+      content: Text('Sucessfully Registerd'),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+        (Route<dynamic> route) => false);
+  } else {
+    final snackBar = SnackBar(
+      content: Text('You have given incorrect details'),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+  // String refreshToken = jsonResponse['refresh'];
+  // Map<String, dynamic> decodedToken = JwtDecoder.decode(yourToken);
+
+  // print('Decoded Token: ${decodedToken['name']}');
+  print('JSON Response: $jsonResponse');
+  print('Response Status: ${response.statusCode}');
+  print('Response MoreBody: ${response.body}');
+}
