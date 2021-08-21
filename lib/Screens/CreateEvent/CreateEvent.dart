@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'topbar.dart';
+
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
+import 'package:shelf/Screens/CreateEventMethod/components/topBar.dart';
 import 'package:shelf/constants.dart';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
@@ -243,6 +244,7 @@ class _CreateEventState extends State<CreateEvent> {
 
 
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return MaterialApp(
       home: SafeArea(
         top: true,
@@ -258,19 +260,30 @@ class _CreateEventState extends State<CreateEvent> {
 
             child: Column(
               children: [
-                TopBox(),
+            Padding(
+            padding: const EdgeInsets.only(top:76.0),
+            child:
+            TopBox(),
+            ),
+
                 Form(
                   key: _Form,
                   child: Column(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.only(top:32),
                         child:
                         Container(
+                          width: size.width * .89,
+                          height: size.height * .07,
                           decoration: BoxDecoration(
                             /*color: Colors.deepOrange,*/
                             border: Border(left: BorderSide(
-                                color: Colors.deepOrange, width: 15)),
+                                color: Colors.deepOrange, width: 15),top:BorderSide(
+                                color: Colors.black12, width: 1.0),right:BorderSide(
+                                color: Colors.black12, width: 1.0),bottom:BorderSide(
+                                color: Colors.black12, width: 1.0),),
+                              /*borderRadius: BorderRadius.circular(5.0)*/
                           ),
                           child: TextFormField(
                             validator: (value) {
@@ -286,13 +299,18 @@ class _CreateEventState extends State<CreateEvent> {
                             decoration: InputDecoration(
 
                               hintText: "Event Name",
+                              contentPadding: const EdgeInsets.only(left: 12),
                               /* labelText:'Event Name',*/
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.grey, width: 1.0),
-                                borderRadius: BorderRadius.circular(0.0),
-
+                              focusedBorder:OutlineInputBorder(
+                                  borderSide: const BorderSide(color:Colors.deepOrange,width:2.0),
+                                  borderRadius: BorderRadius.circular(5.0)
                               ),
+                              border: InputBorder.none,
+                                /*borderSide: BorderSide(
+                                    color: Colors.black12, width: 1.0),
+                                borderRadius: BorderRadius.circular(5.0),
+
+                              ),*/
                               /*enabledBorder: OutlineInputBorder(
                                                   borderSide: BorderSide(color:Colors.deepOrange,width:10.0),
                                                 )*/
@@ -301,13 +319,18 @@ class _CreateEventState extends State<CreateEvent> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.only(top:19),
                         child:
                         Container(
+                          width: size.width * .89,
+                          height: size.height * .07,
                           decoration: BoxDecoration(
                             /*color: Colors.deepOrange,*/
                             border: Border(left: BorderSide(
-                                color: Colors.deepOrange, width: 15)),
+                                color: Colors.deepOrange, width: 15),top:BorderSide(
+                                color: Colors.black12, width: 1.0),right:BorderSide(
+                                color: Colors.black12, width: 1.0),bottom:BorderSide(
+                                color: Colors.black12, width: 1.0),),
                           ),
                           child: TextFormField(
                             validator: (value) {
@@ -325,23 +348,31 @@ class _CreateEventState extends State<CreateEvent> {
                             maxLines: null,
                             decoration: InputDecoration(
                                 hintText: "Short Description",
+                                contentPadding: const EdgeInsets.only(left: 12),
                                 /* labelText:'Short Description',*/
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(0.0),
-                                )
+                                focusedBorder:OutlineInputBorder(
+                                    borderSide: const BorderSide(color:Colors.deepOrange,width:2.0),
+                                    borderRadius: BorderRadius.circular(5.0)
+                                ),
+                                border: InputBorder.none
                             ),
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.only(top:19),
                         child:
                         Container(
+                          width: size.width * .89,
+                          height: size.height * .22,
 
                           decoration: BoxDecoration(
                             /*color: Colors.deepOrange,*/
                             border: Border(left: BorderSide(
-                                color: Colors.deepOrange, width: 15)),
+                                color: Colors.deepOrange, width: 15),top:BorderSide(
+                                color: Colors.black12, width: 1.0),right:BorderSide(
+                                color: Colors.black12, width: 1.0),bottom:BorderSide(
+                                color: Colors.black12, width: 1.0),),
                           ),
                           child: TextFormField(
                             validator: (value) {
@@ -358,24 +389,31 @@ class _CreateEventState extends State<CreateEvent> {
                             maxLines: null,
                             decoration: InputDecoration(
                                 hintText: "Long Description",
+                                contentPadding: const EdgeInsets.only(left: 12),
                                 /*labelText:'Long Description',*/
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.grey, width: 1.0),
-                                  borderRadius: BorderRadius.circular(0.0),
-                                )
+                                focusedBorder:OutlineInputBorder(
+                                    borderSide: const BorderSide(color:Colors.deepOrange,width:2.0),
+                                    borderRadius: BorderRadius.circular(5.0)
+                                ),
+                                border: InputBorder.none
+
                             ),
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.only(top:19),
                         child:
                         Container(
+                          width: size.width * .89,
+                          height: size.height * .07,
                           decoration: BoxDecoration(
                             /*color: Colors.deepOrange,*/
                             border: Border(left: BorderSide(
-                                color: Colors.deepOrange, width: 15)),
+                                color: Colors.deepOrange, width: 15),top:BorderSide(
+                                color: Colors.black12, width: 1.0),right:BorderSide(
+                                color: Colors.black12, width: 1.0),bottom:BorderSide(
+                                color: Colors.black12, width: 1.0),),
                           ),
                           child: TextFormField(
                             validator: (value) {
@@ -395,25 +433,30 @@ class _CreateEventState extends State<CreateEvent> {
                             decoration: InputDecoration(
                               /*   errorText: isANumber?null:"please enter a number",*/
                                 hintText: "Max Participants",
+                                contentPadding: const EdgeInsets.only(left: 12),
                                 /*labelText:'Max Participants',*/
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.grey, width: 1.0),
-                                  borderRadius: BorderRadius.circular(0.0),
-
-                                )
+                                focusedBorder:OutlineInputBorder(
+                                  borderSide: const BorderSide(color:Colors.deepOrange,width:2.0),
+                                  borderRadius: BorderRadius.circular(5.0)
+                                ),
+                                border: InputBorder.none
                             ),
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.only(top:19.0),
                         child:
                         Container(
+                          width: size.width * .89,
+                          height: size.height * .07,
                           decoration: BoxDecoration(
                             /*color: Colors.deepOrange,*/
                             border: Border(left: BorderSide(
-                                color: Colors.deepOrange, width: 15)),
+                                color: Colors.deepOrange, width: 15),top:BorderSide(
+                                color: Colors.black12, width: 1.0),right:BorderSide(
+                                color: Colors.black12, width: 1.0),bottom:BorderSide(
+                                color: Colors.black12, width: 1.0),),
                           ),
                           child: TextFormField(
                             validator: (value) {
@@ -436,13 +479,13 @@ class _CreateEventState extends State<CreateEvent> {
                             decoration: InputDecoration(
 
                                 hintText: "Venue",
+                                contentPadding: const EdgeInsets.only(left: 12),
                                 /*labelText:'Venue',*/
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.grey, width: 1.0),
-                                  borderRadius: BorderRadius.circular(0.0),
-
-                                )
+                                focusedBorder:OutlineInputBorder(
+                                    borderSide: const BorderSide(color:Colors.deepOrange,width:2.0),
+                                    borderRadius: BorderRadius.circular(5.0)
+                                ),
+                                border: InputBorder.none
                             ),
                           ),
                         ),
@@ -450,17 +493,18 @@ class _CreateEventState extends State<CreateEvent> {
 
 
                       Padding(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.only(top:19.0),
                         child: Container(
+                          width: size.width * .89,
 
                           decoration: BoxDecoration(
 
                             /*color: Colors.deepOrange,*/
                             border: Border(left: BorderSide(
                                 color: Colors.deepOrange, width: 15),top:BorderSide(
-                                color: Colors.grey, width: 1.0), right:BorderSide(
-                                color: Colors.grey, width: 1.0),bottom: BorderSide(
-                                color: Colors.grey, width: 1.0), ),
+                                color: Colors.black12, width: 1.0), right:BorderSide(
+                                color: Colors.black12, width: 1.0),bottom: BorderSide(
+                                color: Colors.black12, width: 1.0), ),
                           ),
                           /*border: Border.all(color: Colors.grey),
                                               borderRadius:BorderRadius.circular(20.0)*/
@@ -489,7 +533,11 @@ class _CreateEventState extends State<CreateEvent> {
                                   children: <Widget>[
 
 
-                                    Text('Starts:  '),
+
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 12.0),
+                                  child: Text('starts:  '),
+                                ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
@@ -518,7 +566,11 @@ class _CreateEventState extends State<CreateEvent> {
                                   children: <Widget>[
 
 
-                                    Text('Ends:  '),
+
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 12.0),
+                                      child: Text('ends:  '),
+                                    ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
@@ -550,13 +602,13 @@ class _CreateEventState extends State<CreateEvent> {
                                   ],
                                 ),
                               ),
+
                               Padding(
                                 padding: const EdgeInsets.all(16.0),
                                 child: Container(
                                   width: 800,
                                   child: Text(
-                                    'Event ',
-                                    textAlign: TextAlign.left,
+                                    'Event',
                                     style: TextStyle(
                                       fontSize: 18.0,
 
@@ -565,13 +617,18 @@ class _CreateEventState extends State<CreateEvent> {
                                   ),
                                 ),
                               ),
+
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Row(
                                   children: <Widget>[
 
 
-                                    Text('Starts:  '),
+
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 12.0),
+                                      child: Text('starts:  '),
+                                    ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
@@ -594,21 +651,25 @@ class _CreateEventState extends State<CreateEvent> {
                                   ],
                                 ),
                               ),
-                              Padding(
+                             /* Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Row(
                                   children: [
                                     _date32Validator(),
                                   ],
                                 ),
-                              ),
+                              ),*/
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Row(
                                   children: <Widget>[
 
 
-                                    Text('Ends:  '),
+
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 12.0),
+                                      child: Text('ends:  '),
+                                    ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
@@ -655,27 +716,31 @@ class _CreateEventState extends State<CreateEvent> {
                     Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Container(
+                        width: size.width * .89,
                         decoration: BoxDecoration(
 
                           /*color: Colors.deepOrange,*/
                           border: Border(left: BorderSide(
                               color: Colors.deepOrange, width: 15),top:BorderSide(
-                              color: Colors.grey, width: 1.0),right:BorderSide(
-                            color: Colors.grey, width: 1.0),bottom:BorderSide(
-                            color: Colors.grey, width: 1.0),),
+                              color: Colors.black12, width: 1.0),right:BorderSide(
+                            color: Colors.black12, width: 1.0),bottom:BorderSide(
+                            color: Colors.black12, width: 1.0),),
                         ),
 
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          /*mainAxisAlignment: MainAxisAlignment.center,*/
                           children: [
-                            Text("Upload Files"),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20.0),
+                              child: Text("Upload Files"),
+                            ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
 
                             ),
 
                             Padding(
-                              padding: const EdgeInsets.only(right: 10.0),
+                              padding: const EdgeInsets.only(left: 30.0),
                               child: RaisedButton.icon(
                                 label: Text(""),
                                 onPressed:
@@ -697,58 +762,83 @@ class _CreateEventState extends State<CreateEvent> {
                     Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Container(
+                        width: size.width * .89,
 
                         decoration: BoxDecoration(
 
                           /*color: Colors.deepOrange,*/
                           border: Border(left: BorderSide(
                               color: Colors.deepOrange, width: 15),top:BorderSide(
-                              color: Colors.grey, width: 1.0),right:BorderSide(
-                              color: Colors.grey, width: 1.0),bottom:BorderSide(
-                              color: Colors.grey, width: 1.0),),
+                              color: Colors.black12, width: 1.0),right:BorderSide(
+                              color: Colors.black12, width: 1.0),bottom:BorderSide(
+                              color: Colors.black12, width: 1.0),),
 
                           /*border: Border.all(color: Colors.grey),*/
                           /* borderRadius:BorderRadius.circular(0.0)*/
                         ),
                         child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                          Padding(
+                            padding: const EdgeInsets.only(left: 12.0),
+                             child:  Text(
                               'Attendance',
+
                               style: TextStyle(
                                 fontSize: 15.0,
                               ),
                             ),
+                        ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 12.0),
+                              child: Text(
+                                'Method',
 
-
-                            ListTile(
-                              title: const Text('Method 1'),
-                              leading: Radio(
-                                value: 1,
-                                groupValue: Type,
-                                onChanged: radioValue,
-
+                                style: TextStyle(
+                                  fontSize: 15.0,
+                                ),
                               ),
                             ),
-                            ListTile(
-                              title: const Text('Method 2'),
-                              leading: Radio(
-                                value: 2,
-                                groupValue: Type,
-                                onChanged: radioValue,
 
+
+                            Padding(
+                              padding: const EdgeInsets.only(left:12.0),
+                              child: ListTile(
+                                title: const Text('Method 1'),
+                                leading: Radio(
+                                  value: 1,
+                                  groupValue: Type,
+                                  onChanged: radioValue,
+
+                                ),
                               ),
                             ),
-                            ListTile(
-                              title: const Text('None'),
-                              leading: Radio(
-                                value: 0,
-                                groupValue: Type,
-                                onChanged: radioValue,
+                            Padding(
+                              padding: const EdgeInsets.only(left:12.0),
+                              child: ListTile(
+                                title: const Text('Method 2'),
+                                leading: Radio(
+                                  value: 2,
+                                  groupValue: Type,
+                                  onChanged: radioValue,
+
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 12.0),
+                              child: ListTile(
+                                title: const Text('None'),
+                                leading: Radio(
+                                  value: 0,
+                                  groupValue: Type,
+                                  onChanged: radioValue,
+
+
+                                ),
 
 
                               ),
-
-
                             ),
 
 
@@ -759,7 +849,7 @@ class _CreateEventState extends State<CreateEvent> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.fromLTRB(123, 63, 120, 52),
                   child: Container(
                     width: 140,
                     height: 50,
