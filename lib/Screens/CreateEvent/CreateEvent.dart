@@ -275,14 +275,11 @@ class _CreateEventState extends State<CreateEvent> {
                         child:
                         Container(
                           width: size.width * .89,
-                          height: size.height * .07,
+                          height: size.height * .06,
                           decoration: BoxDecoration(
                             /*color: Colors.deepOrange,*/
                             border: Border(left: BorderSide(
-                                color: Colors.deepOrange, width: 15),top:BorderSide(
-                                color: Colors.black12, width: 1.0),right:BorderSide(
-                                color: Colors.black12, width: 1.0),bottom:BorderSide(
-                                color: Colors.black12, width: 1.0),),
+                                color: Colors.deepOrange, width: 15),),
                               /*borderRadius: BorderRadius.circular(5.0)*/
                           ),
                           child: TextFormField(
@@ -303,15 +300,21 @@ class _CreateEventState extends State<CreateEvent> {
                               /* labelText:'Event Name',*/
                               focusedBorder:OutlineInputBorder(
                                   borderSide: const BorderSide(color:Colors.deepOrange,width:2.0),
-                                  borderRadius: BorderRadius.circular(5.0)
+                                  borderRadius:  BorderRadius.only(
+                                    topRight: Radius.circular(5.0),
+                                    bottomRight: Radius.circular(5.0),
                               ),
-                              border: InputBorder.none,
-                                /*borderSide: BorderSide(
+                              ),
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
                                     color: Colors.black12, width: 1.0),
-                                borderRadius: BorderRadius.circular(5.0),
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(5.0),
+                                  bottomRight: Radius.circular(5.0),
+                                ),
 
-                              ),*/
-                              /*enabledBorder: OutlineInputBorder(
+                              ),
+                             /* enabledBorder: OutlineInputBorder(
                                                   borderSide: BorderSide(color:Colors.deepOrange,width:10.0),
                                                 )*/
                             ),
@@ -323,14 +326,11 @@ class _CreateEventState extends State<CreateEvent> {
                         child:
                         Container(
                           width: size.width * .89,
-                          height: size.height * .07,
+                          height: size.height * .06,
                           decoration: BoxDecoration(
                             /*color: Colors.deepOrange,*/
                             border: Border(left: BorderSide(
-                                color: Colors.deepOrange, width: 15),top:BorderSide(
-                                color: Colors.black12, width: 1.0),right:BorderSide(
-                                color: Colors.black12, width: 1.0),bottom:BorderSide(
-                                color: Colors.black12, width: 1.0),),
+                                color: Colors.deepOrange, width: 15),),
                           ),
                           child: TextFormField(
                             validator: (value) {
@@ -352,9 +352,20 @@ class _CreateEventState extends State<CreateEvent> {
                                 /* labelText:'Short Description',*/
                                 focusedBorder:OutlineInputBorder(
                                     borderSide: const BorderSide(color:Colors.deepOrange,width:2.0),
-                                    borderRadius: BorderRadius.circular(5.0)
+                                  borderRadius:  BorderRadius.only(
+                                    topRight: Radius.circular(5.0),
+                                    bottomRight: Radius.circular(5.0),
+                                  ),
                                 ),
-                                border: InputBorder.none
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black12, width: 1.0),
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(5.0),
+                                  bottomRight: Radius.circular(5.0),
+                                ),
+
+                              ),
                             ),
                           ),
                         ),
@@ -369,34 +380,49 @@ class _CreateEventState extends State<CreateEvent> {
                           decoration: BoxDecoration(
                             /*color: Colors.deepOrange,*/
                             border: Border(left: BorderSide(
-                                color: Colors.deepOrange, width: 15),top:BorderSide(
-                                color: Colors.black12, width: 1.0),right:BorderSide(
-                                color: Colors.black12, width: 1.0),bottom:BorderSide(
-                                color: Colors.black12, width: 1.0),),
+                                color: Colors.deepOrange, width: 15),),
                           ),
-                          child: TextFormField(
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "please fill this field";
-                              }
-                              return null;
-                            },
-                            onChanged: (value) {
-                              longDescription = value;
-                            },
+                          child: SizedBox(
+                            width: size.width * .89,
+                            height: size.height * .89,
+                            child: TextFormField(
 
-                            controller: LongDescriptionController,
-                            maxLines: null,
-                            decoration: InputDecoration(
-                                hintText: "Long Description",
-                                contentPadding: const EdgeInsets.only(left: 12),
-                                /*labelText:'Long Description',*/
-                                focusedBorder:OutlineInputBorder(
-                                    borderSide: const BorderSide(color:Colors.deepOrange,width:2.0),
-                                    borderRadius: BorderRadius.circular(5.0)
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "please fill this field";
+                                }
+                                return null;
+                              },
+                              onChanged: (value) {
+                                longDescription = value;
+                              },
+
+                              controller: LongDescriptionController,
+                              maxLines: null,
+                              minLines: 15,
+                              decoration: InputDecoration(
+
+                                  hintText: "Long Description",
+                                  contentPadding: const EdgeInsets.only(left: 12),
+                                  /*labelText:'Long Description',*/
+                                  focusedBorder:OutlineInputBorder(
+                                      borderSide: const BorderSide(color:Colors.deepOrange,width:2.0),
+                                    borderRadius:  BorderRadius.only(
+                                      topRight: Radius.circular(5.0),
+                                      bottomRight: Radius.circular(5.0),
+                                    ),
+                                  ),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.black12, width: 1.0),
+                                  borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(5.0),
+                                    bottomRight: Radius.circular(5.0),
+                                  ),
+
                                 ),
-                                border: InputBorder.none
 
+                              ),
                             ),
                           ),
                         ),
@@ -406,14 +432,11 @@ class _CreateEventState extends State<CreateEvent> {
                         child:
                         Container(
                           width: size.width * .89,
-                          height: size.height * .07,
+                          height: size.height * .06,
                           decoration: BoxDecoration(
                             /*color: Colors.deepOrange,*/
                             border: Border(left: BorderSide(
-                                color: Colors.deepOrange, width: 15),top:BorderSide(
-                                color: Colors.black12, width: 1.0),right:BorderSide(
-                                color: Colors.black12, width: 1.0),bottom:BorderSide(
-                                color: Colors.black12, width: 1.0),),
+                                color: Colors.deepOrange, width: 15),),
                           ),
                           child: TextFormField(
                             validator: (value) {
@@ -437,9 +460,20 @@ class _CreateEventState extends State<CreateEvent> {
                                 /*labelText:'Max Participants',*/
                                 focusedBorder:OutlineInputBorder(
                                   borderSide: const BorderSide(color:Colors.deepOrange,width:2.0),
-                                  borderRadius: BorderRadius.circular(5.0)
+                                  borderRadius:  BorderRadius.only(
+                                    topRight: Radius.circular(5.0),
+                                    bottomRight: Radius.circular(5.0),
+                                  ),
                                 ),
-                                border: InputBorder.none
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black12, width: 1.0),
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(5.0),
+                                  bottomRight: Radius.circular(5.0),
+                                ),
+
+                              ),
                             ),
                           ),
                         ),
@@ -449,14 +483,11 @@ class _CreateEventState extends State<CreateEvent> {
                         child:
                         Container(
                           width: size.width * .89,
-                          height: size.height * .07,
+                          height: size.height * .06,
                           decoration: BoxDecoration(
                             /*color: Colors.deepOrange,*/
                             border: Border(left: BorderSide(
-                                color: Colors.deepOrange, width: 15),top:BorderSide(
-                                color: Colors.black12, width: 1.0),right:BorderSide(
-                                color: Colors.black12, width: 1.0),bottom:BorderSide(
-                                color: Colors.black12, width: 1.0),),
+                                color: Colors.deepOrange, width: 15),),
                           ),
                           child: TextFormField(
                             validator: (value) {
@@ -483,9 +514,20 @@ class _CreateEventState extends State<CreateEvent> {
                                 /*labelText:'Venue',*/
                                 focusedBorder:OutlineInputBorder(
                                     borderSide: const BorderSide(color:Colors.deepOrange,width:2.0),
-                                    borderRadius: BorderRadius.circular(5.0)
+                                  borderRadius:  BorderRadius.only(
+                                    topRight: Radius.circular(5.0),
+                                    bottomRight: Radius.circular(5.0),
+                                  ),
                                 ),
-                                border: InputBorder.none
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black12, width: 1.0),
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(5.0),
+                                  bottomRight: Radius.circular(5.0),
+                                ),
+
+                              ),
                             ),
                           ),
                         ),
@@ -504,7 +546,9 @@ class _CreateEventState extends State<CreateEvent> {
                                 color: Colors.deepOrange, width: 15),top:BorderSide(
                                 color: Colors.black12, width: 1.0), right:BorderSide(
                                 color: Colors.black12, width: 1.0),bottom: BorderSide(
-                                color: Colors.black12, width: 1.0), ),
+                                color: Colors.black12, width: 1.0),
+                              ),
+
                           ),
                           /*border: Border.all(color: Colors.grey),
                                               borderRadius:BorderRadius.circular(20.0)*/
@@ -780,7 +824,7 @@ class _CreateEventState extends State<CreateEvent> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 12.0),
+                            padding: const EdgeInsets.fromLTRB(12, 12, 0, 0),
                              child:  Text(
                               'Attendance',
 
