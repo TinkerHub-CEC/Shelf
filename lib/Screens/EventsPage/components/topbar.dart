@@ -31,36 +31,37 @@ class TopBox extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        //IconButton(
-                        //  onPressed: (
+                        IconButton(
+                          onPressed: (
 
-                        //      ) { print("object");
-                        //   },
-                        //  icon: Icon(
-                        //     Icons.menu_sharp,
-                        //   ),
-                        // ),
-                        SizedBox(width: size.width* .05),
-                        Container(
-                          width: size.width* .07,
-                          alignment: Alignment.center,
-                          child: Text(
-                            "A",
-                            style: TextStyle(fontSize: 15),
-                          ),
+                             ) { print("object");
+                           },
+                          icon: Icon(Icons.star_rounded,
+                             size:size.width*.07,
+                            color: Colors.yellow,
+                           ),
+                         ),
+                       // SizedBox(width: size.width* .05),
+                        //Container(
+                        //  width: size.width* .07,
+                        //  alignment: Alignment.center,
+                        //  child: Text(
+                        //    "A",
+                        //    style: TextStyle(fontSize: 15),
+                        //  ),
                           // child ://CircleAvatar(
                           // backgroundColor: Colors.white54,
                           //backgroundImage:
                           //   AssetImage('assets/images/h_photo.png'),
                           //radius: 15.0,
                           //  ),
-                          decoration: BoxDecoration(
-                              color: Colors.black12,
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                  color: Colors.deepOrange, width: 1)),
-                        ),
-                        SizedBox(width: size.width* .05),
+                         // decoration: BoxDecoration(
+                           //   color: Colors.black12,
+                            //  shape: BoxShape.circle,
+                           //   border: Border.all(
+                           //       color: Colors.deepOrange, width: 1)),
+                        //),
+                        //SizedBox(width: size.width* .05),
                         Container(
                           //color: Colors.black,
                             alignment: Alignment.centerLeft,

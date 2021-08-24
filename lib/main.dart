@@ -1,4 +1,7 @@
+import 'package:shelf/Screens/EventsPage/event_screen.dart';
+import 'package:shelf/Screens/Home/homepage.dart';
 import 'package:shelf/Screens/Login/login_screen.dart';
+import 'package:shelf/Screens/VerifyAttendance/verify_attendance.dart';
 
 import 'package:shelf/constants.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +35,7 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: LoginScreen(),
+      home: Homepage(),
     );
   }
 }

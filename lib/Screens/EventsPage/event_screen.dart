@@ -5,13 +5,16 @@ import 'package:shelf/Screens/Login/login_screen.dart';
 
  
 class EventScreen extends StatefulWidget {
+   EventScreen(this.events);
+   final events ;
 
-  @override
    _EventScreenState createState() => _EventScreenState();
 }
 
 class _EventScreenState extends State<EventScreen> {
   late SharedPreferences sharedPreferences;
+
+
 
   @override
   void initState() {
@@ -33,8 +36,10 @@ class _EventScreenState extends State<EventScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.events);
     return Scaffold(
-      body: Body(),
+      body: Body(widget.events
+      ),
     );
   }
   }

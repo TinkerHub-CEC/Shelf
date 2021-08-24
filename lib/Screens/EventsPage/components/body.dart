@@ -1,184 +1,260 @@
+//import 'dart:html';
 import 'dart:convert';
-import 'package:flutter/rendering.dart';
 
-import '../../../constants.dart';
-import 'topbar.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter/cupertino.dart';
+import 'package:shelf/Screens/EventsPage/components/topbar.dart';
+import 'package:shelf/Screens/EventsPage/event_screen.dart';
 import 'package:shelf/components/rounded_button.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
 
-class Body extends StatefulWidget {
-  final String Id ;
-  Body({
-    Key? key,
-    required this.Id,
-  }) : super(key: key);
-  @override
-  _BodyState createState() => _BodyState();
-}
+import '../../../constants.dart';
 
-class _BodyState extends State<Body> {
-  List events = [];
-  bool isLoading = false;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    this.fetchEvents();
-  }
+class Body extends StatelessWidget {
+  final events;
+  Body(this.events);
 
-  fetchEvents() async {
-    setState(() {
-      isLoading = true;
-    });
-    var url = "${baseUrl}/api/events/active";
-    var response = await http.get(Uri.parse(url));
-    print(response.body);
-    if (response.statusCode == 200) {
-      events = json.decode(response.body);
-      setState(() {
-        isLoading = false;
-      });
-    } else {
-      events = [];
-      isLoading = false;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [ Expanded(
-          child: getBody()
-      ),
-  ]  );
-  }
-
-  Widget getBody() {
-    if (events.contains(null) || events.length < 0 || isLoading) {
-      return Center(
-          child: CircularProgressIndicator(
-            valueColor: new AlwaysStoppedAnimation<Color>(kPrimaryColor),
-          ));
-    }
-    return ListView.builder(
-        physics: ScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: events.length,
-        itemBuilder: (context, index) {
-          return getEvent(events[index]);
-        });
-  }
-
-  Widget getEvent(events) {
+    print(events);
     Size size = MediaQuery.of(context).size;
-    var id = events['id'];
     var title = events['title'];
-    var datetime = events['start_datetime'];
-    var location = events['location'];
+    var sdatetime = events['start_datetime'];
+    String sdate = sdatetime.substring(0,10);
+    String stime = sdatetime.substring(11,16);
+    var edatetime = events['end_datetime'];
+    String edate = edatetime.substring(0,10);
+    String etime = sdatetime.substring(11,16);
     var description = events['long_description'];
-    var image = "$baseUrl" + events['poster'];
-    return Container(
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: size.height * 0.04),
-            TopBox(),
-        Container(
-              width: size.width*.88,
-              height: size.height*.41,
-              margin: EdgeInsets.symmetric(
-                vertical: 22,),
-                 decoration : BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                   image: DecorationImage(
-                       fit: BoxFit.fill, image: NetworkImage(image, ))
-                  ),
-              //child: Image.network(image,fit: BoxFit.fill,),
-              ),
-            Container(
-              child: Text(
-                title,
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-              width: size.width * 0.88,
-              height: size.width * 0.07,
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(
-                vertical: 13,
-              ),
-              child: Text(
-                description,
-                style: TextStyle(
-                  fontSize: 16.8,
-                ),
-                textAlign: TextAlign.justify,
+    var image = events['poster'];
+    var regclose = events['reg_close_date'];
+    String rgcdate = regclose.substring(0,10);
+    String rgctime = regclose.substring(11,16);
+    var regiclose = rgcdate+" @ "+ rgctime;
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(height: size.height * 0.07),
+          TopBox(),
+          Container(
+            margin: EdgeInsets.symmetric(
+              vertical: 22,
 
-              ),
-              width: size.width * 0.88,
-              height: size.width * 0.25,
             ),
-            Container(
-              padding: EdgeInsets.symmetric(
-                vertical: 6,
-                horizontal: 18,
+            decoration: BoxDecoration(
+              color: kPrimaryColor,
+              border: Border.all(color: Colors.black12),
+              borderRadius: BorderRadius.circular(10),),
+
+              width: size.width * 0.87,
+              height: size.width * 0.87,
+            child:
+                Image.network(image,scale: 3,),
+          ),
+          Container(
+            child: Text(
+              title,
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
               ),
-              margin: EdgeInsets.only(
-                top: 22,
+            ),
+            width: size.width * 0.87,
+            height: size.width * 0.07,
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(
+              vertical: 13,
+            ),
+            child: Text(
+              description,
+              style: TextStyle(
+                fontSize: 16.8,
               ),
-              width: size.width * 0.88,
-              height: size.width * 0.07,
-              child: Text(
-                datetime,
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
+              textAlign: TextAlign.left,
+            ),
+            width: size.width * 0.87,
+            height: size.width * 0.5,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+            SizedBox(
+              width: size.width * .04,
+            ),
+                Row(
+                  children: [
+                    Container(
+                      width: size.width * 0.07,
+                      height: size.width * 0.3,
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        border: Border.all(color: Colors.black12),
+                        borderRadius: BorderRadius.circular(10),),
+                      child: Center(
+                          child :RotatedBox(
+                            quarterTurns: -1,
+                            child :Text(
+                              'Start Date',
+                              //textDirection: TextDirection.ltr,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                              ),
+                            ),
+
+                          )
+                      ),
+
+                    ),
+                    Container(
+
+                      width: size.width * 0.35,
+                      height: size.width * 0.3,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.black12),
+                        borderRadius: BorderRadius.circular(10),),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+
+                          Text(
+                            sdate,
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
+                          SizedBox(
+                            height: size.height * .01,
+                          ),
+                          Text(
+                            stime,
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(
-                vertical: 6,
-                horizontal: 18,
-              ),
-              width: size.width * 0.88,
-              height: size.width * 0.07,
-              child: Text(
-                datetime,
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
+
+                Row(
+                  children: [
+                    Container(
+                      width: size.width * 0.07,
+                      height: size.width * 0.3,
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        border: Border.all(color: Colors.black12),
+                        borderRadius: BorderRadius.circular(10),),
+                      child: Center(
+                          child :RotatedBox(
+                        quarterTurns: -1,
+                        child :Text(
+                        'End Date',
+                        //textDirection: TextDirection.ltr,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
+
+                      )
+                    ),),
+                    Container(
+
+                      width: size.width * 0.35,
+                      height: size.width * 0.3,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.black12),
+                        borderRadius: BorderRadius.circular(10),),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            edate,
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
+                      SizedBox(
+                        height: size.height * .01),
+                          Text(
+                            etime,
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(
-                vertical: 6,
-                horizontal: 18,
-              ),
-              width: size.width * 0.88,
-              height: size.width * 0.07,
-              child: Text(
-                location,
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
+
+                SizedBox(
+                  width: size.width * .04,
                 ),
-              ),
+          ]),
+          //SizedBox(width: size.width * .06,),
+          Container(
+            margin: EdgeInsets.symmetric(
+              vertical: 13,
             ),
-            SizedBox(height: size.height * 0.06),
-            RoundedButton(text: "Register", press: () => {}),
-          ],
-        ),
-      );
-    }
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: Colors.black12),
+              borderRadius: BorderRadius.circular(10),),
+            width: size.width * 0.88,
+            height: size.height * 0.07,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  'Registration Open till',
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
+                Text(
+                  regiclose,
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                )
+              ],
+            ),
+          ),
+
+          SizedBox(height: size.height * 0.01),
+          RoundedButton(text: "Register", press: () => {}),
+        ],
+      ),
+    );
   }
+}
