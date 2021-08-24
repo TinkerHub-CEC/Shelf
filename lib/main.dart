@@ -36,6 +36,5 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 //%localappdata%/Android/Sdk/platform-tools/  do not change this
 //adb connect localhost:5556
