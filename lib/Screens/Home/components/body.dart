@@ -14,9 +14,9 @@ class Body extends StatelessWidget {
           //mainAxisAlignment: MainAxisAlignment.center,
           //children: [
           ListView(
-        physics: ScrollPhysics(),
-        scrollDirection: Axis.vertical,
-        children: <Widget>[
+          physics: ScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          children: <Widget>[
           SizedBox(height: size.height * 0.04),
           TopBox(),
           SizedBox(height: size.height * 0.04),

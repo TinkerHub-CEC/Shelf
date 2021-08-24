@@ -1,4 +1,3 @@
-import 'package:shelf/Screens/CreateEventMethod/CreateEventMethod.dart';
 import 'package:shelf/Screens/Login/login_screen.dart';
 import 'package:shelf/Screens/VerifyAttendance/verify_attendance.dart';
 
