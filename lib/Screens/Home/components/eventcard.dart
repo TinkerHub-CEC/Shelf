@@ -23,7 +23,7 @@ class _EventCardState extends State<EventCard> {
     setState(() {
       isLoading = true;
     });
-    var url = "$baseUrl/api/events/active";
+    var url = "$baseUrl/api/events/";
     var response = await http.get(Uri.parse(url));
     print(response.body);
     if (response.statusCode == 200) {
@@ -72,7 +72,7 @@ class _EventCardState extends State<EventCard> {
       },
       child: Container(
         width: size.width * .85,
-        height: size.height * .42,
+        height: size.height * 0.6,
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
         decoration: BoxDecoration(
             color: Colors.white,
@@ -91,12 +91,12 @@ class _EventCardState extends State<EventCard> {
             children: <Widget>[
               Container(
                 width: size.width * .88,
-                height: 175,
+                height: size.height * .42,
                 decoration: BoxDecoration(
-                    color: kPrimaryColor,
+                    color: Colors.grey[600],
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
-                        fit: BoxFit.fill, image: NetworkImage(image))),
+                        fit: BoxFit.scaleDown, image: NetworkImage(image))),
                 child: Container(
                     margin: EdgeInsets.all(15),
                     alignment: Alignment.bottomLeft,

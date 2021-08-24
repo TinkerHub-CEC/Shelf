@@ -16,8 +16,7 @@ class SignUpScreen extends StatelessWidget {
       onTap: () {
         FocusScope.of(context).requestFocus(new FocusNode());
       },
-      child:
-          Scaffold(resizeToAvoidBottomInset: true, body: Body(child: Column())),
+      child: Scaffold(resizeToAvoidBottomInset: true, body: Body()),
     );
   }
 }

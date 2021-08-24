@@ -1,3 +1,5 @@
+import 'package:shelf/components/custom_menu_bar.dart';
+
 import 'eventcard.dart';
 import 'slider.dart';
 import 'topbar.dart';
@@ -35,8 +37,10 @@ class Body extends StatelessWidget {
             ],
           ),
           SizedBox(height: size.height * 0.02),
+
           EventCard(),
           SizedBox(height: size.height * 0.04),
+
           // Row(
           //   mainAxisAlignment: MainAxisAlignment.center,
           //   children: [
