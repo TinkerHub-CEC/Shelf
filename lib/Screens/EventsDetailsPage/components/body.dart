@@ -1,17 +1,39 @@
+//import 'dart:html';
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+import 'package:flutter/cupertino.dart';
 import 'package:shelf/Screens/ConfirmationPage/confirmation_screen.dart';
 import 'package:shelf/components/custom_menu_bar.dart';
 import 'package:shelf/components/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
+import '../../../constants.dart';
+
 class Body extends StatelessWidget {
-  const Body({Key? key}) : super(key: key);
+  final events;
+  Body(this.events);
 
   @override
   Widget build(BuildContext context) {
     int _total_seats = 100;
     int _seats_filled = 80;
+    print(events);
     Size size = MediaQuery.of(context).size;
+    var title = events['title'];
+    var sdatetime = events['start_datetime'];
+    String sdate = sdatetime.substring(0, 10);
+    String stime = sdatetime.substring(11, 16);
+    var edatetime = events['end_datetime'];
+    String edate = edatetime.substring(0, 10);
+    String etime = sdatetime.substring(11, 16);
+    var description = events['long_description'];
+    var image = events['poster'];
+    var regclose = events['reg_close_date'];
+    String rgcdate = regclose.substring(0, 10);
+    String rgctime = regclose.substring(11, 16);
+    var regiclose = rgcdate + " @ " + rgctime;
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -22,8 +44,14 @@ class Body extends StatelessWidget {
             margin: EdgeInsets.symmetric(
               vertical: 22,
             ),
-            child:
-                Image.asset('assets/images/event-hacktober.png', scale: 0.83),
+            decoration: BoxDecoration(
+              color: kPrimaryColor,
+              border: Border.all(color: Colors.black12),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            width: size.width * 0.80,
+            height: size.width * 0.87,
+            child: Image.network(image),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -67,7 +95,7 @@ class Body extends StatelessWidget {
           ),
           Container(
             child: Text(
-              'Event Name 00',
+              title,
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -82,7 +110,7 @@ class Body extends StatelessWidget {
               vertical: 13,
             ),
             child: Text(
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Egestas interdum sed faucibus lacus sem arcu. Lectus sed sed aliquam adipiscing ultrices adipiscing. Purus in sodales in in et rhoncus. Habitant at commodo urna rhoncus phasellus nulla volutpat.",
+              description,
               style: TextStyle(
                 fontSize: 16.8,
               ),
@@ -91,28 +119,7 @@ class Body extends StatelessWidget {
             width: size.width * 0.8,
             height: size.width * 0.25,
           ),
-          SizedBox(height: size.height * 0.02),
-          Container(
-            width: size.width * 0.8,
-            child: Text(
-              "Contact.",
-              style: TextStyle(
-                fontSize: 16.8,
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: size.height * 0.005),
-            width: size.width * 0.8,
-            child: Text(
-              "000000000000",
-              style: TextStyle(
-                fontSize: 16.8,
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -161,7 +168,7 @@ class Body extends StatelessWidget {
                           width: size.width * 0.31,
                           height: size.width * 0.07,
                           child: Text(
-                            'Date 00-00-0000',
+                            sdate,
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -178,7 +185,7 @@ class Body extends StatelessWidget {
                           width: size.width * 0.31,
                           height: size.width * 0.07,
                           child: Text(
-                            'Time 00:00 pm',
+                            stime,
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -236,7 +243,7 @@ class Body extends StatelessWidget {
                           width: size.width * 0.31,
                           height: size.width * 0.07,
                           child: Text(
-                            'Date 00-00-0000',
+                            edate,
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -253,7 +260,7 @@ class Body extends StatelessWidget {
                           width: size.width * 0.31,
                           height: size.width * 0.07,
                           child: Text(
-                            'Time 00:00 pm',
+                            etime,
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -268,6 +275,7 @@ class Body extends StatelessWidget {
               ),
             ],
           ),
+          //SizedBox(width: size.width * .06,),
           Container(
             margin: EdgeInsets.only(
               top: size.height * 0.02,
@@ -285,7 +293,7 @@ class Body extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "15-07-2021 @ 5:00 PM",
+                  regiclose,
                   style: TextStyle(
                     color: Color(0xffF34336),
                     fontWeight: FontWeight.bold,
@@ -301,6 +309,7 @@ class Body extends StatelessWidget {
             ),
           ),
           SizedBox(height: size.height * 0.03),
+
           RoundedButton(
               text: "Register",
               press: () => {

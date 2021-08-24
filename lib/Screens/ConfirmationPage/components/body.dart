@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:shelf/components/custom_menu_bar.dart';
 
 class Body extends StatelessWidget {
-  const Body({Key? key}) : super(key: key);
+  const Body({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,42 +14,7 @@ class Body extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           SizedBox(height: size.height * 0.07),
-          Center(
-            child: Container(
-              margin: EdgeInsets.symmetric(
-                vertical: 10,
-              ),
-              padding: EdgeInsets.symmetric(
-                vertical: 10,
-                horizontal: 5,
-              ),
-              height: size.height * 0.055,
-              width: size.width * 0.8,
-              decoration: BoxDecoration(
-                border: Border.all(color: Color(0xffE1E8E8)),
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(6),
-              ),
-
-              // borderRadius: BorderRadius.circular(32),
-              child: Row(
-                children: [
-                  Container(
-                      margin: EdgeInsets.symmetric(
-                        horizontal: 10,
-                      ),
-                      child: Icon(Icons.menu)),
-                  Text(
-                    "Confirmation",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          CustomMenuBar(text: "Confirmation"),
           Stack(
             children: [
               Container(

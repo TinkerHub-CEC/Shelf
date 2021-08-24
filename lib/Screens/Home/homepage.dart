@@ -6,6 +6,7 @@ import 'package:shelf/Screens/EventsDetailsPage/event_screen.dart';
 import 'package:shelf/Screens/Home/components/body.dart';
 import 'package:flutter/material.dart';
 import 'package:shelf/Screens/Login/login_screen.dart';
+import 'package:shelf/Screens/RegisteredEventsPage/registered_events.dart';
 import 'package:shelf/providers/is_user_admin.dart';
 
 import '../ProfilePage/ProfilePage.dart';
@@ -19,7 +20,6 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
   late TabController _tabController;
   late TabController _admintabController;
   late SharedPreferences sharedPreferences;
-
 
   @override
   void initState() {
@@ -61,7 +61,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                 body: TabBarView(
                   children: <Widget>[
                     Body(),
-                    //EventScreen(),
+                    RegisteredEventsPage(),
                     ProfilePage(),
                   ],
                   physics: NeverScrollableScrollPhysics(),

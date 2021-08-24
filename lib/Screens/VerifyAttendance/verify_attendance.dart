@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shelf/Screens/Welcome/welcome_screen.dart';
+import 'package:shelf/components/custom_menu_bar.dart';
 import 'package:shelf/models/verify_data.dart';
 import "dart:convert";
 import '../../../constants.dart';
@@ -67,49 +68,7 @@ class _VerifyAttendanceScreenState extends State<VerifyAttendanceScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             SizedBox(height: size.height * 0.07),
-            Center(
-              child: Container(
-                margin: EdgeInsets.symmetric(
-                  vertical: 10,
-                ),
-                padding: EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 5,
-                ),
-                height: size.height * 0.055,
-                width: size.width * 0.8,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Color(0xffE1E8E8)),
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      width: size.width * .07,
-                      alignment: Alignment.center,
-                      child: Text(
-                        "A",
-                        style: TextStyle(fontSize: 15),
-                      ),
-                      decoration: BoxDecoration(
-                          color: Colors.black12,
-                          shape: BoxShape.circle,
-                          border:
-                              Border.all(color: Colors.deepOrange, width: 1)),
-                    ),
-                    SizedBox(width: size.width * 0.07),
-                    Text(
-                      "Verify Attendance",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            CustomMenuBar(text: "Verify Attendance"),
 
             //image upload
             SizedBox(height: 10),
