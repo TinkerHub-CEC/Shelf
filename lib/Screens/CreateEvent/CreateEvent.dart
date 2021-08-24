@@ -276,7 +276,6 @@ class _CreateEventState extends State<CreateEvent> {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                TopBox(),
                 Form(
                   key: _Form,
                   child: Column(

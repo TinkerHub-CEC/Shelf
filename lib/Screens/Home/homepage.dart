@@ -20,6 +20,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
   late TabController _admintabController;
   late SharedPreferences sharedPreferences;
 
+
   @override
   void initState() {
     // ignore: todo
@@ -60,7 +61,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                 body: TabBarView(
                   children: <Widget>[
                     Body(),
-                    EventScreen(),
+                    //EventScreen(),
                     ProfilePage(),
                   ],
                   physics: NeverScrollableScrollPhysics(),
