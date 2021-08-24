@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
+import 'package:shelf/Screens/CreateEventMethod/components/topBar.dart';
 import 'package:shelf/constants.dart';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
@@ -265,6 +266,7 @@ class _CreateEventState extends State<CreateEvent> {
 
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: SafeArea(
         top: true,
         child: Scaffold(

@@ -2,17 +2,16 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:shelf/Screens/EventsPage/event_screen.dart';
+import 'package:shelf/Screens/EventsDetailsPage/event_screen.dart';
 import '../../../constants.dart';
 
 class EventCard extends StatefulWidget {
-  
   @override
   _EventCardState createState() => _EventCardState();
 }
 
 class _EventCardState extends State<EventCard> {
-  int i=0;
+  int i = 0;
   List events = [];
   bool isLoading = false;
   @override
@@ -31,9 +30,9 @@ class _EventCardState extends State<EventCard> {
     var response = await http.get(Uri.parse(url));
     //print(response.body);
     if (response.statusCode == 200) {
-       var extractdata = json.decode(response.body);
-       events=extractdata;
-       //print(events[1]["title"]);
+      var extractdata = json.decode(response.body);
+      events = extractdata;
+      //print(events[1]["title"]);
       setState(() {
         isLoading = false;
       });
@@ -54,13 +53,13 @@ class _EventCardState extends State<EventCard> {
     if (events.contains(null) || events.length < 0 || isLoading) {
       return Center(
           child: CircularProgressIndicator(
-            valueColor: new AlwaysStoppedAnimation<Color>(kPrimaryColor),
-          ));
+        valueColor: new AlwaysStoppedAnimation<Color>(kPrimaryColor),
+      ));
     }
     return ListView.builder(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount:  events.length,
+        itemCount: events.length,
         itemBuilder: (context, i) {
           return getCard(events[i]);
         });
@@ -72,15 +71,16 @@ class _EventCardState extends State<EventCard> {
     var id = events['id'];
     var title = events['title'];
     var datetime = events['start_datetime'];
-    String date = datetime.substring(0,10);
+    String date = datetime.substring(0, 10);
     var description = events['short_description'];
     var image = events['poster'];
     return GestureDetector(
       onTap: () {
         Navigator.push(
-          context,
-         new MaterialPageRoute(builder: (BuildContext context) => new EventScreen(events),
-        ));
+            context,
+            new MaterialPageRoute(
+              builder: (BuildContext context) => new EventScreen(events),
+            ));
       },
       child: Container(
         width: size.width * .85,
@@ -103,9 +103,9 @@ class _EventCardState extends State<EventCard> {
             children: <Widget>[
               Container(
                 width: size.width * .88,
-                height: size.height* .35,
+                height: size.height * .35,
                 decoration: BoxDecoration(
-                    color: kPrimaryColor,
+                    color: Colors.grey[600],
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
                         fit: BoxFit.scaleDown, image: NetworkImage(image))),
@@ -137,7 +137,7 @@ class _EventCardState extends State<EventCard> {
                     width: size.width * .80,
                     height: size.height * .05,
                     child: Text(
-                     date.toString(),
+                      date.toString(),
                       style:
                           TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                     ),

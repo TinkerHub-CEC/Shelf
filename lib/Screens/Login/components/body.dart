@@ -10,6 +10,7 @@ import 'package:shelf/components/rounded_input_field.dart';
 import 'package:shelf/components/rounded_password_field.dart';
 
 import 'package:shelf/providers/login_auth.dart';
+import 'package:shelf/size_config.dart';
 
 class Body extends StatefulWidget {
   const Body({
@@ -26,6 +27,7 @@ class _BodyState extends State<Body> {
   late SharedPreferences sharedPreferences;
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     Size size = MediaQuery.of(context).size;
     return Background(
       child: SingleChildScrollView(
@@ -37,10 +39,14 @@ class _BodyState extends State<Body> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
+                  margin: EdgeInsets.symmetric(
+                      vertical: MediaQuery.of(context).size.height * .012,
+                      horizontal: MediaQuery.of(context).size.width * .078),
                   child: Text(
                     "Login",
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: SizeConfig.safeBlockHorizontal * 5,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
@@ -49,12 +55,14 @@ class _BodyState extends State<Body> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 38),
+                  margin: EdgeInsets.symmetric(
+                      vertical: MediaQuery.of(context).size.height * .012,
+                      horizontal: MediaQuery.of(context).size.width * .078),
                   child: Text(
                     "Sign into your account",
                     style: TextStyle(
                         color: Color(0xff788190),
-                        fontSize: 14,
+                        fontSize: SizeConfig.safeBlockHorizontal * 2.9,
                         fontWeight: FontWeight.w400),
                   ),
                 ),
@@ -64,11 +72,14 @@ class _BodyState extends State<Body> {
             Row(
               children: [
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
+                  margin: EdgeInsets.symmetric(
+                      vertical: MediaQuery.of(context).size.height * .012,
+                      horizontal: MediaQuery.of(context).size.width * .078),
                   child: Text(
                     "Your Email",
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                    style: TextStyle(
+                        fontSize: SizeConfig.safeBlockHorizontal * 3.4,
+                        fontWeight: FontWeight.normal),
                   ),
                 ),
               ],
@@ -82,11 +93,14 @@ class _BodyState extends State<Body> {
             Row(
               children: [
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
+                  margin: EdgeInsets.symmetric(
+                      vertical: MediaQuery.of(context).size.height * .012,
+                      horizontal: MediaQuery.of(context).size.width * .078),
                   child: Text(
                     "Password",
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                    style: TextStyle(
+                        fontSize: SizeConfig.safeBlockHorizontal * 3.4,
+                        fontWeight: FontWeight.normal),
                   ),
                 ),
               ],
