@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'topbar.dart';
+//import 'topbar.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:shelf/constants.dart';
@@ -258,7 +258,7 @@ class _CreateEventState extends State<CreateEvent> {
 
             child: Column(
               children: [
-                TopBox(),
+                //TopBox(),
                 Form(
                   key: _Form,
                   child: Column(

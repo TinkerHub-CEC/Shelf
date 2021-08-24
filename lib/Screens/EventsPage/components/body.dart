@@ -52,7 +52,7 @@ class Body extends StatelessWidget {
               width: size.width * 0.87,
               height: size.width * 0.87,
             child:
-                Image.network(image,scale: 3,),
+                Image.network(image),
           ),
           Container(
             child: Text(

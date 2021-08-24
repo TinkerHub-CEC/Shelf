@@ -27,7 +27,7 @@ class _EventCardState extends State<EventCard> {
     setState(() {
       isLoading = true;
     });
-    var url = "$baseUrl/api/events";
+    var url = "$baseUrl/api/events/active/all";
     var response = await http.get(Uri.parse(url));
     //print(response.body);
     if (response.statusCode == 200) {
