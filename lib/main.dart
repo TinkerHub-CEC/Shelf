@@ -1,4 +1,6 @@
+import 'package:shelf/Screens/CreateEventMethod/CreateEventMethod.dart';
 import 'package:shelf/Screens/Login/login_screen.dart';
+import 'package:shelf/Screens/VerifyAttendance/verify_attendance.dart';
 
 import 'package:shelf/constants.dart';
 import 'package:flutter/material.dart';
@@ -32,11 +34,10 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: LoginScreen(),
+      home: VerifyAttendanceScreen(),
     );
   }
 }
-
 
 //%localappdata%/Android/Sdk/platform-tools/  do not change this
 //adb connect localhost:5556
