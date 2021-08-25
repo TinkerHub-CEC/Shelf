@@ -20,7 +20,8 @@ class AlreadyHaveAnAccountCheck extends StatelessWidget {
         GestureDetector(
           onTap: () => press(),
           child: Container(
-            margin: EdgeInsets.symmetric(vertical: 10),
+            margin: EdgeInsets.symmetric(
+                vertical: MediaQuery.of(context).size.height * .010),
             child: Text(
               login ? "I don't have an account" : "Already have an account",
               style: TextStyle(color: Color(0xffEF3561)),

@@ -17,13 +17,11 @@ import 'package:shelf/components/small_rounded_input_field.dart';
 import 'package:shelf/components/text_field_container.dart';
 import 'package:shelf/constants.dart';
 import 'package:shelf/providers/signup_auth.dart';
+import 'package:shelf/size_config.dart';
 
 class Body extends StatefulWidget {
-  final Widget child;
-
   const Body({
     Key? key,
-    required this.child,
   }) : super(key: key);
 
   @override
@@ -48,36 +46,43 @@ class _BodyState extends State<Body> {
   // var _listItems = ["1", "2", "3", "4", "5", "6", "7", "8"];
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     Size size = MediaQuery.of(context).size;
     return Background(
         child: SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.start,
+          //   children: [
+          //     Container(
+          //       margin: EdgeInsets.symmetric(
+          //           vertical: size.height * 0.010,
+          //           horizontal: size.width * 0.010),
+          //       child: IconButton(
+          //         highlightColor: Colors.white,
+          //         iconSize: 22,
+          //         icon: Icon(Icons.arrow_back),
+          //         color: Colors.black,
+          //         onPressed: () => Navigator.pop(context, false),
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          SizedBox(height: size.height * 0.20),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-                child: IconButton(
-                  highlightColor: Colors.white,
-                  iconSize: 22,
-                  icon: Icon(Icons.arrow_back),
-                  color: Colors.black,
-                  onPressed: () => Navigator.pop(context, false),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: size.height * 0.16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
+                margin: EdgeInsets.symmetric(
+                    vertical: size.height * 0.012,
+                    horizontal: size.width * 0.078),
                 child: Text(
                   "Register",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 5,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ],
@@ -86,12 +91,14 @@ class _BodyState extends State<Body> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 38),
+                margin: EdgeInsets.symmetric(
+                    vertical: size.height * 0.012,
+                    horizontal: size.width * 0.078),
                 child: Text(
                   "Create your account",
                   style: TextStyle(
                       color: Color(0xff788190),
-                      fontSize: 14,
+                      fontSize: SizeConfig.safeBlockHorizontal * 2.9,
                       fontWeight: FontWeight.w400),
                 ),
               ),
@@ -101,18 +108,25 @@ class _BodyState extends State<Body> {
           Row(
             children: [
               Container(
-                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
+                margin: EdgeInsets.symmetric(
+                    vertical: size.height * 0.012,
+                    horizontal: size.width * 0.078),
                 child: Text(
                   "Your Name",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                  style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 3.4,
+                      fontWeight: FontWeight.normal),
                 ),
               ),
             ],
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 36),
+                margin: EdgeInsets.symmetric(
+                    vertical: size.height * .012,
+                    horizontal: size.width * .020),
                 child: SmallRoundedInputField(
                     hintText: "First Name",
                     onChanged: (value) {
@@ -187,10 +201,14 @@ class _BodyState extends State<Body> {
           Row(
             children: [
               Container(
-                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
+                margin: EdgeInsets.symmetric(
+                    vertical: size.height * .012,
+                    horizontal: size.width * .078),
                 child: Text(
                   "Your Email",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                  style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 3.4,
+                      fontWeight: FontWeight.normal),
                 ),
               ),
             ],
@@ -204,10 +222,14 @@ class _BodyState extends State<Body> {
           Row(
             children: [
               Container(
-                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
+                margin: EdgeInsets.symmetric(
+                    vertical: size.height * .012,
+                    horizontal: size.width * .078),
                 child: Text(
                   "Password",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                  style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 3.4,
+                      fontWeight: FontWeight.normal),
                 ),
               ),
             ],
