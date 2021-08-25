@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelf/Api/api.dart';
+import 'package:shelf/Screens/AnalyticsPage/analytics_screen.dart';
 
 import 'package:shelf/Screens/CreateEvent/CreateEvent.dart';
 import 'package:shelf/Screens/EventsPage/event_screen.dart';
@@ -60,6 +61,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                 body: TabBarView(
                   children: <Widget>[
                     Body(),
+                    AnalyticsScreen(),
                     //EventScreen(),
                     ProfilePage(),
                   ],
