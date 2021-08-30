@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelf/Screens/Login/login_screen.dart';
 import 'package:shelf/Screens/VerifyAttendance/verify_attendance.dart';
+import 'package:shelf/components/custom_menu_bar.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -26,6 +27,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -42,28 +44,26 @@ class _ProfilePageState extends State<ProfilePage> {
                 })
           ]),
         ),
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: Text('Profile',
-              style: TextStyle(
-                color: Colors.black,
-              )),
-          iconTheme: IconThemeData(color: Colors.black),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => LoginScreen()),
-                    (Route<dynamic> route) => false);
-              },
-              child: Text('Logout'),
-            ),
-          ],
-        ),
+
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            SizedBox(height: size.height * 0.07),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                CustomMenuBar(text: "Profile"),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => LoginScreen()),
+                        (Route<dynamic> route) => false);
+                  },
+                  child: Text('Logout'),
+                ),
+              ],
+            ),
             Center(
               child: Padding(
                 padding: const EdgeInsets.only(top: 30.0),
@@ -99,6 +99,7 @@ class _ProfilePageState extends State<ProfilePage> {
               padding: const EdgeInsets.fromLTRB(20.0, 50.0, 20.0, 1.0),
               child: SizedBox(
                 width: double.infinity,
+                // ignore: deprecated_member_use
                 child: RaisedButton.icon(
                   elevation: 0.0,
                   onPressed: () {},
@@ -117,9 +118,16 @@ class _ProfilePageState extends State<ProfilePage> {
               padding: const EdgeInsets.fromLTRB(20.0, 1.0, 20.0, 10.0),
               child: SizedBox(
                 width: double.infinity,
+                // ignore: deprecated_member_use
                 child: RaisedButton.icon(
                   elevation: 0.0,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => VerifyAttendanceScreen()),
+                    );
+                  },
                   icon: Icon(
                     Icons.settings,
                   ),

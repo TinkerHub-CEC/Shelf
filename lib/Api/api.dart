@@ -13,3 +13,10 @@ Future<String?> getData(String key) async {
 
   return data;
 }
+
+Future getValue(var key) async {
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  int? data = sharedPreferences.getInt(key);
+
+  return data;
+}

@@ -7,12 +7,15 @@ import 'package:shelf/Screens/Login/login_screen.dart';
 import '../constants.dart';
 
 signUp(BuildContext context, String firstname, String lastname, String email,
-    String password) async {
+    String password, String rollNo, String semester, String batch) async {
   Map data = {
     'firstname': firstname,
     'lastname': lastname,
     'email': email,
-    'password': password
+    'password': password,
+    'rollNo': rollNo,
+    'semester': semester,
+    'batch': batch,
   };
 
   print(data);
@@ -22,9 +25,9 @@ signUp(BuildContext context, String firstname, String lastname, String email,
   final msg = jsonEncode({
     "first_name": firstname,
     "last_name": lastname,
-    "roll_no": "10",
-    "semester": "4",
-    "batch": "D",
+    "roll_no": rollNo,
+    "semester": semester,
+    "batch": batch,
     "username": (firstname + lastname).toLowerCase(),
     "email": email,
     "password": password
@@ -48,6 +51,9 @@ signUp(BuildContext context, String firstname, String lastname, String email,
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+        (Route<dynamic> route) => false);
   }
   // String refreshToken = jsonResponse['refresh'];
   // Map<String, dynamic> decodedToken = JwtDecoder.decode(yourToken);

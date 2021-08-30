@@ -1,13 +1,13 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:shelf/components/custom_menu_bar.dart';
+import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
-class TopBox extends StatelessWidget {
+class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
     Size size = MediaQuery.of(context).size;
-    return CustomMenuBar(text: "Dashboard");
+    return Scaffold(
+      body: CustomMenuBar(text: "Events"),
+    );
   }
 }
