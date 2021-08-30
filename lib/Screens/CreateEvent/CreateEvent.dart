@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-
-import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:shelf/Screens/CreateEventMethod/components/topBar.dart';
 import 'package:shelf/constants.dart';
@@ -271,634 +269,744 @@ class _CreateEventState extends State<CreateEvent> {
                   child: Column(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.only(top:32),
-                        child:
-                        Container(
-                          width: size.width * .89,
-                          height: size.height * .06,
-                          decoration: BoxDecoration(
-                            /*color: Colors.deepOrange,*/
-                            border: Border(left: BorderSide(
-                                color: Colors.deepOrange, width: 15),),
-                              /*borderRadius: BorderRadius.circular(5.0)*/
-                          ),
-                          child: TextFormField(
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "please fill this field";
-                              }
-                              return null;
-                            },
-                            onChanged: (value) {
-                              EventName = value;
-                            },
-                            controller: EventnameController,
-                            decoration: InputDecoration(
-
-                              hintText: "Event Name",
-                              contentPadding: const EdgeInsets.only(left: 12),
-                              /* labelText:'Event Name',*/
-                              focusedBorder:OutlineInputBorder(
-                                  borderSide: const BorderSide(color:Colors.deepOrange,width:2.0),
-                                  borderRadius:  BorderRadius.only(
-                                    topRight: Radius.circular(5.0),
-                                    bottomRight: Radius.circular(5.0),
+                        padding: const EdgeInsets.fromLTRB(20.0, 19, 0, 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: size.width * .89,
+                              height: size.height * .07,
+                              /*margin: EdgeInsets.only(
+                      top: size.width * 0.028, left: size.width * 0.1),*/
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Color(0xffE1E8E8)),
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8),
                               ),
-                              ),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.black12, width: 1.0),
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(5.0),
-                                  bottomRight: Radius.circular(5.0),
-                                ),
-
-                              ),
-                             /* enabledBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(color:Colors.deepOrange,width:10.0),
-                                                )*/
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top:19),
-                        child:
-                        Container(
-                          width: size.width * .89,
-                          height: size.height * .06,
-                          decoration: BoxDecoration(
-                            /*color: Colors.deepOrange,*/
-                            border: Border(left: BorderSide(
-                                color: Colors.deepOrange, width: 15),),
-                          ),
-                          child: TextFormField(
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "please fill this field";
-                              }
-                              return null;
-                            },
-                            onChanged: (value) {
-                              shortDescription = value;
-                            },
-
-
-                            controller: ShortDescriptionController,
-                            maxLines: null,
-                            decoration: InputDecoration(
-                                hintText: "Short Description",
-                                contentPadding: const EdgeInsets.only(left: 12),
-                                /* labelText:'Short Description',*/
-                                focusedBorder:OutlineInputBorder(
-                                    borderSide: const BorderSide(color:Colors.deepOrange,width:2.0),
-                                  borderRadius:  BorderRadius.only(
-                                    topRight: Radius.circular(5.0),
-                                    bottomRight: Radius.circular(5.0),
-                                  ),
-                                ),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.black12, width: 1.0),
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(5.0),
-                                  bottomRight: Radius.circular(5.0),
-                                ),
-
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top:19),
-                        child:
-                        Container(
-                          width: size.width * .89,
-                          height: size.height * .22,
-
-                          decoration: BoxDecoration(
-                            /*color: Colors.deepOrange,*/
-                            border: Border(left: BorderSide(
-                                color: Colors.deepOrange, width: 15),),
-                          ),
-                          child: SizedBox(
-                            width: size.width * .89,
-                            height: size.height * .89,
-                            child: TextFormField(
-
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return "please fill this field";
-                                }
-                                return null;
-                              },
-                              onChanged: (value) {
-                                longDescription = value;
-                              },
-
-                              controller: LongDescriptionController,
-                              maxLines: null,
-                              minLines: 15,
-                              decoration: InputDecoration(
-
-                                  hintText: "Long Description",
-                                  contentPadding: const EdgeInsets.only(left: 12),
-                                  /*labelText:'Long Description',*/
-                                  focusedBorder:OutlineInputBorder(
-                                      borderSide: const BorderSide(color:Colors.deepOrange,width:2.0),
-                                    borderRadius:  BorderRadius.only(
-                                      topRight: Radius.circular(5.0),
-                                      bottomRight: Radius.circular(5.0),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: Color(0xffff7a45),
+                                      borderRadius: BorderRadius.circular(2),
+                                    ),
+                                    padding: EdgeInsets.only(
+                                      left: 4,
+                                    ),
+                                    height: size.height * 1,
+                                    width: size.width * 0.05,
+                                    child: RotatedBox(
+                                      quarterTurns: 3,
                                     ),
                                   ),
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.black12, width: 1.0),
-                                  borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(5.0),
-                                    bottomRight: Radius.circular(5.0),
+                                  SizedBox(
+                                      height: size.height*0.20,
+                                      width: size.width*0.832,
+                                      child:  TextFormField(
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return "please fill this field";
+                                          }
+                                          return null;
+                                        },
+                                        onChanged: (value) {
+                                          EventName = value;
+                                        },
+                                        controller: EventnameController,
+                                        decoration: InputDecoration(
+
+                                          hintText: "Event Name",
+                                          contentPadding: const EdgeInsets.only(left: 12),
+                                          /* labelText:'Event Name',*/
+                                          focusedBorder:OutlineInputBorder(
+                                            borderSide: const BorderSide(color:Colors.deepOrange,width:2.0),
+                                            borderRadius:  BorderRadius.only(
+                                              topRight: Radius.circular(5.0),
+                                              bottomRight: Radius.circular(5.0),
+                                            ),
+                                          ),
+                                          border: InputBorder.none
+                                        ),
+                                      ),
                                   ),
-
-                                ),
-
+                                ],
                               ),
-                            ),
-                          ),
-                        ),
-                      ),
+                            ),],),),
                       Padding(
-                        padding: const EdgeInsets.only(top:19),
-                        child:
-                        Container(
-                          width: size.width * .89,
-                          height: size.height * .06,
-                          decoration: BoxDecoration(
-                            /*color: Colors.deepOrange,*/
-                            border: Border(left: BorderSide(
-                                color: Colors.deepOrange, width: 15),),
-                          ),
-                          child: TextFormField(
-                            validator: (value) {
-                              if (value == null || value.isEmpty ||
-                                  !_digitRegex.hasMatch(value)) {
-                                return "please enter a number";
-                              }
-                              return null;
-                            },
-                            keyboardType: TextInputType.number,
-                            onChanged: (value) {
-                              MaxParticipants = int.parse(value);
-
-                              },
-
-                            controller: MaxParticipantsController,
-                            decoration: InputDecoration(
-                              /*   errorText: isANumber?null:"please enter a number",*/
-                                hintText: "Max Participants",
-                                contentPadding: const EdgeInsets.only(left: 12),
-                                /*labelText:'Max Participants',*/
-                                focusedBorder:OutlineInputBorder(
-                                  borderSide: const BorderSide(color:Colors.deepOrange,width:2.0),
-                                  borderRadius:  BorderRadius.only(
-                                    topRight: Radius.circular(5.0),
-                                    bottomRight: Radius.circular(5.0),
-                                  ),
-                                ),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.black12, width: 1.0),
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(5.0),
-                                  bottomRight: Radius.circular(5.0),
-                                ),
-
+                        padding: const EdgeInsets.fromLTRB(20.0, 19, 0, 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: size.width * .89,
+                              height: size.height * .07,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Color(0xffE1E8E8)),
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8),
                               ),
-                            ),
-                          ),
-                        ),
-                      ),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: Color(0xffff7a45),
+                                      borderRadius: BorderRadius.circular(2),
+                                    ),
+                                    padding: EdgeInsets.only(
+                                      left: 4,
+                                    ),
+                                    height: size.height * 1,
+                                    width: size.width * 0.05,
+                                    child: RotatedBox(
+                                      quarterTurns: 3,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                      height: size.height*0.20,
+                                    width: size.width*0.832,
+                                      child: TextFormField(
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return "please fill this field";
+                                          }
+                                          return null;
+                                        },
+                                        onChanged: (value) {
+                                          shortDescription = value;
+                                        },
+
+
+                                        controller: ShortDescriptionController,
+                                        maxLines: null,
+                                        decoration: InputDecoration(
+                                          hintText: "Short Description",
+                                          contentPadding: const EdgeInsets.only(left: 12),
+                                          /* labelText:'Short Description',*/
+                                          focusedBorder:OutlineInputBorder(
+                                            borderSide: const BorderSide(color:Colors.deepOrange,width:2.0),
+                                            borderRadius:  BorderRadius.only(
+                                              topRight: Radius.circular(5.0),
+                                              bottomRight: Radius.circular(5.0),
+                                            ),
+                                          ),
+                                          border: InputBorder.none
+                                        ),
+                                      ),)
+                                ],
+                              ),
+                            ),],),),
                       Padding(
-                        padding: const EdgeInsets.only(top:19.0),
-                        child:
-                        Container(
-                          width: size.width * .89,
-                          height: size.height * .06,
-                          decoration: BoxDecoration(
-                            /*color: Colors.deepOrange,*/
-                            border: Border(left: BorderSide(
-                                color: Colors.deepOrange, width: 15),),
-                          ),
-                          child: TextFormField(
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "please fill this field";
-                              }
-                              return null;
-                            },
-
-                            onChanged: (value) {
-                              Venue = value;
-                              if (value.isEmpty) {
-                                setValidator(true);
-                              }
-                              else {
-                                setValidator(false);
-                              }
-                            },
-                            controller: VenueController,
-                            decoration: InputDecoration(
-
-                                hintText: "Venue",
-                                contentPadding: const EdgeInsets.only(left: 12),
-                                /*labelText:'Venue',*/
-                                focusedBorder:OutlineInputBorder(
-                                    borderSide: const BorderSide(color:Colors.deepOrange,width:2.0),
-                                  borderRadius:  BorderRadius.only(
-                                    topRight: Radius.circular(5.0),
-                                    bottomRight: Radius.circular(5.0),
-                                  ),
-                                ),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.black12, width: 1.0),
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(5.0),
-                                  bottomRight: Radius.circular(5.0),
-                                ),
-
+                        padding: const EdgeInsets.fromLTRB(20.0, 19, 0, 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: size.width * .89,
+                              height: size.height * .30,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Color(0xffE1E8E8)),
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8),
                               ),
-                            ),
-                          ),
-                        ),
-                      ),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: Color(0xffff7a45),
+                                      borderRadius: BorderRadius.circular(2),
+                                    ),
+                                    padding: EdgeInsets.only(
+                                      left: 4,
+                                    ),
+                                    height: size.height * 1,
+                                    width: size.width * 0.05,
+                                    child: RotatedBox(
+                                      quarterTurns: 3,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                      height: size.height*0.50,
+                                    width: size.width*0.832,
+                                      child:  TextFormField(
 
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return "please fill this field";
+                                          }
+                                          return null;
+                                        },
+                                        onChanged: (value) {
+                                          longDescription = value;
+                                        },
+
+                                        controller: LongDescriptionController,
+                                        maxLines: null,
+                                        minLines: 15,
+                                        decoration: InputDecoration(
+
+                                          hintText: "Long Description",
+                                          contentPadding: const EdgeInsets.fromLTRB(12.0, 12.0, 0.0, 0.0),
+                                          /*labelText:'Long Description',*/
+                                          focusedBorder:OutlineInputBorder(
+                                            borderSide: const BorderSide(color:Colors.deepOrange,width:2.0),
+                                            borderRadius:  BorderRadius.only(
+                                              topRight: Radius.circular(5.0),
+                                              bottomRight: Radius.circular(5.0),
+                                            ),
+                                          ),
+                                          border: InputBorder.none
+                                        ),
+                                      ),)
+                                ],
+                              ),
+                            ),],),),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20.0, 19, 0, 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: size.width * .89,
+                              height: size.height * .07,
+                              /*margin: EdgeInsets.only(
+                      top: size.width * 0.028, left: size.width * 0.1),*/
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Color(0xffE1E8E8)),
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: Color(0xffff7a45),
+                                      borderRadius: BorderRadius.circular(2),
+                                    ),
+                                    padding: EdgeInsets.only(
+                                      left: 4,
+                                    ),
+                                    height: size.height * 1,
+                                    width: size.width * 0.05,
+                                    child: RotatedBox(
+                                      quarterTurns: 3,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                      height: size.height*0.20,
+                                    width: size.width*0.832,
+                                      child: TextFormField(
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty ||
+                                              !_digitRegex.hasMatch(value)) {
+                                            return "please enter a number";
+                                          }
+                                          return null;
+                                        },
+                                        keyboardType: TextInputType.number,
+                                        onChanged: (value) {
+                                          MaxParticipants = int.parse(value);
+
+                                        },
+
+                                        controller: MaxParticipantsController,
+                                        decoration: InputDecoration(
+
+                                          hintText: "Max Participants",
+                                          contentPadding: const EdgeInsets.only(left: 12),
+                                          /*labelText:'Max Participants',*/
+                                          focusedBorder:OutlineInputBorder(
+                                            borderSide: const BorderSide(color:Colors.deepOrange,width:2.0),
+                                            borderRadius:  BorderRadius.only(
+                                              topRight: Radius.circular(5.0),
+                                              bottomRight: Radius.circular(5.0),
+                                            ),
+                                          ),
+                                          border: InputBorder.none
+
+                                        ),
+                                      ),)
+                                ],
+                              ),
+                            ),],),),
 
                       Padding(
-                        padding: const EdgeInsets.only(top:19.0),
-                        child: Container(
-                          width: size.width * .89,
-
-                          decoration: BoxDecoration(
-
-                            /*color: Colors.deepOrange,*/
-                            border: Border(left: BorderSide(
-                                color: Colors.deepOrange, width: 15),top:BorderSide(
-                                color: Colors.black12, width: 1.0), right:BorderSide(
-                                color: Colors.black12, width: 1.0),bottom: BorderSide(
-                                color: Colors.black12, width: 1.0),
+                        padding: const EdgeInsets.fromLTRB(20.0, 19, 0, 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: size.width * .89,
+                              height: size.height * .07,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Color(0xffE1E8E8)),
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8),
                               ),
-
-                          ),
-                          /*border: Border.all(color: Colors.grey),
-                                              borderRadius:BorderRadius.circular(20.0)*/
-
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Container(
-                                  width: 800,
-                                  child: Text(
-                                    'Event Registration',
-                                    style: TextStyle(
-                                      fontSize: 18.0,
-
-
+                              child: Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: Color(0xffff7a45),
+                                      borderRadius: BorderRadius.circular(2),
+                                    ),
+                                    padding: EdgeInsets.only(
+                                      left: 4,
+                                    ),
+                                    height: size.height * 1,
+                                    width: size.width * 0.05,
+                                    child: RotatedBox(
+                                      quarterTurns: 3,
                                     ),
                                   ),
-                                ),
+                                  SizedBox(
+                                      height: size.height*0.20,
+                                      width: size.width*0.832,
+                                      child:TextFormField(
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return "please fill this field";
+                                          }
+                                          return null;
+                                        },
+
+                                        onChanged: (value) {
+                                          Venue = value;
+                                          if (value.isEmpty) {
+                                            setValidator(true);
+                                          }
+                                          else {
+                                            setValidator(false);
+                                          }
+                                        },
+                                        controller: VenueController,
+                                        decoration: InputDecoration(
+
+                                          hintText: "Venue",
+                                          contentPadding: const EdgeInsets.only(left: 12),
+                                          /*labelText:'Venue',*/
+                                          focusedBorder:OutlineInputBorder(
+                                            borderSide: const BorderSide(color:Colors.deepOrange,width:2.0),
+                                            borderRadius:  BorderRadius.only(
+                                              topRight: Radius.circular(5.0),
+                                              bottomRight: Radius.circular(5.0),
+                                            ),
+                                          ),
+                                          border: InputBorder.none
+                                        ),
+                                      ),
+                                  )
+                                ],
                               ),
-
-
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  children: <Widget>[
-
-
-
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 12.0),
-                                  child: Text('starts:  '),
-                                ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                          '${_dateTime1.day}/${_dateTime1
-                                              .month}/${_dateTime1.year}'),
-                                    ),
-                                    Text('${time1.hour}:${time1.minute}'),
-                                    IconButton(
-                                      onPressed: () => _pickDate1(context),
-                                      icon: Icon(Icons.date_range),
-
-                                    ),
-                                    IconButton(
-                                      onPressed: () => _pickTime1(context),
-                                      icon: Icon(Icons.access_time_outlined),
-
-                                    ),
-
-
-                                  ],
-                                ),
+                            ),],),),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20.0, 19, 0, 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: size.width * .89,
+                              height: size.height * .60,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Color(0xffE1E8E8)),
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  children: <Widget>[
-
-
-
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 12.0),
-                                      child: Text('ends:  '),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: Color(0xffff7a45),
+                                      borderRadius: BorderRadius.circular(2),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                          '${_dateTime2.day}/${_dateTime2
-                                              .month}/${_dateTime2.year}'),
+                                    padding: EdgeInsets.only(
+                                      left: 4,
                                     ),
-                                    Text('${time2.hour}:${time2.minute}'),
-                                    IconButton(
-                                      onPressed: () => _pickDate2(context),
-                                      icon: Icon(Icons.date_range),
-
-                                    ),
-                                    IconButton(
-                                      onPressed: () => _pickTime2(context),
-                                      icon: Icon(Icons.access_time_outlined),
-
-                                    ),
-
-
-
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  children: [
-                                    _date2Validator(),
-                                  ],
-                                ),
-                              ),
-
-                              Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Container(
-                                  width: 800,
-                                  child: Text(
-                                    'Event',
-                                    style: TextStyle(
-                                      fontSize: 18.0,
-
-
+                                    height: size.height * 1,
+                                    width: size.width * 0.05,
+                                    child: RotatedBox(
+                                      quarterTurns: 3,
                                     ),
                                   ),
-                                ),
+                                  SizedBox(
+                                    height: size.height*0.60,
+                                    width: size.width*0.832,
+                                    child:Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(16.0),
+                                          child: Container(
+                                            width: 800,
+                                            child: Text(
+                                              'Event Registration',
+                                              style: TextStyle(
+                                                fontSize: 18.0,
+
+
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+
+
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            children: <Widget>[
+
+
+
+                                              Padding(
+                                                padding: const EdgeInsets.only(left: 12.0),
+                                                child: Text('starts:  '),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: Text(
+                                                    '${_dateTime1.day}/${_dateTime1
+                                                        .month}/${_dateTime1.year}'),
+                                              ),
+                                              Text('${time1.hour}:${time1.minute}'),
+                                              IconButton(
+                                                onPressed: () => _pickDate1(context),
+                                                icon: Icon(Icons.date_range),
+
+                                              ),
+                                              IconButton(
+                                                onPressed: () => _pickTime1(context),
+                                                icon: Icon(Icons.access_time_outlined),
+
+                                              ),
+
+
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            children: <Widget>[
+
+
+
+                                              Padding(
+                                                padding: const EdgeInsets.only(left: 12.0),
+                                                child: Text('ends:  '),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: Text(
+                                                    '${_dateTime2.day}/${_dateTime2
+                                                        .month}/${_dateTime2.year}'),
+                                              ),
+                                              Text('${time2.hour}:${time2.minute}'),
+                                              IconButton(
+                                                onPressed: () => _pickDate2(context),
+                                                icon: Icon(Icons.date_range),
+
+                                              ),
+                                              IconButton(
+                                                onPressed: () => _pickTime2(context),
+                                                icon: Icon(Icons.access_time_outlined),
+
+                                              ),
+
+
+
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            children: [
+                                              _date2Validator(),
+                                            ],
+                                          ),
+                                        ),
+
+                                        Padding(
+                                          padding: const EdgeInsets.all(16.0),
+                                          child: Container(
+                                            width: 800,
+                                            child: Text(
+                                              'Event',
+                                              style: TextStyle(
+                                                fontSize: 18.0,
+
+
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            children: <Widget>[
+
+
+
+                                              Padding(
+                                                padding: const EdgeInsets.only(left: 12.0),
+                                                child: Text('starts:  '),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: Text(
+                                                    '${_dateTime3.day}/${_dateTime3
+                                                        .month}/${_dateTime3.year}'),
+                                              ),
+                                              Text('${time3.hour}:${time3.minute}'),
+                                              IconButton(
+                                                onPressed: () => _pickDate3(context),
+                                                icon: Icon(Icons.date_range),
+
+                                              ),
+                                              IconButton(
+                                                onPressed: () => _pickTime3(context),
+                                                icon: Icon(Icons.access_time_outlined),
+
+                                              ),
+
+
+                                            ],
+                                          ),
+                                        ),
+
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            children: <Widget>[
+
+
+
+                                              Padding(
+                                                padding: const EdgeInsets.only(left: 12.0),
+                                                child: Text('ends:  '),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: Text(
+                                                    '${_dateTime4.day}/${_dateTime4
+                                                        .month}/${_dateTime4.year}'),
+                                              ),
+
+                                              Text('${time4.hour}:${time4.minute}'),
+                                              IconButton(
+                                                onPressed: () => _pickDate4(context),
+                                                icon: Icon(Icons.date_range),
+
+                                              ),
+                                              IconButton(
+                                                onPressed: () => _pickTime4(context),
+                                                icon: Icon(Icons.access_time_outlined),
+
+                                              ),
+
+
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            children: [
+                                              _date4Validator(),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
                               ),
-
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  children: <Widget>[
-
-
-
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 12.0),
-                                      child: Text('starts:  '),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                          '${_dateTime3.day}/${_dateTime3
-                                              .month}/${_dateTime3.year}'),
-                                    ),
-                                    Text('${time3.hour}:${time3.minute}'),
-                                    IconButton(
-                                      onPressed: () => _pickDate3(context),
-                                      icon: Icon(Icons.date_range),
-
-                                    ),
-                                    IconButton(
-                                      onPressed: () => _pickTime3(context),
-                                      icon: Icon(Icons.access_time_outlined),
-
-                                    ),
-
-
-                                  ],
-                                ),
-                              ),
-                             /* Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  children: [
-                                    _date32Validator(),
-                                  ],
-                                ),
-                              ),*/
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  children: <Widget>[
-
-
-
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 12.0),
-                                      child: Text('ends:  '),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                          '${_dateTime4.day}/${_dateTime4
-                                              .month}/${_dateTime4.year}'),
-                                    ),
-
-                                    Text('${time4.hour}:${time4.minute}'),
-                                    IconButton(
-                                      onPressed: () => _pickDate4(context),
-                                      icon: Icon(Icons.date_range),
-
-                                    ),
-                                    IconButton(
-                                      onPressed: () => _pickTime4(context),
-                                      icon: Icon(Icons.access_time_outlined),
-
-                                    ),
-
-
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  children: [
-                                    _date4Validator(),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-
+                            ),],),),
 
                     ],
 
                   ),
                 ),
+
                 Column(
                   children: <Widget>[
+
                     Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Container(
-                        width: size.width * .89,
-                        decoration: BoxDecoration(
-
-                          /*color: Colors.deepOrange,*/
-                          border: Border(left: BorderSide(
-                              color: Colors.deepOrange, width: 15),top:BorderSide(
-                              color: Colors.black12, width: 1.0),right:BorderSide(
-                            color: Colors.black12, width: 1.0),bottom:BorderSide(
-                            color: Colors.black12, width: 1.0),),
-                        ),
-
-                        child: Row(
-                          /*mainAxisAlignment: MainAxisAlignment.center,*/
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20.0),
-                              child: Text("Upload Files"),
+                      padding: const EdgeInsets.fromLTRB(20.0, 19, 0, 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: size.width * .89,
+                            height: size.width * 0.20,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Color(0xffE1E8E8)),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-
-                            ),
-
-                            Padding(
-                              padding: const EdgeInsets.only(left: 30.0),
-                              child: RaisedButton.icon(
-                                label: Text(""),
-                                onPressed:
-                                getImage,
-
-                                icon: Center(child: Icon(Icons.file_copy)),
-                                color: Colors.white,
-                                shape: CircleBorder(
-
+                            child: Row(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Color(0xffff7a45),
+                                    borderRadius: BorderRadius.circular(2),
+                                  ),
+                                  height: size.height * 1,
+                                  width: size.width * 0.05,
+                                  child: RotatedBox(
+                                    quarterTurns: 3,
+                                  ),
                                 ),
-                              ),
-                            )
-                          ],
-                        ),
+                                Column(
+                                  children: [
+                                    Container(
+                                      color: Colors.white,
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: 6,
+                                        horizontal: 11,
+                                      ),
 
+                                      child:  Row(
+
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 20.0),
+                                            child: Text("Upload Files"),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+
+                                          ),
+
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 30.0),
+                                            child: RaisedButton.icon(
+                                              label: Text(""),
+                                              onPressed:
+                                              getImage,
+
+                                              icon: Center(child: Icon(Icons.file_copy)),
+                                              color: Colors.white,
+                                              shape: CircleBorder(
+
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+
+                                    ),
+
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     _previewImage(),
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Container(
-                        width: size.width * .89,
-
-                        decoration: BoxDecoration(
-
-                          /*color: Colors.deepOrange,*/
-                          border: Border(left: BorderSide(
-                              color: Colors.deepOrange, width: 15),top:BorderSide(
-                              color: Colors.black12, width: 1.0),right:BorderSide(
-                              color: Colors.black12, width: 1.0),bottom:BorderSide(
-                              color: Colors.black12, width: 1.0),),
-
-                          /*border: Border.all(color: Colors.grey),*/
-                          /* borderRadius:BorderRadius.circular(0.0)*/
-                        ),
-                        child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(12, 12, 0, 0),
-                             child:  Text(
-                              'Attendance',
-
-                              style: TextStyle(
-                                fontSize: 15.0,
-                              ),
-                            ),
-                        ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 12.0),
-                              child: Text(
-                                'Method',
-
-                                style: TextStyle(
-                                  fontSize: 15.0,
-                                ),
-                              ),
-                            ),
 
 
-                            Padding(
-                              padding: const EdgeInsets.only(left:12.0),
-                              child: ListTile(
-                                title: const Text('Method 1'),
-                                leading: Radio(
-                                  value: 1,
-                                  groupValue: Type,
-                                  onChanged: radioValue,
-
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left:12.0),
-                              child: ListTile(
-                                title: const Text('Method 2'),
-                                leading: Radio(
-                                  value: 2,
-                                  groupValue: Type,
-                                  onChanged: radioValue,
-
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 12.0),
-                              child: ListTile(
-                                title: const Text('None'),
-                                leading: Radio(
-                                  value: 0,
-                                  groupValue: Type,
-                                  onChanged: radioValue,
-
-
-                                ),
-
-
-                              ),
-                            ),
-
-
-                          ],
-                        ),
-                      ),
-                    ),
                   ],
                 ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20.0, 19, 0, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: size.width * .89,
+                        height: size.height * .30,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Color(0xffE1E8E8)),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Color(0xffff7a45),
+                                borderRadius: BorderRadius.circular(2),
+                              ),
+                              padding: EdgeInsets.only(
+                                left: 4,
+                              ),
+                              height: size.height * 1,
+                              width: size.width * 0.05,
+                              child: RotatedBox(
+                                quarterTurns: 3,
+                              ),
+                            ),
+                            SizedBox(
+                              height: size.height*0.50,
+                              width: size.width*0.832,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(25, 12, 0, 0),
+                                    child:  Text(
+                                      'Attendance',
+
+                                      style: TextStyle(
+                                        fontSize: 15.0,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 25.0),
+                                    child: Text(
+                                      'Method',
+
+                                      style: TextStyle(
+                                        fontSize: 15.0,
+                                      ),
+                                    ),
+                                  ),
+
+
+                                  ListTile(
+                                    title: const Text('Method 1'),
+                                    leading: Radio(
+                                      value: 1,
+                                      groupValue: Type,
+                                      onChanged: radioValue,
+
+                                    ),
+                                  ),
+
+                                  ListTile(
+                                    title: const Text('Method 2'),
+                                    leading: Radio(
+                                      value: 2,
+                                      groupValue: Type,
+                                      onChanged: radioValue,
+
+                                    ),
+                                  ),
+
+                                  ListTile(
+                                    title: const Text('None'),
+                                    leading: Radio(
+                                      value: 0,
+                                      groupValue: Type,
+                                      onChanged: radioValue,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),],),),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(123, 63, 120, 52),
                   child: Container(
                     width: 140,
                     height: 50,
                     child: ElevatedButton(
-                      style:ElevatedButton.styleFrom(primary:Colors.white,side:BorderSide(width:1.0,color:Colors.deepOrange,),shape: RoundedRectangleBorder(
+                      style:ElevatedButton.styleFrom(primary:Colors.white,side:BorderSide(width:1.0,color:Color(0xffff7a45),),shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(50.0))
                   ),),
 
@@ -925,20 +1033,6 @@ class _CreateEventState extends State<CreateEvent> {
                                   ? 'Event created successfully'
                                   : "please fix errors and submit")));
                         }
-                      /* final formatter=DateFormat("yyyy-MM-dd 'T' hh:mm ':00Z'");
-                       final datetime1=_dateTime1.toIso8601String();
-                        final datetime2=_dateTime2.toIso8601String();
-                        final datetime3=_dateTime3.toIso8601String();
-                        final datetime4=_dateTime4.toIso8601String();*/
-                      /*_dateTime1.=int.parse(time1.hour);
-                      /*(Duration(hours:time1.hour,minutes:time1.minute));*/
-                        _dateTime2.add(Duration(hours:time2.hour,minutes:time2.minute));
-                        _dateTime3.add(Duration(hours:time3.hour,minutes:time3.minute));
-                        _dateTime4.add(Duration(hours:time4.hour,minutes:time4.minute));*/
-
-
-
-
 
                         Datetime1=(DateTime.parse((_dateTime1.year).toString()+'-'+(_dateTime1.month).toString().padLeft(2,'0')+'-'+(_dateTime1.day).toString().padLeft(2,'0')+'T'+(time1.hour).toString()+':'+(time1.minute).toString()+':00Z')).toString();
 
@@ -947,11 +1041,6 @@ class _CreateEventState extends State<CreateEvent> {
                         Datetime3=(DateTime.parse((_dateTime3.year).toString()+'-'+(_dateTime3.month).toString().padLeft(2,'0')+'-'+(_dateTime3.day).toString().padLeft(2,'0')+'T'+(time3.hour).toString()+':'+(time3.minute).toString()+':00Z')).toString();
                         Datetime4=(DateTime.parse((_dateTime4.year).toString()+'-'+(_dateTime4.month).toString().padLeft(2,'0')+'-'+(_dateTime4.day).toString().padLeft(2,'0')+'T'+(time4.hour).toString()+':'+(time4.minute).toString()+':00Z')).toString();
 
-
-                        /* Datetime1=(_dateTime1.toString()+time1.toString());
-                        Datetime2=(_dateTime2.toString()+time2.toString());
-                        Datetime3=(_dateTime3.toString()+time3.toString());
-                        Datetime4=(_dateTime4.toString()+time4.toString());*/
                         print(Datetime1);
                         print(Datetime2);
                         print(Datetime3);
@@ -1143,7 +1232,9 @@ void radioValue(int? value)
     try {
 
       Uri url = Uri.parse("${baseUrl}/api/events/");
+     /* final data=await getData('auth_data');*/
       var sendRequest = http.MultipartRequest("POST", url);
+     /* sendRequest.headers['']*/
       sendRequest.fields['title'] = eventname;
       sendRequest.fields['start_datetime'] = startDateTime;
       sendRequest.fields['end_datetime'] = endDateTime;
