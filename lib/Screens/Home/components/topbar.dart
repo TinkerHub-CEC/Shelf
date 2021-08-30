@@ -6,6 +6,7 @@ import 'package:shelf/components/custom_menu_bar.dart';
 class TopBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     Size size = MediaQuery.of(context).size;
     return CustomMenuBar(text: "Dashboard");
   }

@@ -140,6 +140,7 @@ class _CreateEventMethodState extends State<CreateEventMethod> {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(right: 10.0),
+                              // ignore: deprecated_member_use
                               child: RaisedButton.icon(
                                 label: Text(""),
                                 onPressed: getImage,

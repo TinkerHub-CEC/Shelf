@@ -1,8 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shelf/Api/api.dart';
 
 import 'package:shelf/Screens/CreateEvent/CreateEvent.dart';
-import 'package:shelf/Screens/EventsDetailsPage/event_screen.dart';
+
 import 'package:shelf/Screens/Home/components/body.dart';
 import 'package:flutter/material.dart';
 import 'package:shelf/Screens/Login/login_screen.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:shelf/Screens/Welcome/welcome_screen.dart';
+
 import 'package:shelf/components/custom_menu_bar.dart';
 import 'package:shelf/models/verify_data.dart';
 import "dart:convert";
@@ -29,6 +29,7 @@ class _VerifyAttendanceScreenState extends State<VerifyAttendanceScreen> {
 
   Future attendanceData(int attendance) async {
     http.Response response;
+    // ignore: unused_local_variable
     final url = '$baseUrl/api/events/4/attendance/';
     response = await http.post(
         Uri.http('$baseUrl', '/api/events/4/attendance/'),

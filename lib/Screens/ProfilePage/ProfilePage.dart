@@ -99,6 +99,7 @@ class _ProfilePageState extends State<ProfilePage> {
               padding: const EdgeInsets.fromLTRB(20.0, 50.0, 20.0, 1.0),
               child: SizedBox(
                 width: double.infinity,
+                // ignore: deprecated_member_use
                 child: RaisedButton.icon(
                   elevation: 0.0,
                   onPressed: () {},
@@ -117,6 +118,7 @@ class _ProfilePageState extends State<ProfilePage> {
               padding: const EdgeInsets.fromLTRB(20.0, 1.0, 20.0, 10.0),
               child: SizedBox(
                 width: double.infinity,
+                // ignore: deprecated_member_use
                 child: RaisedButton.icon(
                   elevation: 0.0,
                   onPressed: () {
