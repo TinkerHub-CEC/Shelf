@@ -48,7 +48,7 @@ class SliderBox extends StatelessWidget {
                 border: Border.all(color: Colors.black12, width: 4),
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
-                  image: NetworkImage(image),
+                  image: AssetImage("assets/images/event-uyilo.png"),
                   fit: BoxFit.fill,
                 ),
               ),
