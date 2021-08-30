@@ -1,6 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:shelf/Screens/Login/login_screen.dart';
-import 'package:shelf/Screens/Signup/components/background.dart';
 
 import 'package:shelf/components/already_have_an_account.dart';
 import 'package:shelf/components/rounded_button.dart';
@@ -9,6 +10,7 @@ import 'package:shelf/components/rounded_input_field.dart';
 import 'package:shelf/components/rounded_password_field.dart';
 
 import 'package:shelf/components/small_rounded_input_field.dart';
+import 'package:shelf/components/text_field_container.dart';
 import 'package:shelf/providers/signup_auth.dart';
 import 'package:shelf/size_config.dart';
 
@@ -26,23 +28,28 @@ class _BodyState extends State<Body> {
 
   var lastNameController = TextEditingController();
 
-  // var registerNumberController = TextEditingController();
+  var registerNumberController = TextEditingController();
 
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   String firstName = '';
   String lastName = '';
-  // String regNo = '';
-  // Object? semChoosen;
-  // Object? valueChoosen;
+  String regNo = '';
+  Object? semChoosen;
+  Object? batchChoosen;
+  Object? semvalueChoosen;
+  Object? batchvalueChoosen;
 
-  // var _listItems = ["1", "2", "3", "4", "5", "6", "7", "8"];
+  var _semlistItems = ["1", "2", "3", "4", "5", "6", "7", "8"];
+  var _batchlistItems = ["A", "B", "C", "D", "E", "F", "G"];
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     Size size = MediaQuery.of(context).size;
-    return Background(
-        child: SingleChildScrollView(
+    return
+        // Background(
+        //     child:
+        SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -63,7 +70,12 @@ class _BodyState extends State<Body> {
           //     ),
           //   ],
           // ),
-          SizedBox(height: size.height * 0.20),
+          Container(
+            width: double.infinity,
+            child:
+                Image.asset("assets/images/signup.png", width: size.width * 1),
+          ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -138,59 +150,92 @@ class _BodyState extends State<Body> {
             ],
           ),
           SizedBox(height: size.height * 0.025),
-          // Row(
-          //   children: [
-          //     Container(
-          //       margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
-          //       child: Text(
-          //         "Registration No",
-          //         style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
-          //       ),
-          //     ),
-          //   ],
-          // ),
-          // RoundedInputField(
-          //   icon: Icons.confirmation_number,
-          //   hintText: "eg CHN19CS057",
-          //   onChanged: (value) {
-          //     print(value);
-          //     regNo = value;
-          //   },
-          //   controller: registerNumberController,
-          // ),
-          // SizedBox(height: size.height * 0.025),
-          // Row(
-          //   children: [
-          //     Container(
-          //       margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
-          //       child: Text(
-          //         "Your Semster",
-          //         style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
-          //       ),
-          //     ),
-          //   ],
-          // ),
-          // Container(
-          //   child: TextFieldContainer(
-          //     child: DropdownButton(
-          //       items: _listItems.map((dropDownItem) {
-          //         return DropdownMenuItem(
-          //           value: dropDownItem,
-          //           child: Text(dropDownItem),
-          //         );
-          //       }).toList(),
-          //       onChanged: (newValue) {
-          //         setState(() {
-          //           print(jsonEncode(newValue));
-          //           this.valueChoosen = newValue;
-          //           semChoosen = valueChoosen;
-          //         });
-          //       },
-          //       hint: Text("Select"),
-          //       value: valueChoosen,
-          //     ),
-          //   ),
-          // ),
+          Row(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
+                child: Text(
+                  "Registration No",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                ),
+              ),
+            ],
+          ),
+          RoundedInputField(
+            icon: Icons.confirmation_number,
+            hintText: "eg CHN19CS057",
+            onChanged: (value) {
+              print(value);
+              regNo = value;
+            },
+            controller: registerNumberController,
+          ),
+          SizedBox(height: size.height * 0.025),
+          Row(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
+                child: Text(
+                  "Your Semster",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                ),
+              ),
+            ],
+          ),
+          Container(
+            child: TextFieldContainer(
+              child: DropdownButton(
+                items: _semlistItems.map((dropDownItem) {
+                  return DropdownMenuItem(
+                    value: dropDownItem,
+                    child: Text(dropDownItem),
+                  );
+                }).toList(),
+                onChanged: (newValue) {
+                  setState(() {
+                    print(jsonEncode(newValue));
+                    this.semvalueChoosen = newValue;
+                    semChoosen = semvalueChoosen;
+                  });
+                },
+                hint: Text("Select"),
+                value: semvalueChoosen,
+              ),
+            ),
+          ),
+          SizedBox(height: size.height * 0.025),
+          Row(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
+                child: Text(
+                  "Department",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                ),
+              ),
+            ],
+          ),
+          Container(
+            child: TextFieldContainer(
+              child: DropdownButton(
+                items: _batchlistItems.map((dropDownItem) {
+                  return DropdownMenuItem(
+                    value: dropDownItem,
+                    child: Text(dropDownItem),
+                  );
+                }).toList(),
+                onChanged: (newValue) {
+                  setState(() {
+                    print(jsonEncode(newValue));
+                    this.batchvalueChoosen = newValue;
+                    batchChoosen = batchvalueChoosen;
+                  });
+                },
+                hint: Text("Select"),
+                value: batchvalueChoosen,
+              ),
+            ),
+          ),
           Row(
             children: [
               Container(
@@ -246,7 +291,10 @@ class _BodyState extends State<Body> {
                     firstNameController.text,
                     lastNameController.text,
                     emailController.text,
-                    passwordController.text);
+                    passwordController.text,
+                    registerNumberController.text,
+                    semChoosen.toString(),
+                    batchChoosen.toString());
               }),
           // SizedBox(height: size.height * 0.025),
 
@@ -275,6 +323,7 @@ class _BodyState extends State<Body> {
           // ),
         ],
       ),
-    ));
+    );
+    // );
   }
 }

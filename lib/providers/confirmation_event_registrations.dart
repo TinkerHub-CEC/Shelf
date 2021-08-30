@@ -9,18 +9,17 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
-Future registerTheEvent(
-  BuildContext context,
-) async {
+Future registerTheEvent(BuildContext context, var id) async {
   try {
-    final uri = Uri.parse('$baseUrl/api/events/14/register/');
+    final uri = Uri.parse('$baseUrl/api/events/$id/register/');
     final data = await getData('auth_data');
+
+    print(id);
 
     http.Response response = await http.post(
       uri,
       headers: {HttpHeaders.authorizationHeader: 'Bearer ' + data!},
     );
-
     // ignore: unused_local_variable
     final body = jsonEncode(response.body);
     print(response.body);

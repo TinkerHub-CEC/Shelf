@@ -9,12 +9,14 @@ import 'package:shelf/providers/is_user_admin.dart';
 
 class EventAdminFeatures extends StatelessWidget {
   final String title;
+  final eventId;
   final String sdatetime;
-  const EventAdminFeatures({
-    Key? key,
-    required this.title,
-    required this.sdatetime,
-  }) : super(key: key);
+  const EventAdminFeatures(
+      {Key? key,
+      required this.title,
+      required this.sdatetime,
+      required this.eventId})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +53,7 @@ class EventAdminFeatures extends StatelessWidget {
                             builder: (context) => ConfirmationScreen(
                                   eventTitle: title,
                                   eventDate: sdatetime,
+                                  eventId: eventId,
                                 )),
                       )
                     });

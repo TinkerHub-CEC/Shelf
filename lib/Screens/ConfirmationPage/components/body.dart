@@ -5,7 +5,12 @@ import 'package:shelf/providers/confirmation_event_registrations.dart';
 class Body extends StatelessWidget {
   final String eventTitle;
   final String eventDate;
-  const Body({Key? key, required this.eventTitle, required this.eventDate})
+  final eventId;
+  const Body(
+      {Key? key,
+      required this.eventTitle,
+      required this.eventDate,
+      required this.eventId})
       : super(key: key);
 
   @override
@@ -141,7 +146,7 @@ class Body extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20)),
             child: ElevatedButton(
               onPressed: () {
-                registerTheEvent(context);
+                registerTheEvent(context, eventId);
               },
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all(Colors.black),

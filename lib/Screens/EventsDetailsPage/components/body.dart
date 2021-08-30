@@ -22,6 +22,7 @@ class Body extends StatelessWidget {
     int _seats_filled = 40;
     print(events);
     Size size = MediaQuery.of(context).size;
+    var id = events['id'];
     var title = events['title'];
     var sdatetime = events['start_datetime'];
     String sdate = sdatetime.substring(0, 10);
@@ -310,7 +311,8 @@ class Body extends StatelessWidget {
             ),
           ),
 
-          EventAdminFeatures(title: events['title'], sdatetime: sdatetime),
+          EventAdminFeatures(
+              title: events['title'], sdatetime: sdatetime, eventId: id),
         ],
       ),
     );
