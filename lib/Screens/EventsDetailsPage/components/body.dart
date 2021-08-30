@@ -1,11 +1,10 @@
 //import 'dart:html';
-import 'dart:convert';
 
-import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
-import 'package:shelf/Screens/ConfirmationPage/confirmation_screen.dart';
+
+import 'package:shelf/Screens/EventsDetailsPage/components/isAdminFeatures.dart';
 import 'package:shelf/components/custom_menu_bar.dart';
-import 'package:shelf/components/rounded_button.dart';
+
 import 'package:flutter/material.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
@@ -17,8 +16,10 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int _total_seats = 100;
-    int _seats_filled = 80;
+    // ignore: non_constant_identifier_names
+    int _total_seats = 120;
+    // ignore: non_constant_identifier_names
+    int _seats_filled = 40;
     print(events);
     Size size = MediaQuery.of(context).size;
     var title = events['title'];
@@ -308,17 +309,8 @@ class Body extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
           ),
-          SizedBox(height: size.height * 0.03),
 
-          RoundedButton(
-              text: "Register",
-              press: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ConfirmationScreen()),
-                    )
-                  }),
+          EventAdminFeatures(title: events['title'], sdatetime: sdatetime),
         ],
       ),
     );

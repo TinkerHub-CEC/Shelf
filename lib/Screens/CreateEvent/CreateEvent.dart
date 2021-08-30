@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
 import 'package:http/http.dart' as http;
-import 'package:shelf/Screens/CreateEventMethod/components/topBar.dart';
+
 import 'package:shelf/constants.dart';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
@@ -192,18 +192,25 @@ class _CreateEventState extends State<CreateEvent> {
     }
   }
 
+  // ignore: non_constant_identifier_names
   final TextEditingController MaxParticipantsController =
       TextEditingController();
+  // ignore: non_constant_identifier_names
   final TextEditingController VenueController = TextEditingController();
+  // ignore: unused_field
   var _numberForm = GlobalKey<FormState>();
   RegExp _digitRegex = RegExp("[0-9]+");
 
+  // ignore: non_constant_identifier_names
   int AttendanceType = -1;
   bool isANumber = true;
   bool isValidForm = false;
+  // ignore: non_constant_identifier_names
   int MaxParticipants = 0;
+  // ignore: non_constant_identifier_names
   String Venue = '';
   Map data = {};
+  // ignore: non_constant_identifier_names
   int? Type = -1;
   final picker = ImagePicker();
   File? _image;
@@ -225,22 +232,31 @@ class _CreateEventState extends State<CreateEvent> {
     });
   }
 
+  // ignore: non_constant_identifier_names
   final TextEditingController EventnameController = TextEditingController();
+  // ignore: non_constant_identifier_names
   final TextEditingController ShortDescriptionController =
       TextEditingController();
+  // ignore: non_constant_identifier_names
   final TextEditingController LongDescriptionController =
       TextEditingController();
 
+  // ignore: non_constant_identifier_names
   var _Form = GlobalKey<FormState>();
 
   RegExp digitValidator = RegExp("[0-9]+");
 
+  // ignore: non_constant_identifier_names
   String EventName = '';
   String shortDescription = '';
   String longDescription = '';
+  // ignore: non_constant_identifier_names
   String Datetime1 = '';
+  // ignore: non_constant_identifier_names
   String Datetime2 = '';
+  // ignore: non_constant_identifier_names
   String Datetime3 = '';
+  // ignore: non_constant_identifier_names
   String Datetime4 = '';
   DateTime _dateTime1 = DateTime(2021, 5, 25);
   DateTime _dateTime2 = DateTime(2021, 5, 25);
@@ -635,6 +651,7 @@ class _CreateEventState extends State<CreateEvent> {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(right: 10.0),
+                              // ignore: deprecated_member_use
                               child: RaisedButton.icon(
                                 label: Text(""),
                                 onPressed: getImage,
@@ -961,11 +978,14 @@ class _CreateEventState extends State<CreateEvent> {
     String shortDescription,
     String longDescription,
     File? image,
+    // ignore: non_constant_identifier_names
     String RegOpenDate,
+    // ignore: non_constant_identifier_names
     String RegCloseDate,
     int? attendance,
   ) async {
     try {
+      // ignore: unnecessary_brace_in_string_interps
       Uri url = Uri.parse("${baseUrl}/api/events/");
       var sendRequest = http.MultipartRequest("POST", url);
       sendRequest.fields['title'] = eventname;

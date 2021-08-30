@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shelf/Screens/EventsDetailsPage/event_screen.dart';
@@ -68,6 +68,7 @@ class _EventCardState extends State<EventCard> {
   Widget getCard(events) {
     print(events);
     Size size = MediaQuery.of(context).size;
+    // ignore: unused_local_variable
     var id = events['id'];
     var title = events['title'];
     var datetime = events['start_datetime'];

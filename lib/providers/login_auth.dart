@@ -16,6 +16,7 @@ Future signIn(BuildContext context, String email, String password) async {
 
   print(data);
   var jsonResponse;
+
   Map<String, String> headers = {"Content-Type": "application/json"};
 
   final msg = jsonEncode({"email": email, "password": password});
@@ -34,6 +35,7 @@ Future signIn(BuildContext context, String email, String password) async {
 
   print('Response Status: ${response.statusCode}');
   print('Response Body: ${response.body}');
+
   if (response.statusCode == 200) {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 

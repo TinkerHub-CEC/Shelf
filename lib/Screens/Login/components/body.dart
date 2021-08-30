@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:shelf/Screens/Home/homepage.dart';
 import 'package:shelf/Screens/Login/components/background.dart';
 import 'package:shelf/Screens/Signup/signup_screen.dart';
 import 'package:shelf/components/already_have_an_account.dart';
@@ -132,6 +130,7 @@ class _BodyState extends State<Body> {
             RoundedButton(
                 text: "Login",
                 press: () async {
+                  // ignore: unused_local_variable
                   SharedPreferences sharedPreferences =
                       await SharedPreferences.getInstance();
                   signIn(

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:shelf/components/custom_menu_bar.dart';
+import 'package:shelf/providers/confirmation_event_registrations.dart';
 
 class Body extends StatelessWidget {
-  const Body({
-    Key? key,
-  }) : super(key: key);
+  final String eventTitle;
+  final String eventDate;
+  const Body({Key? key, required this.eventTitle, required this.eventDate})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +64,7 @@ class Body extends StatelessWidget {
                             margin: EdgeInsets.only(
                                 left: size.width * 0.10,
                                 top: size.height * 0.06),
-                            child: Text("Utsav 2021",
+                            child: Text(eventTitle,
                                 style: TextStyle(
                                     fontSize: 19,
                                     fontWeight: FontWeight.bold))),
@@ -82,7 +84,7 @@ class Body extends StatelessWidget {
                             margin: EdgeInsets.only(
                                 left: size.width * 0.10,
                                 top: size.height * 0.02),
-                            child: Text("05-05-2012",
+                            child: Text(eventDate,
                                 style: TextStyle(
                                     fontSize: 19,
                                     fontWeight: FontWeight.bold))),
@@ -137,12 +139,21 @@ class Body extends StatelessWidget {
             decoration: BoxDecoration(
                 color: Color(0xffECECEC),
                 borderRadius: BorderRadius.circular(20)),
-            child: Center(
-              child: Text("It’s All Done !",
-                  style: TextStyle(
-                    fontSize: 17,
-                  ),
-                  textAlign: TextAlign.center),
+            child: ElevatedButton(
+              onPressed: () {
+                registerTheEvent(context);
+              },
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all(Colors.black),
+                backgroundColor: MaterialStateProperty.all(Color(0xffECECEC)),
+              ),
+              child: Center(
+                child: Text("It’s All Done !",
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
+                    textAlign: TextAlign.center),
+              ),
             ),
           )
         ],

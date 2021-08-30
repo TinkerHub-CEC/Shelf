@@ -1,7 +1,7 @@
-import 'package:shelf/components/custom_menu_bar.dart';
+import 'package:shelf/Screens/Home/components/isAdminFeatures.dart';
 
 import 'eventcard.dart';
-import 'slider.dart';
+
 import 'topbar.dart';
 import 'package:flutter/material.dart';
 
@@ -16,13 +16,13 @@ class Body extends StatelessWidget {
           //mainAxisAlignment: MainAxisAlignment.center,
           //children: [
           ListView(
-          physics: ScrollPhysics(),
-          scrollDirection: Axis.vertical,
-          children: <Widget>[
+        physics: ScrollPhysics(),
+        scrollDirection: Axis.vertical,
+        children: <Widget>[
           SizedBox(height: size.height * 0.04),
           TopBox(),
           SizedBox(height: size.height * 0.04),
-          SliderBox(),
+          HomeAdminFeatures(),
           SizedBox(height: size.height * 0.04),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
