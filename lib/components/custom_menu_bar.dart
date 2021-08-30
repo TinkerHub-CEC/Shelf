@@ -17,10 +17,10 @@ class CustomMenuBar extends StatelessWidget {
         margin: EdgeInsets.symmetric(
           vertical: 10,
         ),
-        padding: EdgeInsets.symmetric(
-          vertical: 10,
-          horizontal: 5,
-        ),
+        //padding: EdgeInsets.symmetric(
+        //  vertical: 10,
+          //horizontal: 5,
+        //),
         height: size.height * 0.055,
         width: size.width * 0.8,
         decoration: BoxDecoration(

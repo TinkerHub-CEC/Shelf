@@ -1,7 +1,8 @@
 import 'dart:convert';
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shelf/Api/api.dart';
 import 'package:shelf/Screens/EventsDetailsPage/event_screen.dart';
 import '../../../constants.dart';
 
@@ -26,12 +27,19 @@ class _EventCardState extends State<EventCard> {
     setState(() {
       isLoading = true;
     });
-    var url = "$baseUrl/api/events/active/all";
-    var response = await http.get(Uri.parse(url));
-    //print(response.body);
+
+    final url = Uri.parse("$baseUrl/api/events/active/all");
+    final data = await getData('auth_data');
+    http.Response response = await http.get(
+      url,
+      headers: {HttpHeaders.authorizationHeader: 'Bearer ' + data!},
+    );
+    //var response = await http.get(Uri.parse(url));
+
+    print(response.body);
     if (response.statusCode == 200) {
-      var extractdata = json.decode(response.body);
-      events = extractdata;
+      var extractData = json.decode(response.body);
+      events = extractData;
       //print(events[1]["title"]);
       setState(() {
         isLoading = false;
