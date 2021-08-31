@@ -1,9 +1,7 @@
-<<<<<<< HEAD
-=======
+
 import 'package:shelf/Screens/Home/components/eventcard.dart';
 import 'package:shelf/Screens/Login/login_screen.dart';
 import 'package:shelf/Screens/Signup/signup_screen.dart';
->>>>>>> parent of a47fc80 (Revert "Updates")
 import 'package:shelf/components/custom_menu_bar.dart';
 import 'package:flutter/material.dart';
 
