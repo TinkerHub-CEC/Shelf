@@ -16,14 +16,13 @@ import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
 
-
 class DelegatesList extends StatefulWidget {
   @override
   _DelegatesListState createState() => _DelegatesListState();
 }
 
 class _DelegatesListState extends State<DelegatesList> {
-  List delegates= [];
+  List delegates = [];
   bool isLoading = false;
   @override
   void initState() {
@@ -38,11 +37,15 @@ class _DelegatesListState extends State<DelegatesList> {
       isLoading = true;
     });
     var url = "$baseUrl/api/events/4/registrations/";
-    final data=await getData('auth_data');
-    var response = await http.get(Uri.parse(url),headers:{HttpHeaders.authorizationHeader:'Bearer'+data!},);
+    final data = await getData('auth_data');
+    var response = await http.get(
+      Uri.parse(url),
+      headers: {HttpHeaders.authorizationHeader: 'Bearer ' + data!},
+    );
     print(response.body);
     if (response.statusCode == 200) {
-      SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
       /*storeData('auth_data', jsonResponse['access']);
       storeData('token',jsonResponse['refresh']);
       sharedPreferences.setString('refresh',jsonResponse['refresh']);
@@ -72,19 +75,20 @@ class _DelegatesListState extends State<DelegatesList> {
   }
 
   Widget getBody() {
-   if (delegates.contains(null) || delegates.length < 0 || isLoading) {
+    if (delegates.contains(null) || delegates.length < 0 || isLoading) {
       return Center(
           child: CircularProgressIndicator(
-            valueColor: new AlwaysStoppedAnimation<Color>(kPrimaryColor),
-          ));
+        valueColor: new AlwaysStoppedAnimation<Color>(kPrimaryColor),
+      ));
+    } else {
+      return ListView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: delegates.length,
+          itemBuilder: (context, index) {
+            return getCard(delegates[index]);
+          });
     }
-    return ListView.builder(
-        physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: delegates.length,
-        itemBuilder: (context, index) {
-          return getCard(delegates[index]);
-        });
   }
 
   Widget getCard(delegates) {
@@ -119,7 +123,9 @@ class _DelegatesListState extends State<DelegatesList> {
               Padding(
                 padding: const EdgeInsets.only(left: 12),
                 child: CircleAvatar(
-                  backgroundColor:Color((math.Random().nextDouble()*0xFFFFFF).toInt()).withOpacity(1.0) ,
+                  backgroundColor:
+                      Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
+                          .withOpacity(1.0),
                   child: Text('${name[0]}'),
                 ),
               ),
@@ -130,26 +136,20 @@ class _DelegatesListState extends State<DelegatesList> {
                     Text(
                       name,
                       style:
-                      TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      'S'+semester+batch,
+                      'S' + semester + batch,
                       style:
-                      TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
               ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
-              child: Icon(
-                    Icons.check_circle_outline_sharp
-                  ),
-            ),
-
-
-
-
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
+                child: Icon(Icons.check_circle_outline_sharp),
+              ),
             ],
           ),
         ),
@@ -157,25 +157,22 @@ class _DelegatesListState extends State<DelegatesList> {
     );
   }
 }
-class TopBox extends StatelessWidget {
-  List delegates= [];
-  fetchEmail() async {
 
+class TopBox extends StatelessWidget {
+  List delegates = [];
+  fetchEmail() async {
     var url = "$baseUrl/api/events/4/registrations/";
     var response = await http.get(Uri.parse(url));
-    final result=json.decode(response.body);
-    Iterable list=result['email'];
+    final result = json.decode(response.body);
+    Iterable list = result['email'];
     print(list);
     print(response.body);
     if (response.statusCode == 200) {
       delegates = json.decode(response.body);
-
     } else {
       delegates = [];
-
     }
   }
-
 
 /*  Widget getBody() {
 
@@ -188,22 +185,22 @@ class TopBox extends StatelessWidget {
         });
   }*/
 
- /* Widget getCard1(delegates) {
+  /* Widget getCard1(delegates) {
 
     var name = delegates['first_name'];
     var semester = delegates['semester'];
     var batch = delegates['batch'];
     var email = delegates['email'];
   }*/
-  sendmails() async{
-    const url='mailto:razabinashraf@gmail.com';
-    if (await canLaunch(url) ){
+  sendmails() async {
+    const url = 'mailto:razabinashraf@gmail.com';
+    if (await canLaunch(url)) {
       await launch(url);
-    }
-    else{
+    } else {
       throw 'could not launch url';
     }
   }
+
   bool adminUser = true;
   @override
   Widget build(BuildContext context) {
@@ -233,26 +230,23 @@ class TopBox extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-
-                        SizedBox(width: size.width* .05),
+                        SizedBox(width: size.width * .05),
                         Container(
-                          width: size.width* .07,
+                          width: size.width * .07,
                           alignment: Alignment.center,
                           child: Text(
                             "A",
                             style: TextStyle(fontSize: 15),
                           ),
-
                           decoration: BoxDecoration(
                               color: Colors.black12,
                               shape: BoxShape.circle,
                               border: Border.all(
                                   color: Colors.deepOrange, width: 1)),
                         ),
-                        SizedBox(width: size.width* .05),
-
+                        SizedBox(width: size.width * .05),
                         Container(
-                          //color: Colors.black,
+                            //color: Colors.black,
                             alignment: Alignment.centerLeft,
                             width: size.width * .40, // .58,
                             height: 30,
@@ -260,37 +254,38 @@ class TopBox extends StatelessWidget {
                             child: Text("Delegates List",
                                 style: TextStyle(
                                     fontSize: 19,
-                                    fontWeight: FontWeight.bold))
-
-                        ),
+                                    fontWeight: FontWeight.bold))),
                         ElevatedButton(
-                            style:ElevatedButton.styleFrom(primary:Color(0xff385A64),shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(5.0))
-                            ),fixedSize: Size(92, 34)),
-
+                            style: ElevatedButton.styleFrom(
+                                primary: Color(0xff385A64),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5.0))),
+                                fixedSize: Size(92, 34)),
                             child: Text('MailTo:',
-                                style:TextStyle(
-                                  color:Colors.black,
+                                style: TextStyle(
+                                  color: Colors.black,
                                 )),
-
                             onPressed: () async {
-                              var apps=await OpenMailApp.getMailApps();
+                              var apps = await OpenMailApp.getMailApps();
                               /*var result=await OpenMailApp.openMailApp(nativePickerTitle: 'select email app to open',);*/
-                              showDialog(context: context, builder:(context){
-                                return MailAppPickerDialog(mailApps: apps,
-                                  emailContent: EmailContent(
-                                    to: [
-                                      'razabinashraf@gmail.com',
-                                    ],
-                                  ),);
-
-                              },);
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return MailAppPickerDialog(
+                                    mailApps: apps,
+                                    emailContent: EmailContent(
+                                      to: [
+                                        'razabinashraf@gmail.com',
+                                      ],
+                                    ),
+                                  );
+                                },
+                              );
                             }),
                       ],
                     ),
                   ),
-
-
                 ]),
           ),
         ],
