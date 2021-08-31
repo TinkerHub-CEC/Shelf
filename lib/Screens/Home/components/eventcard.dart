@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -31,10 +30,11 @@ class _EventCardState extends State<EventCard> {
 
     final url = Uri.parse("$baseUrl/api/events/active/all");
     final data = await getData('auth_data');
-    http.Response response= await http.get(
-        url,
-        headers: {HttpHeaders.authorizationHeader: 'Bearer '+ data!},);
-     //var response = await http.get(Uri.parse(url));
+    http.Response response = await http.get(
+      url,
+      headers: {HttpHeaders.authorizationHeader: 'Bearer ' + data!},
+    );
+    //var response = await http.get(Uri.parse(url));
 
     print(response.body);
     if (response.statusCode == 200) {
@@ -76,6 +76,7 @@ class _EventCardState extends State<EventCard> {
   Widget getCard(events) {
     print(events);
     Size size = MediaQuery.of(context).size;
+    // ignore: unused_local_variable
     var id = events['id'];
     var title = events['title'];
     var datetime = events['start_datetime'];

@@ -4,10 +4,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 class SliderBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var image = "http://3.22.186.17/media/uploads/events/978954-uefa-euro-trophy.jpg";
     Size size = MediaQuery.of(context).size;
     return Stack(
-
       children: [
         CarouselSlider(
           options: CarouselOptions(

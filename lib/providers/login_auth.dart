@@ -16,6 +16,7 @@ Future signIn(BuildContext context, String email, String password) async {
 
   print(data);
   var jsonResponse;
+
   Map<String, String> headers = {"Content-Type": "application/json"};
 
   final msg = jsonEncode({"email": email, "password": password});
@@ -34,15 +35,18 @@ Future signIn(BuildContext context, String email, String password) async {
 
   print('Response Status: ${response.statusCode}');
   print('Response Body: ${response.body}');
+
   if (response.statusCode == 200) {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     storeData('auth_data', jsonResponse['access']);
+
     storeData('token', jsonResponse['refresh']);
     sharedPreferences.setString('refresh', jsonResponse['refresh']);
     sharedPreferences.setBool('islogged', true);
     final a = await getData('auth_data');
     final b = await getData('refresh_token');
+
     print('refresh_token: $b');
     print('auth_data: $a');
 
@@ -54,6 +58,11 @@ Future signIn(BuildContext context, String email, String password) async {
     // Now you can use your decoded token
     sharedPreferences.setBool(
         'isAdminUser', decodedrefreshToken['is_superuser']);
+
+    sharedPreferences.setInt('auth_user_id', decodedrefreshToken['user_id']);
+
+    final c = await getValue('auth_user_id');
+    print('auth_id: $c');
     final snackBar = SnackBar(
       content: Text('Sucessfully Logged In'),
     );

@@ -15,6 +15,7 @@ class _EventScreenState extends State<EventScreen> {
 
   @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
     super.initState();
     checkLoginStatus();
