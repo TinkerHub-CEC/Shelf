@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shelf/Screens/ConfirmationPage/confirmation_screen.dart';
+import 'package:shelf/Screens/DelegatesList/DelegatesList.dart';
+import 'package:shelf/Screens/DelegatesList/DelegatesListPage.dart';
 import 'package:shelf/Screens/VerifyAttendance/verify_attendance.dart';
 import 'package:shelf/components/rounded_button.dart';
 import 'package:shelf/components/small_rounded_button.dart';
@@ -31,7 +33,14 @@ class EventAdminFeatures extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SmallRoundedButtonOutlined(
-                        press: () {}, text: "View Delegates"),
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DelegatesListPage()),
+                          );
+                        },
+                        text: "View Delegates"),
                     SmallRoundedButton(
                         press: () {
                           Navigator.push(
