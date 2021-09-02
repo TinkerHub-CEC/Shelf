@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:shelf/Api/api.dart';
+import 'package:shelf/Screens/Welcome/welcome_screen.dart';
 import 'package:shelf/components/custom_menu_bar.dart';
 import 'package:shelf/models/verify_data.dart';
 import "dart:convert";
@@ -14,11 +17,18 @@ class VerifyAttendanceScreen extends StatefulWidget {
 
 class _VerifyAttendanceScreenState extends State<VerifyAttendanceScreen> {
   List<Welcome> data = [];
+
   PageController controller = PageController();
   Future verifyAttendance() async {
     http.Response response;
+    final token_data = await getData('auth_data');
     final url = '$baseUrl/api/events/4/attendance/';
-    response = await http.get(Uri.parse(url));
+    response = await http.get(
+      Uri.parse(url),
+      headers: {
+        HttpHeaders.authorizationHeader: 'Bearer ' + token_data!,
+      },
+    );
     print(response.body);
     if (response.statusCode == 200) {
       setState(() {
@@ -29,15 +39,17 @@ class _VerifyAttendanceScreenState extends State<VerifyAttendanceScreen> {
 
   Future attendanceData(int attendance) async {
     http.Response response;
-    // ignore: unused_local_variable
     final url = '$baseUrl/api/events/4/attendance/';
+
     response = await http.post(
         Uri.http('$baseUrl', '/api/events/4/attendance/'),
         body: {'attendance': attendance});
     print(response.body);
+    print(response.statusCode);
     if (response.statusCode == 200) {
       setState(() {
         data = welcomeFromJson(response.body);
+        print(response.statusCode);
       });
     }
   }
@@ -117,19 +129,25 @@ class _VerifyAttendanceScreenState extends State<VerifyAttendanceScreen> {
                 children: [
                   CircleAvatar(
                     radius: 15,
+                    // backgroundColor: Colors.brown.shade800,
+                    // child: Text('${data[position].firstName.toString()}'),
                     backgroundImage: AssetImage('assets/images/emma.jpg'),
                   ),
-                  SizedBox(width: 15),
+                  SizedBox(width: size.width * 0.03),
                   Text(
-                    data[position].firstName.toString(),
+                    data[position].firstName.toString() +
+                        ' ' +
+                        data[position].lastName.toString(),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
                     ),
                   ),
-                  SizedBox(width: 15),
+                  SizedBox(width: size.width * 0.28),
                   Text(
-                    "Class and Batch",
+                    'S' +
+                        data[position].semester.toString() +
+                        data[position].batch.toString(),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
@@ -157,14 +175,37 @@ class _VerifyAttendanceScreenState extends State<VerifyAttendanceScreen> {
                   height: size.height * 0.07,
                   child: ClipRRect(
                     child: TextButton(
-                      onPressed: () => {
+                      onPressed: () async {
                         controller.nextPage(
-                            duration: Duration(seconds: 1), curve: Curves.ease),
+                          duration: Duration(seconds: 1),
+                          curve: Curves.ease,
+                        );
+
+                        final body = jsonEncode({
+                          'attendance': 2,
+                          'user': data[position].user.toString()
+                        });
+
+                        final token_data = await getData('auth_data');
+
+                        final response = await http.put(
+                            Uri.parse("$baseUrl/api/events/4/attendance/"),
+                            headers: {
+                              "Accept": "application/json",
+                              "Content-Type":
+                                  "application/x-www-form-urlencoded",
+                              HttpHeaders.authorizationHeader:
+                                  'Bearer ' + token_data!,
+                            },
+                            body: body);
+                        print(response.statusCode);
+                        print(response.body);
+
                         // controller.jumpTo(position + 1),
                       },
-                      child: Text("Accept"),
+                      child: Text("Deny"),
                       style: TextButton.styleFrom(
-                          backgroundColor: Color.fromRGBO(189, 255, 187, 1),
+                          backgroundColor: Color.fromRGBO(255, 178, 178, 1),
                           primary: Colors.black,
                           textStyle: TextStyle(
                             fontSize: 16,
@@ -184,20 +225,33 @@ class _VerifyAttendanceScreenState extends State<VerifyAttendanceScreen> {
                   child: ClipRRect(
                     child: TextButton(
                       onPressed: () async {
+                        controller.nextPage(
+                          duration: Duration(seconds: 1),
+                          curve: Curves.ease,
+                        );
+
                         final body = jsonEncode({
                           'attendance': 1,
+                          'user': data[position].user.toString()
                         });
-
-                        final response = await http.post(
+                        final token_data = await getData('auth_data');
+                        final response = await http.put(
                             Uri.parse("$baseUrl/api/events/4/attendance/"),
-                            headers: {'Content-Type': 'application/json'},
+                            headers: {
+                              "Accept": "application/json",
+                              "Content-Type":
+                                  "application/x-www-form-urlencoded",
+                              HttpHeaders.authorizationHeader:
+                                  'Bearer ' + token_data!
+                            },
                             body: body);
                         print(response.statusCode);
                         print(response.body);
+                        print(data[position].user.toString());
                       },
-                      child: Text("Deny"),
+                      child: Text("Accept"),
                       style: TextButton.styleFrom(
-                          backgroundColor: Color.fromRGBO(255, 178, 178, 1),
+                          backgroundColor: Color.fromRGBO(189, 255, 187, 1),
                           primary: Colors.black,
                           textStyle: TextStyle(
                             fontSize: 16,
