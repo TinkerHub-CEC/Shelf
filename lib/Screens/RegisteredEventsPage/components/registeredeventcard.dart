@@ -7,12 +7,12 @@ import 'package:shelf/Api/api.dart';
 import 'package:shelf/Screens/EventsDetailsPage/event_screen.dart';
 import '../../../constants.dart';
 
-class EventCard extends StatefulWidget {
+class RegEventCard extends StatefulWidget {
   @override
-  _EventCardState createState() => _EventCardState();
+  _RegEventCardState createState() => _RegEventCardState();
 }
 
-class _EventCardState extends State<EventCard> {
+class _RegEventCardState extends State<RegEventCard> {
   int i = 0;
   List events = [];
   bool isLoading = false;
@@ -28,8 +28,9 @@ class _EventCardState extends State<EventCard> {
     setState(() {
       isLoading = true;
     });
-
-    final url = Uri.parse("$baseUrl/api/events/reg");
+    var  UserId = await getValue('auth_user_id');
+    print(UserId);
+    final url = Uri.parse('$baseUrl/api/users/$UserId/registered_events/');
     final data = await getData('auth_data');
     http.Response response= await http.get(
         url,

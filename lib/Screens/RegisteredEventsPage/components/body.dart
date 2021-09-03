@@ -1,9 +1,12 @@
 
-import 'package:shelf/Screens/Home/components/eventcard.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:shelf/Screens/CreateEvent/CreateEvent.dart';
+import 'package:shelf/Screens/RegisteredEventsPage/components/registeredeventcard.dart';
 import 'package:shelf/Screens/Login/login_screen.dart';
 import 'package:shelf/Screens/Signup/signup_screen.dart';
 import 'package:shelf/components/custom_menu_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:shelf/components/rounded_button.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -21,12 +24,45 @@ class Body extends StatelessWidget {
         scrollDirection: Axis.vertical,
         children: <Widget>[
           SizedBox(height: size.height * 0.04),
-          CustomMenuBar(text: "Registered Events"),
+          CustomMenuBar(text: "Events"),
+          SizedBox(height: size.height * 0.02),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+            children:
+            [
+              Container(
+              height: size.height*0.05,
+              width: size.width*.5,
+            //color: Colors.red,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Color(0xffE1E8E8)),
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.circular(40),
+                ),
+            child: Center(
+              child:Text("Registered Events",
+                style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              ),),
+          ),)
+          ]),
           SizedBox(height: size.height * 0.04),
           SizedBox(height: size.height * 0.02),
-          EventCard(),
+          RegEventCard(),
           SizedBox(height: size.height * 0.04),
-
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:
+              [
+                Container(
+                  //height: size.height*0.1,
+                  //width: size.width*.5,
+                  child: Center(
+                    child:RoundedButton(text: "Attendance", press:(){
+                    },),
+                  ),)
+              ]),
         ],
       ),
 
