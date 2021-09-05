@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shelf/Api/api.dart';
 import 'package:shelf/Screens/EventsDetailsPage/event_screen.dart';
+import 'package:shelf/size_config.dart';
 import '../../../constants.dart';
 
 class EventCard extends StatefulWidget {
@@ -75,6 +76,7 @@ class _EventCardState extends State<EventCard> {
 
   Widget getCard(events) {
     print(events);
+    SizeConfig().init(context);
     Size size = MediaQuery.of(context).size;
     // ignore: unused_local_variable
     var id = events['id'];

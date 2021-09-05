@@ -1,4 +1,5 @@
 import 'package:shelf/Screens/Home/components/isAdminFeatures.dart';
+import 'package:shelf/size_config.dart';
 
 import 'eventcard.dart';
 
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     Size size = MediaQuery.of(context).size;
     return Container(
       height: size.height,
@@ -28,10 +30,13 @@ class Body extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                margin: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
+                margin:
+                    EdgeInsets.only(left: SizeConfig.blockSizeHorizontal * 9),
                 child: Text(
                   "UPCOMING EVENTS",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 4.6,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ],
