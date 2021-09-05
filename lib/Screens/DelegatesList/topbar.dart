@@ -1,19 +1,19 @@
+import 'dart:io';
+import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:open_mail_app/open_mail_app.dart';
+import 'package:shelf/Api/api.dart';
 import 'package:shelf/components/rounded_button.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:convert';
+import '../../constants.dart';
 
 // ignore: must_be_immutable
 class TopBox extends StatelessWidget {
-  sendmails() async{
-    const url='mailto:razabinashraf@gmail.com';
-    if (await canLaunch(url) ){
-      await launch(url);
-    }
-    else{
-      throw 'could not launch url';
-    }
+  getEmail(delegates){
+    var email=delegates['email'];
+    print(email);
   }
   bool adminUser = true;
   @override
@@ -77,22 +77,41 @@ class TopBox extends StatelessWidget {
                         ElevatedButton(
                             style:ElevatedButton.styleFrom(primary:Color(0xff385A64),shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(5.0))
-                              ),fixedSize: Size(92, 34)),
+                              ),fixedSize: Size(100, 34)),
 
-                            child: Text('MailTo:',
+                            child: Text('Send Mail:',
                                 style:TextStyle(
                                   color:Colors.black,
                                 )),
 
                             onPressed: () async {
                               var apps=await OpenMailApp.getMailApps();
+                              List delegates = [];
+                              List<String> emails=[];
+                              var url = "$baseUrl/api/events/4/registrations/";
+                              final data = await getData('auth_data');
+                              /*var email = delegates['email'];*/
+                              var response = await http.get(
+                              Uri.parse(url),
+                              headers: {HttpHeaders.authorizationHeader: 'Bearer ' + data!},
+                              );
+                              print(response.body);
+                              if (response.statusCode == 200) {
+                                delegates = json.decode(response.body);
+                                /*getEmail(delegates);*/
+
+                                for(int i=0;i<delegates.length;i++)
+                                {emails.add(delegates[i]['email']);
+                                }
+                                /*emails.remove(']');*/
+                                print(emails);
+                              }
                               /*var result=await OpenMailApp.openMailApp(nativePickerTitle: 'select email app to open',);*/
                               showDialog(context: context, builder:(context){
                                 return MailAppPickerDialog(mailApps: apps,
                                 emailContent: EmailContent(
-                                  to: [
-                                    'razabinshraf@gmail.com',
-                                  ],
+                                  to: emails,
+
                                 ),);
 
                               },);
