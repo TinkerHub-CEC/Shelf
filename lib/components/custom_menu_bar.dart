@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shelf/size_config.dart';
 
 //rounded button stateless widget is created below
 
@@ -11,18 +12,20 @@ class CustomMenuBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     Size size = MediaQuery.of(context).size;
     return Center(
       child: Container(
         margin: EdgeInsets.symmetric(
-          vertical: 10,
+          vertical: SizeConfig.safeBlockVertical * 1.0,
+          horizontal: SizeConfig.safeBlockHorizontal * 6.5,
         ),
         //padding: EdgeInsets.symmetric(
         //  vertical: 10,
-          //horizontal: 5,
+        //horizontal: 5,
         //),
-        height: size.height * 0.055,
-        width: size.width * 0.8,
+        height: SizeConfig.safeBlockVertical * 5,
+        width: SizeConfig.safeBlockHorizontal * 80,
         decoration: BoxDecoration(
           border: Border.all(color: Color(0xffE1E8E8)),
           color: Colors.white,
@@ -34,7 +37,7 @@ class CustomMenuBar extends StatelessWidget {
           children: [
             Container(
                 margin: EdgeInsets.symmetric(
-                  horizontal: 10,
+                  horizontal: SizeConfig.safeBlockHorizontal * 2.0,
                 ),
                 child: Icon(
                   Icons.star_rounded,
@@ -44,7 +47,7 @@ class CustomMenuBar extends StatelessWidget {
               text,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 20,
+                fontSize: SizeConfig.safeBlockHorizontal * 4.2,
               ),
             ),
           ],
