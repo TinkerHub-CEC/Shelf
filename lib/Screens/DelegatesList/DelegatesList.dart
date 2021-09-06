@@ -151,7 +151,7 @@ class _DelegatesListState extends State<DelegatesList> {
                           child: Text(
                             first_name+' '+last_name,
                             style:
-                                TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                                TextStyle(fontSize: 17,),
                           ),
                         ),
                       ),
@@ -168,7 +168,7 @@ class _DelegatesListState extends State<DelegatesList> {
                         child: Text(
                           'S' + semester + batch,
                           style:
-                              TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                              TextStyle(fontSize: 17,),
                         ),
                       ),
                     ),
