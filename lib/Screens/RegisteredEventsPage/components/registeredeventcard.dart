@@ -28,15 +28,17 @@ class _RegEventCardState extends State<RegEventCard> {
     setState(() {
       isLoading = true;
     });
-    var  UserId = await getValue('auth_user_id');
-    print(UserId);
-    final url = Uri.parse('$baseUrl/api/users/$UserId/registered_events/');
+    var userId = await getValue('auth_user_id');
+    print(userId);
+    final url = Uri.parse('$baseUrl/api/users/$userId/registered_events/');
     final data = await getData('auth_data');
-    http.Response response= await http.get(
-        url,
-        headers: {HttpHeaders.authorizationHeader: 'Bearer '+ data!},);
-     //var response = await http.get(Uri.parse(url));
-
+    http.Response response = await http.get(
+      url,
+      headers: {HttpHeaders.authorizationHeader: 'Bearer ' + data!},
+    );
+    //var response = await http.get(Uri.parse(url));
+    final body = jsonEncode(response.body);
+    print(response.statusCode);
     print(response.body);
     if (response.statusCode == 200) {
       var extractData = json.decode(response.body);
