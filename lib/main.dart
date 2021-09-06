@@ -12,9 +12,10 @@ void main() {
       [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]).then((_) {
     runApp(
       // Using device_preview
-      DevicePreview(
-        builder: (context) => MyApp(),
-      ),
+      // DevicePreview(
+      //   builder: (context) =>
+      MyApp(),
+      // ),
     );
   });
 }

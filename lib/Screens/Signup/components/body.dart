@@ -179,7 +179,7 @@ class _BodyState extends State<Body> {
                     vertical: SizeConfig.blockSizeVertical * 1.2,
                     horizontal: SizeConfig.blockSizeHorizontal * 7.5),
                 child: Text(
-                  "Your Semster",
+                  "Your Semester",
                   style: TextStyle(
                       fontSize: SizeConfig.safeBlockHorizontal * 3.4,
                       fontWeight: FontWeight.normal),
