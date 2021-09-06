@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shelf/Screens/Home/homepage.dart';
+import 'package:shelf/Api/api.dart';
 
 enum Attendance{Method1,Method2,None}
 
@@ -54,23 +55,29 @@ class _CreateEventState extends State<CreateEvent> {
                width: 150,
                child: Column(
                  children: [
-                   Text('Registration close date came before ',
-                     style: TextStyle(
-                       color: Colors.red,
-                       fontSize: 12.0,
-                     ),
+                   Padding(
+                     padding: const EdgeInsets.only(left: 30),
+                     child: Text('Registration close date came before ',
+                       style: TextStyle(
+                         color: Colors.red,
+                         fontSize: 12.0,
+                       ),
+                     maxLines: 1,
+                     overflow:TextOverflow.visible,
+                     softWrap: false,),
+                   ),
+
+               Padding(
+                 padding: const EdgeInsets.only(left: 60),
+                 child: Text(' registration open date',
+                   style: TextStyle(
+                     color: Colors.red,
+                     fontSize: 12.0,
+                   ),
                    maxLines: 1,
                    overflow:TextOverflow.visible,
                    softWrap: false,),
-
-               Text(' registration open date',
-                 style: TextStyle(
-                   color: Colors.red,
-                   fontSize: 12.0,
-                 ),
-                 maxLines: 1,
-                 overflow:TextOverflow.visible,
-                 softWrap: false,),
+               ),
                  ],
                ),
              ),
@@ -98,22 +105,28 @@ class _CreateEventState extends State<CreateEvent> {
                 width: 150,
                 child: Column(
                   children: [
-                    Text('Event close date came before',
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontSize: 12.0,
-                      ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 50),
+                      child: Text('Event close date came before',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 12.0,
+                        ),
           maxLines: 1,
           overflow:TextOverflow.visible,
-                    softWrap: false,),
-                    Text(' event start date',
+                      softWrap: false,),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 80),
+                      child: Text(' event start date',
                   style: TextStyle(
-                    color: Colors.red,
-                    fontSize: 12.0,
+                      color: Colors.red,
+                      fontSize: 12.0,
                   ),
                   maxLines: 1,
                   overflow:TextOverflow.visible,
                   softWrap: false,),
+                    ),
                   ],
                 ),
               ),
@@ -139,7 +152,9 @@ class _CreateEventState extends State<CreateEvent> {
            width:150,
                 child: Column(
                   children: [
-                    Text('*Event start date came before ',
+                    Padding(
+                      padding: const EdgeInsets.only(left: 50),
+                      child: Text('*Event start date came before ',
           style: TextStyle(
             color: Colors.red,
             fontSize: 15.0,
@@ -147,16 +162,20 @@ class _CreateEventState extends State<CreateEvent> {
 
           maxLines: 1,
           overflow:TextOverflow.visible,
-                    softWrap: false,),
-                    Text(' registration close date',
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontSize: 15.0,
-                      ),
-
-                      maxLines: 1,
-                      overflow:TextOverflow.visible,
                       softWrap: false,),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left:80),
+                      child: Text(' registration close date',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 15.0,
+                        ),
+
+                        maxLines: 1,
+                        overflow:TextOverflow.visible,
+                        softWrap: false,),
+                    ),
                   ],
                 ),
          ),
@@ -605,7 +624,7 @@ class _CreateEventState extends State<CreateEvent> {
                           children: [
                             Container(
                               width: size.width * .89,
-                              height: size.height * .60,
+                              height: size.height * .66,
                               decoration: BoxDecoration(
                                 border: Border.all(color: Color(0xffE1E8E8)),
                                 color: Colors.white,
@@ -632,87 +651,100 @@ class _CreateEventState extends State<CreateEvent> {
                                     width: size.width*0.832,
                                     child:Column(
                                       children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(16.0),
+                                       /* Padding(
+                                          padding: const EdgeInsets.only(left: 12.0),
                                           child: Container(
                                             width: 800,
-                                            child: Text(
+                                           /* child: Text(
                                               'Event Registration',
                                               style: TextStyle(
                                                 fontSize: 18.0,
 
 
                                               ),
-                                            ),
+                                            ),*/
                                           ),
+                                        ),*/
+
+
+                                        Row(
+                                          children: <Widget>[
+
+
+
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 15.0),
+                                              child: Text('Registration starts:  '),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                  '${_dateTime1.day}/${_dateTime1
+                                                      .month}/${_dateTime1.year}'),
+                                            ),
+                                            Text('${time1.hour}:${time1.minute}'),
+
+
+
+                                          ],
                                         ),
-
-
                                         Padding(
-                                          padding: const EdgeInsets.all(8.0),
+                                          padding: const EdgeInsets.only(left: 150),
                                           child: Row(
-                                            children: <Widget>[
-
-
-
-                                              Padding(
-                                                padding: const EdgeInsets.only(left: 12.0),
-                                                child: Text('starts:  '),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: Text(
-                                                    '${_dateTime1.day}/${_dateTime1
-                                                        .month}/${_dateTime1.year}'),
-                                              ),
-                                              Text('${time1.hour}:${time1.minute}'),
+                                            children: [
                                               IconButton(
                                                 onPressed: () => _pickDate1(context),
                                                 icon: Icon(Icons.date_range),
 
                                               ),
-                                              IconButton(
-                                                onPressed: () => _pickTime1(context),
-                                                icon: Icon(Icons.access_time_outlined),
 
-                                              ),
+                                          IconButton(
+                                            onPressed: () => _pickTime1(context),
+                                            icon: Icon(Icons.access_time_outlined),
 
-
+                                          ),
                                             ],
                                           ),
                                         ),
+                                        Row(
+                                          children: <Widget>[
+
+
+
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 15.0),
+                                              child: Text('Registration ends:  '),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                  '${_dateTime2.day}/${_dateTime2
+                                                      .month}/${_dateTime2.year}'),
+                                            ),
+                                            Text('${time2.hour}:${time2.minute}'),
+
+
+
+
+                                          ],
+                                        ),
                                         Padding(
-                                          padding: const EdgeInsets.all(8.0),
+                                          padding: const EdgeInsets.only(left: 150),
                                           child: Row(
-                                            children: <Widget>[
-
-
-
-                                              Padding(
-                                                padding: const EdgeInsets.only(left: 12.0),
-                                                child: Text('ends:  '),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: Text(
-                                                    '${_dateTime2.day}/${_dateTime2
-                                                        .month}/${_dateTime2.year}'),
-                                              ),
-                                              Text('${time2.hour}:${time2.minute}'),
+                                            children: [
                                               IconButton(
                                                 onPressed: () => _pickDate2(context),
                                                 icon: Icon(Icons.date_range),
 
                                               ),
-                                              IconButton(
-                                                onPressed: () => _pickTime2(context),
-                                                icon: Icon(Icons.access_time_outlined),
-
-                                              ),
 
 
+                                          IconButton(
+                                            onPressed: () => _pickTime2(context),
+                                            icon: Icon(Icons.access_time_outlined),
 
-                                            ],
+                                          ),
+      ],
                                           ),
                                         ),
                                         Padding(
@@ -723,9 +755,11 @@ class _CreateEventState extends State<CreateEvent> {
                                             ],
                                           ),
                                         ),
-
-                                        Padding(
-                                          padding: const EdgeInsets.all(16.0),
+                                    Divider(
+                                      color:Color(0xffE1E8E8),
+                                    ),
+                                      /*  Padding(
+                                          padding: const EdgeInsets.only(left: 12),
                                           child: Container(
                                             width: 800,
                                             child: Text(
@@ -737,52 +771,58 @@ class _CreateEventState extends State<CreateEvent> {
                                               ),
                                             ),
                                           ),
+                                        ),*/
+
+                                        Row(
+                                          children: <Widget>[
+
+
+
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 15.0),
+                                              child: Text('Event starts:  '),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                  '${_dateTime3.day}/${_dateTime3
+                                                      .month}/${_dateTime3.year}'),
+                                            ),
+                                            Text('${time3.hour}:${time3.minute}'),
+
+
+
+                                          ],
                                         ),
-
                                         Padding(
-                                          padding: const EdgeInsets.all(8.0),
+                                          padding: const EdgeInsets.only(left: 100),
                                           child: Row(
-                                            children: <Widget>[
-
-
-
-                                              Padding(
-                                                padding: const EdgeInsets.only(left: 12.0),
-                                                child: Text('starts:  '),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: Text(
-                                                    '${_dateTime3.day}/${_dateTime3
-                                                        .month}/${_dateTime3.year}'),
-                                              ),
-                                              Text('${time3.hour}:${time3.minute}'),
+                                            children: [
                                               IconButton(
                                                 onPressed: () => _pickDate3(context),
                                                 icon: Icon(Icons.date_range),
 
                                               ),
-                                              IconButton(
-                                                onPressed: () => _pickTime3(context),
-                                                icon: Icon(Icons.access_time_outlined),
 
-                                              ),
+                                          IconButton(
+                                            onPressed: () => _pickTime3(context),
+                                            icon: Icon(Icons.access_time_outlined),
 
-
+                                          ),
                                             ],
                                           ),
                                         ),
 
                                         Padding(
-                                          padding: const EdgeInsets.all(8.0),
+                                          padding: const EdgeInsets.all(1.0),
                                           child: Row(
                                             children: <Widget>[
 
 
 
                                               Padding(
-                                                padding: const EdgeInsets.only(left: 12.0),
-                                                child: Text('ends:  '),
+                                                padding: const EdgeInsets.only(left: 15.0),
+                                                child: Text('Event ends:  '),
                                               ),
                                               Padding(
                                                 padding: const EdgeInsets.all(8.0),
@@ -792,18 +832,28 @@ class _CreateEventState extends State<CreateEvent> {
                                               ),
 
                                               Text('${time4.hour}:${time4.minute}'),
+
+
+
+                                            ],
+                                          ),
+
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 100),
+                                          child: Row(
+                                            children: [
                                               IconButton(
                                                 onPressed: () => _pickDate4(context),
                                                 icon: Icon(Icons.date_range),
 
                                               ),
-                                              IconButton(
-                                                onPressed: () => _pickTime4(context),
-                                                icon: Icon(Icons.access_time_outlined),
 
-                                              ),
+                                          IconButton(
+                                            onPressed: () => _pickTime4(context),
+                                            icon: Icon(Icons.access_time_outlined),
 
-
+                                          ),
                                             ],
                                           ),
                                         ),
@@ -869,7 +919,7 @@ class _CreateEventState extends State<CreateEvent> {
 
                                         children: [
                                           Padding(
-                                            padding: const EdgeInsets.only(left: 20.0),
+                                            padding: const EdgeInsets.only(left: 12.0),
                                             child: Text("Upload Files"),
                                           ),
                                           Padding(
@@ -967,7 +1017,7 @@ class _CreateEventState extends State<CreateEvent> {
 
 
                                   ListTile(
-                                    title: const Text('Method 1'),
+                                    title: const Text('CheckBox Marking Method'),
                                     leading: Radio(
                                       value: 1,
                                       groupValue: Type,
@@ -977,7 +1027,7 @@ class _CreateEventState extends State<CreateEvent> {
                                   ),
 
                                   ListTile(
-                                    title: const Text('Method 2'),
+                                    title: const Text('Proof Uploading Method'),
                                     leading: Radio(
                                       value: 2,
                                       groupValue: Type,
@@ -1230,11 +1280,13 @@ void radioValue(int? value)
           ) async {
 
     try {
+      final data=await getData('auth_data');
+      Map<String,String>headers={HttpHeaders.authorizationHeader:'Bearer '+data!};
+      Uri url = Uri.parse("$baseUrl/api/events/");
 
-      Uri url = Uri.parse("${baseUrl}/api/events/");
-     /* final data=await getData('auth_data');*/
       var sendRequest = http.MultipartRequest("POST", url);
-     /* sendRequest.headers['']*/
+      sendRequest.headers.addAll(headers);
+
       sendRequest.fields['title'] = eventname;
       sendRequest.fields['start_datetime'] = startDateTime;
       sendRequest.fields['end_datetime'] = endDateTime;

@@ -37,7 +37,7 @@ class EventAdminFeatures extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => DelegatesListPage()),
+                                builder: (context) => DelegatesListPage(eventId: eventId,)),
                           );
                         },
                         text: "View Delegates"),
