@@ -30,7 +30,9 @@ class Body extends StatelessWidget {
     var edatetime = events['end_datetime'];
     String edate = edatetime.substring(0, 10);
     String etime = sdatetime.substring(11, 16);
-    var description = events['long_description'];
+    var description =
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+    // events['long_description'];
     var image = events['poster'];
     var regclose = events['reg_close_date'];
     String rgcdate = regclose.substring(0, 10);
@@ -107,19 +109,25 @@ class Body extends StatelessWidget {
             width: size.width * 0.8,
             height: size.width * 0.07,
           ),
-          Container(
-            margin: EdgeInsets.symmetric(
-              vertical: 13,
-            ),
-            child: Text(
-              description,
-              style: TextStyle(
-                fontSize: 16.8,
+          Row(
+            children: [
+              Flexible(
+                child: Container(
+                  margin: EdgeInsets.symmetric(
+                    vertical: 13,
+                    horizontal: 46,
+                  ),
+                  child: Text(
+                    description,
+                    style: TextStyle(
+                      fontSize: 16.8,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                  width: size.width * 0.8,
+                ),
               ),
-              textAlign: TextAlign.left,
-            ),
-            width: size.width * 0.8,
-            height: size.width * 0.25,
+            ],
           ),
 
           Row(

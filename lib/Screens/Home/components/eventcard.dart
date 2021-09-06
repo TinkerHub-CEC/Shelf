@@ -95,8 +95,8 @@ class _EventCardState extends State<EventCard> {
       },
       child: Container(
         width: size.width * .85,
-        height: size.height * .55,
-        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+        margin: EdgeInsets.symmetric(
+            vertical: 10, horizontal: SizeConfig.blockSizeHorizontal * 7.5),
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
@@ -136,21 +136,33 @@ class _EventCardState extends State<EventCard> {
               ),
               Column(
                 children: <Widget>[
-                  SizedBox(
-                    width: size.width * .80,
-                    height: size.height * .07,
-                    child: Text(description, style: TextStyle(fontSize: 14)),
+                  // SizedBox(
+                  //   width: size.width * .80,
+                  // ),
+                  Row(
+                    children: <Widget>[
+                      Flexible(
+                          child: Container(
+                        margin: EdgeInsets.symmetric(
+                            horizontal: SizeConfig.blockSizeHorizontal * 2.5),
+                        child:
+                            Text(description, style: TextStyle(fontSize: 14)),
+                      )),
+                    ],
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  SizedBox(
-                    width: size.width * .80,
-                    height: size.height * .05,
-                    child: Text(
-                      date.toString(),
-                      style:
-                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                  Container(
+                    margin: EdgeInsets.only(
+                        bottom: SizeConfig.blockSizeVertical * 2),
+                    child: SizedBox(
+                      width: size.width * .80,
+                      child: Text(
+                        date.toString(),
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ],
