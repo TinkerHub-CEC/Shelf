@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: submitAttendance(),
+      home: LoginScreen(),
     );
   }
 }
