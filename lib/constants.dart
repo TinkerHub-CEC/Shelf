@@ -4,4 +4,4 @@ import 'package:flutter/material.dart';
 const kPrimaryColor = Color(0xff385A64);
 const textFieldColor = Color(0xffF5F9FF);
 const kPrimaryLightColor = Color(0xFFCFCFCF);
-const baseUrl = "http://3.20.146.217";
+const baseUrl = "http://18.222.71.50";
