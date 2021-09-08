@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:shelf/Screens/CreateEventMethod/components/topBar.dart';
 import 'package:shelf/constants.dart';
@@ -229,7 +231,7 @@ class _CreateEventState extends State<CreateEvent> {
   var _Form = GlobalKey<FormState>();
 
   RegExp digitValidator = RegExp("[0-9]+");
-
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   String EventName = '';
   String shortDescription = '';
   String longDescription = '';
@@ -266,7 +268,7 @@ class _CreateEventState extends State<CreateEvent> {
       home: SafeArea(
         top: true,
         child: Scaffold(
-
+          key: _scaffoldKey,
           drawer: Drawer(
             child: ListView(
                 children: [Text('data')]),
@@ -295,8 +297,6 @@ class _CreateEventState extends State<CreateEvent> {
                             Container(
                               width: size.width * .89,
                               height: size.height * .07,
-                              /*margin: EdgeInsets.only(
-                      top: size.width * 0.028, left: size.width * 0.1),*/
                               decoration: BoxDecoration(
                                 border: Border.all(color: Color(0xffE1E8E8)),
                                 color: Colors.white,
@@ -393,15 +393,12 @@ class _CreateEventState extends State<CreateEvent> {
                                         onChanged: (value) {
                                           shortDescription = value;
                                         },
-
-
                                         controller: ShortDescriptionController,
                                         maxLines: null,
                                         decoration: InputDecoration(
                                           hintText: "Short Description",
                                           contentPadding: const EdgeInsets.only(left: 12),
-                                          /* labelText:'Short Description',*/
-                                          focusedBorder:OutlineInputBorder(
+                                            focusedBorder:OutlineInputBorder(
                                             borderSide: const BorderSide(color:Colors.deepOrange,width:2.0),
                                             borderRadius:  BorderRadius.only(
                                               topRight: Radius.circular(5.0),
@@ -457,16 +454,13 @@ class _CreateEventState extends State<CreateEvent> {
                                         onChanged: (value) {
                                           longDescription = value;
                                         },
-
                                         controller: LongDescriptionController,
                                         maxLines: null,
                                         minLines: 15,
                                         decoration: InputDecoration(
-
-                                          hintText: "Long Description",
+                                            hintText: "Long Description",
                                           contentPadding: const EdgeInsets.fromLTRB(12.0, 12.0, 0.0, 0.0),
-                                          /*labelText:'Long Description',*/
-                                          focusedBorder:OutlineInputBorder(
+                                            focusedBorder:OutlineInputBorder(
                                             borderSide: const BorderSide(color:Colors.deepOrange,width:2.0),
                                             borderRadius:  BorderRadius.only(
                                               topRight: Radius.circular(5.0),
@@ -487,8 +481,6 @@ class _CreateEventState extends State<CreateEvent> {
                             Container(
                               width: size.width * .89,
                               height: size.height * .07,
-                              /*margin: EdgeInsets.only(
-                      top: size.width * 0.028, left: size.width * 0.1),*/
                               decoration: BoxDecoration(
                                 border: Border.all(color: Color(0xffE1E8E8)),
                                 color: Colors.white,
@@ -651,27 +643,9 @@ class _CreateEventState extends State<CreateEvent> {
                                     width: size.width*0.832,
                                     child:Column(
                                       children: [
-                                       /* Padding(
-                                          padding: const EdgeInsets.only(left: 12.0),
-                                          child: Container(
-                                            width: 800,
-                                           /* child: Text(
-                                              'Event Registration',
-                                              style: TextStyle(
-                                                fontSize: 18.0,
-
-
-                                              ),
-                                            ),*/
-                                          ),
-                                        ),*/
-
 
                                         Row(
                                           children: <Widget>[
-
-
-
                                             Padding(
                                               padding: const EdgeInsets.only(left: 15.0),
                                               child: Text('Registration starts:  '),
@@ -683,9 +657,6 @@ class _CreateEventState extends State<CreateEvent> {
                                                       .month}/${_dateTime1.year}'),
                                             ),
                                             Text('${time1.hour}:${time1.minute}'),
-
-
-
                                           ],
                                         ),
                                         Padding(
@@ -708,9 +679,6 @@ class _CreateEventState extends State<CreateEvent> {
                                         ),
                                         Row(
                                           children: <Widget>[
-
-
-
                                             Padding(
                                               padding: const EdgeInsets.only(left: 15.0),
                                               child: Text('Registration ends:  '),
@@ -722,10 +690,6 @@ class _CreateEventState extends State<CreateEvent> {
                                                       .month}/${_dateTime2.year}'),
                                             ),
                                             Text('${time2.hour}:${time2.minute}'),
-
-
-
-
                                           ],
                                         ),
                                         Padding(
@@ -758,26 +722,8 @@ class _CreateEventState extends State<CreateEvent> {
                                     Divider(
                                       color:Color(0xffE1E8E8),
                                     ),
-                                      /*  Padding(
-                                          padding: const EdgeInsets.only(left: 12),
-                                          child: Container(
-                                            width: 800,
-                                            child: Text(
-                                              'Event',
-                                              style: TextStyle(
-                                                fontSize: 18.0,
-
-
-                                              ),
-                                            ),
-                                          ),
-                                        ),*/
-
                                         Row(
                                           children: <Widget>[
-
-
-
                                             Padding(
                                               padding: const EdgeInsets.only(left: 15.0),
                                               child: Text('Event starts:  '),
@@ -1080,43 +1026,19 @@ class _CreateEventState extends State<CreateEvent> {
                         if (_Form.currentState!.validate()) {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(isValidForm
-                                  ? 'Event created successfully'
+                                  ? ''
                                   : "please fix errors and submit")));
                         }
 
-                        Datetime1=(DateTime.parse((_dateTime1.year).toString()+'-'+(_dateTime1.month).toString().padLeft(2,'0')+'-'+(_dateTime1.day).toString().padLeft(2,'0')+'T'+(time1.hour).toString()+':'+(time1.minute).toString()+':00Z')).toString();
-
-                        Datetime2=(DateTime.parse((_dateTime2.year).toString()+'-'+(_dateTime2.month).toString().padLeft(2,'0')+'-'+(_dateTime2.day).toString().padLeft(2,'0')+'T'+(time2.hour).toString()+':'+(time2.minute).toString()+':00Z')).toString();
-
-                        Datetime3=(DateTime.parse((_dateTime3.year).toString()+'-'+(_dateTime3.month).toString().padLeft(2,'0')+'-'+(_dateTime3.day).toString().padLeft(2,'0')+'T'+(time3.hour).toString()+':'+(time3.minute).toString()+':00Z')).toString();
-                        Datetime4=(DateTime.parse((_dateTime4.year).toString()+'-'+(_dateTime4.month).toString().padLeft(2,'0')+'-'+(_dateTime4.day).toString().padLeft(2,'0')+'T'+(time4.hour).toString()+':'+(time4.minute).toString()+':00Z')).toString();
-
-                        print(Datetime1);
-                        print(Datetime2);
-                        print(Datetime3);
-                        print(Datetime4);
-                        createEvent(
-                          EventnameController.text,
-                          Datetime3,
-                          Datetime4,
-                          VenueController.text,
-                          MaxParticipantsController.text,
-                          ShortDescriptionController.text,
-                          LongDescriptionController.text,
-                          _image,
-                          Datetime1,
-                          Datetime2,
-                          AttendanceType,
+                        Datetime1=(DateTime.parse((_dateTime1.year).toString()+'-'+(_dateTime1.month).toString().padLeft(2,'0')+'-'+(_dateTime1.day).toString().padLeft(2,'0')+'T'+(time1.hour).toString().padLeft(2,'0')+':'+(time1.minute).toString().padLeft(2,'0')+':00Z')).toString();
+                        Datetime2=(DateTime.parse((_dateTime2.year).toString()+'-'+(_dateTime2.month).toString().padLeft(2,'0')+'-'+(_dateTime2.day).toString().padLeft(2,'0')+'T'+(time2.hour).toString().padLeft(2,'0')+':'+(time2.minute).toString().padLeft(2,'0')+':00Z')).toString();
+                        Datetime3=(DateTime.parse((_dateTime3.year).toString()+'-'+(_dateTime3.month).toString().padLeft(2,'0')+'-'+(_dateTime3.day).toString().padLeft(2,'0')+'T'+(time3.hour).toString().padLeft(2,'0')+':'+(time3.minute).toString().padLeft(2,'0')+':00Z')).toString();
+                        Datetime4=(DateTime.parse((_dateTime4.year).toString()+'-'+(_dateTime4.month).toString().padLeft(2,'0')+'-'+(_dateTime4.day).toString().padLeft(2,'0')+'T'+(time4.hour).toString().padLeft(2,'0')+':'+(time4.minute).toString().padLeft(2,'0')+':00Z')).toString();
+                        createEvent(EventnameController.text, Datetime3, Datetime4,
+                          VenueController.text, MaxParticipantsController.text, ShortDescriptionController.text,
+                          LongDescriptionController.text, _image, Datetime1, Datetime2, AttendanceType,
                         );
-                        if (isValidForm) {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => Homepage()), );
-                        }
-                      },
-
-
-
+                        },
                     ),
                   ),
                 ),
@@ -1266,17 +1188,10 @@ void radioValue(int? value)
     }
   });
 }
-  Future<bool> createEvent (String eventname ,
-         String startDateTime,
-          String endDateTime,
-         String location,
-         String maxParticipants,
-          String shortDescription,
-          String longDescription,
-          File? image,
-          String RegOpenDate,
-          String RegCloseDate,
-          int? attendance,
+
+Future<bool> createEvent (String eventname , String startDateTime, String endDateTime, String location,
+         String maxParticipants, String shortDescription, String longDescription, File? image, String RegOpenDate,
+          String RegCloseDate, int? attendance,
           ) async {
 
     try {
@@ -1301,7 +1216,34 @@ void radioValue(int? value)
       http.StreamedResponse response = await sendRequest.send();
       final finalResp = await http.Response.fromStream(response);
       print(finalResp.body);
+      if (finalResp.statusCode == 201){
+        Fluttertoast.showToast(
+            msg: "Event created successfully",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 3,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Homepage()), );
+
+      }
+      else{
+        Fluttertoast.showToast(
+            msg: "Error in creating the event",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 3,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
+      }
       return true;
+
     } on SocketException {
       print("No Internet while uploading ");
       return false;
@@ -1311,7 +1253,4 @@ void radioValue(int? value)
     }
 
   }
-
-
-
 }
