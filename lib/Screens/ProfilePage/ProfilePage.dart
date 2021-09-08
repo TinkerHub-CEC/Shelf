@@ -37,11 +37,11 @@ class _ProfilePageState extends State<ProfilePage> {
             TextButton(
                 child: Text('Attendance Page'),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => VerifyAttendanceScreen()),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => VerifyAttendanceScreen()),
+                  // );
                 })
           ]),
         ),
@@ -114,11 +114,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: RaisedButton.icon(
                   elevation: 0.0,
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => VerifyAttendanceScreen()),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //       builder: (context) => VerifyAttendanceScreen()),
+                    // );
                   },
                   icon: Icon(
                     Icons.settings,
