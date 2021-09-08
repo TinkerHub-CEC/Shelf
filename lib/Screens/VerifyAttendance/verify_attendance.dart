@@ -189,21 +189,21 @@ class _VerifyAttendanceScreenState extends State<VerifyAttendanceScreen> {
                           curve: Curves.ease,
                         );
 
-                        final bodys = jsonEncode(
-                            {'attendance': 2, 'user': data[position].user});
+                        // final bodys = jsonEncode(
+                        //     {'attendance': 2, 'user': data[position].user});
 
-                        final token_data = await getData('auth_data');
+                        // final token_data = await getData('auth_data');
 
-                        final response = await http.put(
-                            Uri.parse(
-                                "$baseUrl/api/events/${widget.eventId}/attendance/"),
-                            headers: {
-                              HttpHeaders.authorizationHeader:
-                                  'Bearer ' + token_data!,
-                            },
-                            body: bodys);
-                        print(response.statusCode);
-                        print(response.body);
+                        // final response = await http.put(
+                        //     Uri.parse(
+                        //         "$baseUrl/api/events/${widget.eventId}/attendance/"),
+                        //     headers: {
+                        //       HttpHeaders.authorizationHeader:
+                        //           'Bearer ' + token_data!,
+                        //     },
+                        //     body: bodys);
+                        // print(response.statusCode);
+                        // print(response.body);
 
                         // controller.jumpTo(position + 1),
                       },
