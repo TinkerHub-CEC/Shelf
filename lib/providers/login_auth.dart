@@ -58,8 +58,7 @@ Future signIn(BuildContext context, String email, String password) async {
     Map<String?, dynamic> decodedrefreshToken =
         JwtDecoder.decode(jsonResponse['refresh']);
     // Now you can use your decoded token
-    sharedPreferences.setBool(
-        'isAdminUser', decodedrefreshToken['is_superuser']);
+    sharedPreferences.setBool('isAdminUser', decodedrefreshToken['is_admin']);
 
     sharedPreferences.setInt('auth_user_id', decodedrefreshToken['user_id']);
 
@@ -89,7 +88,7 @@ Future signIn(BuildContext context, String email, String password) async {
 
     print(decodedauthToken);
     print(decodedrefreshToken);
-    print(decodedrefreshToken['is_superuser']);
+    print(decodedrefreshToken['is_admin']);
     // sharedPreferences.setBool(
     //     'isAdminUser', decodedrefreshToken['is_superuser']);
 
