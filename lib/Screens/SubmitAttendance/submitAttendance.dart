@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:shelf/Api/api.dart';
 import "dart:convert";
 import 'dart:async';
+import 'package:shelf/models/verify_data.dart';
 
 // ignore: camel_case_types
 class submitAttendance extends StatefulWidget {
@@ -18,25 +19,10 @@ class submitAttendance extends StatefulWidget {
 
 // ignore: camel_case_types
 class _submitAttendanceState extends State<submitAttendance> {
-  // Future submitAttendance() async {
-  //   http.Response response;
-  //   final token_data = await getData('auth_data');
-  //   final url = '$baseUrl/api/events/4/attendance/';
-  //   response = await http.get(
-  //     Uri.parse(url),
-  //     headers: {
-  //       HttpHeaders.authorizationHeader: 'Bearer ' + token_data!,
-  //     },
-  //   );
-  //   print(response.body);
-  // }
-
   var selectedRadio;
-
   @override
   void initState() {
     super.initState();
-
     selectedRadio = 0;
   }
 
@@ -44,6 +30,67 @@ class _submitAttendanceState extends State<submitAttendance> {
     setState(() {
       selectedRadio = val;
     });
+  }
+
+  List<Welcome> data = [];
+  Future submitAttendance() async {
+    http.Response response;
+    final token_data = await getData('auth_data');
+    final url = '$baseUrl/api/events/4/attendance/';
+    response = await http.get(
+      Uri.parse(url),
+      headers: {
+        HttpHeaders.authorizationHeader: 'Bearer ' + token_data!,
+      },
+    );
+    print(response.body);
+    if (response.statusCode == 200) {
+      setState(() {
+        data = welcomeFromJson(response.body);
+      });
+    }
+  }
+
+  presentButton(var val) async {
+    final token_data = await getData('auth_data');
+    if (val == 1) {
+      final body = jsonEncode({
+        'attendance': 1,
+        // 'user':.user.toString()
+      });
+
+      final response =
+          await http.put(Uri.parse("$baseUrl/api/events/4/attendance/"),
+              headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/x-www-form-urlencoded",
+                HttpHeaders.authorizationHeader: 'Bearer ' + token_data!
+              },
+              body: body);
+      print(response.statusCode);
+      print(response.body);
+    }
+  }
+
+  absentButton(var val) async {
+    final token_data = await getData('auth_data');
+    if (val == 2) {
+      final body = jsonEncode({
+        'attendance': 2,
+        // 'user':.user.toString()
+      });
+
+      final response =
+          await http.put(Uri.parse("$baseUrl/api/events/4/attendance/"),
+              headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/x-www-form-urlencoded",
+                HttpHeaders.authorizationHeader: 'Bearer ' + token_data!
+              },
+              body: body);
+      print(response.statusCode);
+      print(response.body);
+    }
   }
 
   @override
@@ -192,7 +239,11 @@ class _submitAttendanceState extends State<submitAttendance> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    presentButton(selectedRadio);
+                    absentButton(selectedRadio);
+                    print('$selectedRadio');
+                  },
                   child: Text("Submit Attendance"),
                   style: TextButton.styleFrom(
                       backgroundColor: Color.fromRGBO(56, 90, 100, 1),
