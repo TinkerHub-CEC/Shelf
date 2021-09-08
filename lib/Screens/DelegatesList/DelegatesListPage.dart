@@ -43,7 +43,7 @@ class DelegatesListPage extends StatelessWidget {
         scrollDirection: Axis.vertical,
         children: <Widget>[
           SizedBox(height: size.height * 0.04),
-          TopBox(),
+          TopBox(eventId: eventId,),
 
           SizedBox(height: size.height * 0.04),
 

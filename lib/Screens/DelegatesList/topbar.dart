@@ -11,11 +11,18 @@ import '../../constants.dart';
 
 // ignore: must_be_immutable
 class TopBox extends StatelessWidget {
+  final eventId;
+  const TopBox(
+      {Key? key,
+        required this.eventId})
+      : super(key: key);
+
+
   getEmail(delegates){
     var email=delegates['email'];
     print(email);
   }
-  bool adminUser = true;
+ final bool adminUser = true;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -88,7 +95,7 @@ class TopBox extends StatelessWidget {
                               var apps=await OpenMailApp.getMailApps();
                               List delegates = [];
                               List<String> emails=[];
-                              var url = "$baseUrl/api/events/4/registrations/";
+                              var url = "$baseUrl/api/events/$eventId/registrations/";
                               final data = await getData('auth_data');
                               /*var email = delegates['email'];*/
                               var response = await http.get(
