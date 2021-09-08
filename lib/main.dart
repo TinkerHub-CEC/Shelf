@@ -4,7 +4,7 @@ import 'package:flutter/services.dart'; //for using device orientation
 import 'package:shelf/Screens/Login/login_screen.dart';
 import 'package:shelf/Screens/SubmitAttendance/submitAttendance.dart';
 import 'package:shelf/constants.dart';
-// import 'package:device_preview/device_preview.dart'; //device_preview package
+import 'package:device_preview/device_preview.dart'; //device_preview package
 
 void main() {
   //device orientation set to portrait
@@ -12,7 +12,7 @@ void main() {
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]).then((_) {
     runApp(
-      //Using device_preview
+      // Using device_preview
       // DevicePreview(
       //   builder: (context) =>
       MyApp(),

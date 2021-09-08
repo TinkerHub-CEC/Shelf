@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shelf/Api/api.dart';
 import 'package:shelf/Screens/EventsDetailsPage/event_screen.dart';
+import 'package:shelf/size_config.dart';
 import '../../../constants.dart';
 
 class RegEventCard extends StatefulWidget {
@@ -28,15 +29,17 @@ class _RegEventCardState extends State<RegEventCard> {
     setState(() {
       isLoading = true;
     });
-    var  UserId = await getValue('auth_user_id');
-    print(UserId);
-    final url = Uri.parse('$baseUrl/api/users/$UserId/registered_events/');
+    var userId = await getValue('auth_user_id');
+    print(userId);
+    final url = Uri.parse('$baseUrl/api/users/$userId/registered_events/');
     final data = await getData('auth_data');
-    http.Response response= await http.get(
-        url,
-        headers: {HttpHeaders.authorizationHeader: 'Bearer '+ data!},);
-     //var response = await http.get(Uri.parse(url));
-
+    http.Response response = await http.get(
+      url,
+      headers: {HttpHeaders.authorizationHeader: 'Bearer ' + data!},
+    );
+    //var response = await http.get(Uri.parse(url));
+    final body = jsonEncode(response.body);
+    print(response.statusCode);
     print(response.body);
     if (response.statusCode == 200) {
       var extractData = json.decode(response.body);
@@ -76,7 +79,9 @@ class _RegEventCardState extends State<RegEventCard> {
 
   Widget getCard(events) {
     print(events);
+    SizeConfig().init(context);
     Size size = MediaQuery.of(context).size;
+    // ignore: unused_local_variable
     var id = events['id'];
     var title = events['title'];
     var datetime = events['start_datetime'];
@@ -93,8 +98,8 @@ class _RegEventCardState extends State<RegEventCard> {
       },
       child: Container(
         width: size.width * .85,
-        height: size.height * .55,
-        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+        margin: EdgeInsets.symmetric(
+            vertical: 10, horizontal: SizeConfig.blockSizeHorizontal * 7.5),
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
@@ -134,21 +139,33 @@ class _RegEventCardState extends State<RegEventCard> {
               ),
               Column(
                 children: <Widget>[
-                  SizedBox(
-                    width: size.width * .80,
-                    height: size.height * .07,
-                    child: Text(description, style: TextStyle(fontSize: 14)),
+                  // SizedBox(
+                  //   width: size.width * .80,
+                  // ),
+                  Row(
+                    children: <Widget>[
+                      Flexible(
+                          child: Container(
+                        margin: EdgeInsets.symmetric(
+                            horizontal: SizeConfig.blockSizeHorizontal * 2.5),
+                        child:
+                            Text(description, style: TextStyle(fontSize: 14)),
+                      )),
+                    ],
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  SizedBox(
-                    width: size.width * .80,
-                    height: size.height * .05,
-                    child: Text(
-                      date.toString(),
-                      style:
-                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                  Container(
+                    margin: EdgeInsets.only(
+                        bottom: SizeConfig.blockSizeVertical * 2),
+                    child: SizedBox(
+                      width: size.width * .80,
+                      child: Text(
+                        date.toString(),
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ],

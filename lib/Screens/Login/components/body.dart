@@ -27,117 +27,119 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     Size size = MediaQuery.of(context).size;
-    return Background(
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: size.height * 0.3),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  margin: EdgeInsets.symmetric(
-                      vertical: MediaQuery.of(context).size.height * .012,
-                      horizontal: MediaQuery.of(context).size.width * .078),
-                  child: Text(
-                    "Login",
-                    style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 5,
-                        fontWeight: FontWeight.bold),
-                  ),
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            width: double.infinity,
+            child:
+                Image.asset("assets/images/login.png", width: size.width * 1),
+          ),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(
+                    vertical: SizeConfig.blockSizeVertical * 1.2,
+                    horizontal: SizeConfig.blockSizeHorizontal * 7.5),
+                child: Text(
+                  "Login",
+                  style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 5,
+                      fontWeight: FontWeight.bold),
                 ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  margin: EdgeInsets.symmetric(
-                      vertical: MediaQuery.of(context).size.height * .012,
-                      horizontal: MediaQuery.of(context).size.width * .078),
-                  child: Text(
-                    "Sign into your account",
-                    style: TextStyle(
-                        color: Color(0xff788190),
-                        fontSize: SizeConfig.safeBlockHorizontal * 2.9,
-                        fontWeight: FontWeight.w400),
-                  ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(
+                    vertical: SizeConfig.blockSizeVertical * 1.2,
+                    horizontal: SizeConfig.blockSizeHorizontal * 7.5),
+                child: Text(
+                  "Sign into your account",
+                  style: TextStyle(
+                      color: Color(0xff788190),
+                      fontSize: SizeConfig.safeBlockHorizontal * 2.9,
+                      fontWeight: FontWeight.w400),
                 ),
-              ],
-            ),
-            SizedBox(height: size.height * 0.045),
-            Row(
-              children: [
-                Container(
-                  margin: EdgeInsets.symmetric(
-                      vertical: MediaQuery.of(context).size.height * .012,
-                      horizontal: MediaQuery.of(context).size.width * .078),
-                  child: Text(
-                    "Your Email",
-                    style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 3.4,
-                        fontWeight: FontWeight.normal),
-                  ),
+              ),
+            ],
+          ),
+          SizedBox(height: SizeConfig.blockSizeVertical * 3.5),
+          Row(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(
+                    vertical: SizeConfig.blockSizeVertical * 1.2,
+                    horizontal: SizeConfig.blockSizeHorizontal * 7.5),
+                child: Text(
+                  "Your Email",
+                  style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 3.4,
+                      fontWeight: FontWeight.normal),
                 ),
-              ],
-            ),
-            RoundedInputField(
-                controller: emailController,
-                icon: Icons.email_outlined,
-                hintText: "myemail@gmail.com",
-                onChanged: (value) {}),
-            SizedBox(height: size.height * 0.025),
-            Row(
-              children: [
-                Container(
-                  margin: EdgeInsets.symmetric(
-                      vertical: MediaQuery.of(context).size.height * .012,
-                      horizontal: MediaQuery.of(context).size.width * .078),
-                  child: Text(
-                    "Password",
-                    style: TextStyle(
-                        fontSize: SizeConfig.safeBlockHorizontal * 3.4,
-                        fontWeight: FontWeight.normal),
-                  ),
+              ),
+            ],
+          ),
+          RoundedInputField(
+              controller: emailController,
+              icon: Icons.email_outlined,
+              hintText: "myemail@gmail.com",
+              onChanged: (value) {}),
+          SizedBox(height: SizeConfig.blockSizeVertical * 2.5),
+          Row(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(
+                    vertical: SizeConfig.blockSizeVertical * 1.2,
+                    horizontal: SizeConfig.blockSizeHorizontal * 7.5),
+                child: Text(
+                  "Password",
+                  style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 3.4,
+                      fontWeight: FontWeight.normal),
                 ),
-              ],
-            ),
-            RoundedPasswordField(
-                controller: passwordController, onChanged: (value) {}),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.end,
-            //   children: [
-            //     Container(
-            //       margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
-            //       child: Text(
-            //         "Forgot Password?",
-            //         style:
-            //             TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
-            //       ),
-            //     ),
-            //   ],
-            // ),
-            SizedBox(height: size.height * 0.075),
-            AlreadyHaveAnAccountCheck(
-              press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SignUpScreen()),
-                );
-              },
-            ),
-            RoundedButton(
-                text: "Login",
-                press: () async {
-                  // ignore: unused_local_variable
-                  SharedPreferences sharedPreferences =
-                      await SharedPreferences.getInstance();
-                  signIn(
-                      context, emailController.text, passwordController.text);
-                }),
-          ],
-        ),
+              ),
+            ],
+          ),
+          RoundedPasswordField(
+              controller: passwordController, onChanged: (value) {}),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.end,
+          //   children: [
+          //     Container(
+          //       margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
+          //       child: Text(
+          //         "Forgot Password?",
+          //         style:
+          //             TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          SizedBox(height: SizeConfig.blockSizeVertical * 7.5),
+          AlreadyHaveAnAccountCheck(
+            press: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SignUpScreen()),
+              );
+            },
+          ),
+          RoundedButton(
+              text: "Login",
+              press: () async {
+                // ignore: unused_local_variable
+                SharedPreferences sharedPreferences =
+                    await SharedPreferences.getInstance();
+                signIn(context, emailController.text, passwordController.text);
+              }),
+        ],
       ),
     );
   }

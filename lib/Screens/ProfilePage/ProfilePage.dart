@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelf/Screens/Login/login_screen.dart';
 import 'package:shelf/Screens/VerifyAttendance/verify_attendance.dart';
 import 'package:shelf/components/custom_menu_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -36,11 +37,11 @@ class _ProfilePageState extends State<ProfilePage> {
             TextButton(
                 child: Text('Attendance Page'),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => VerifyAttendanceScreen()),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => VerifyAttendanceScreen()),
+                  // );
                 })
           ]),
         ),
@@ -53,15 +54,6 @@ class _ProfilePageState extends State<ProfilePage> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 CustomMenuBar(text: "Profile"),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => LoginScreen()),
-                        (Route<dynamic> route) => false);
-                  },
-                  child: Text('Logout'),
-                ),
               ],
             ),
             Center(
@@ -122,11 +114,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: RaisedButton.icon(
                   elevation: 0.0,
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => VerifyAttendanceScreen()),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //       builder: (context) => VerifyAttendanceScreen()),
+                    // );
                   },
                   icon: Icon(
                     Icons.settings,
@@ -137,6 +129,22 @@ class _ProfilePageState extends State<ProfilePage> {
                       borderRadius: BorderRadius.circular(18.0),
                       side: BorderSide(color: Colors.black)),
                 ),
+              ),
+            ),
+            Center(
+              child: TextButton(
+                onPressed: () async {
+                  SharedPreferences sharedPreferences =
+                      await SharedPreferences.getInstance();
+                  sharedPreferences.setBool('islogged', false);
+                  final d = sharedPreferences.getBool('islogged');
+                  print('logged out: $d');
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => LoginScreen()),
+                      (Route<dynamic> route) => false);
+                },
+                child: Text('Logout'),
               ),
             ),
           ],

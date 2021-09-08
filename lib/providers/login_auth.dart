@@ -46,9 +46,11 @@ Future signIn(BuildContext context, String email, String password) async {
     sharedPreferences.setBool('islogged', true);
     final a = await getData('auth_data');
     final b = await getData('refresh_token');
+    final d = sharedPreferences.getBool('islogged');
 
     print('refresh_token: $b');
     print('auth_data: $a');
+    print('logged in: $d');
 
     Map<String?, dynamic> decodedauthToken =
         JwtDecoder.decode(jsonResponse['access']);
@@ -56,8 +58,7 @@ Future signIn(BuildContext context, String email, String password) async {
     Map<String?, dynamic> decodedrefreshToken =
         JwtDecoder.decode(jsonResponse['refresh']);
     // Now you can use your decoded token
-    sharedPreferences.setBool(
-        'isAdminUser', decodedrefreshToken['is_superuser']);
+    sharedPreferences.setBool('isAdminUser', decodedrefreshToken['is_admin']);
 
     sharedPreferences.setInt('auth_user_id', decodedrefreshToken['user_id']);
 
@@ -87,14 +88,15 @@ Future signIn(BuildContext context, String email, String password) async {
 
     print(decodedauthToken);
     print(decodedrefreshToken);
-    print(decodedrefreshToken['is_superuser']);
+    print(decodedrefreshToken['is_admin']);
     // sharedPreferences.setBool(
     //     'isAdminUser', decodedrefreshToken['is_superuser']);
 
-    Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (BuildContext context) => Homepage()),
-        (Route<dynamic> route) => false);
-
+    if (sharedPreferences.getBool('islogged') == true) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (BuildContext context) => Homepage()),
+          (Route<dynamic> route) => false);
+    }
     return true;
   } else {
     print(response.body);

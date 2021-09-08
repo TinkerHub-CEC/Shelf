@@ -37,7 +37,9 @@ class EventAdminFeatures extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => DelegatesListPage(eventId: eventId,)),
+                                builder: (context) => DelegatesListPage(
+                                      eventId: eventId,
+                                    )),
                           );
                         },
                         text: "View Delegates"),
@@ -46,7 +48,9 @@ class EventAdminFeatures extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => VerifyAttendanceScreen()),
+                                builder: (context) => VerifyAttendanceScreen(
+                                      eventId: eventId,
+                                    )),
                           );
                         },
                         text: "Verify Attendance"),

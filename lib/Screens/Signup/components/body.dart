@@ -81,8 +81,8 @@ class _BodyState extends State<Body> {
             children: [
               Container(
                 margin: EdgeInsets.symmetric(
-                    vertical: size.height * 0.012,
-                    horizontal: size.width * 0.078),
+                    vertical: SizeConfig.blockSizeVertical * 1.2,
+                    horizontal: SizeConfig.blockSizeHorizontal * 7.5),
                 child: Text(
                   "Register",
                   style: TextStyle(
@@ -97,8 +97,8 @@ class _BodyState extends State<Body> {
             children: [
               Container(
                 margin: EdgeInsets.symmetric(
-                    vertical: size.height * 0.012,
-                    horizontal: size.width * 0.078),
+                    vertical: SizeConfig.blockSizeVertical * 1.2,
+                    horizontal: SizeConfig.blockSizeHorizontal * 7.5),
                 child: Text(
                   "Create your account",
                   style: TextStyle(
@@ -109,13 +109,13 @@ class _BodyState extends State<Body> {
               ),
             ],
           ),
-          SizedBox(height: size.height * 0.025),
+          SizedBox(height: SizeConfig.blockSizeVertical * 3.5),
           Row(
             children: [
               Container(
                 margin: EdgeInsets.symmetric(
-                    vertical: size.height * 0.012,
-                    horizontal: size.width * 0.078),
+                    vertical: SizeConfig.blockSizeVertical * 1.2,
+                    horizontal: SizeConfig.blockSizeHorizontal * 7.5),
                 child: Text(
                   "Your Name",
                   style: TextStyle(
@@ -129,9 +129,6 @@ class _BodyState extends State<Body> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                margin: EdgeInsets.symmetric(
-                    vertical: size.height * .012,
-                    horizontal: size.width * .020),
                 child: SmallRoundedInputField(
                     hintText: "First Name",
                     onChanged: (value) {
@@ -149,14 +146,18 @@ class _BodyState extends State<Body> {
               ),
             ],
           ),
-          SizedBox(height: size.height * 0.025),
+          SizedBox(height: SizeConfig.blockSizeVertical * 3.5),
           Row(
             children: [
               Container(
-                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
+                margin: EdgeInsets.symmetric(
+                    vertical: SizeConfig.blockSizeVertical * 1.2,
+                    horizontal: SizeConfig.blockSizeHorizontal * 7.5),
                 child: Text(
                   "Registration No",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                  style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 3.4,
+                      fontWeight: FontWeight.normal),
                 ),
               ),
             ],
@@ -170,14 +171,18 @@ class _BodyState extends State<Body> {
             },
             controller: registerNumberController,
           ),
-          SizedBox(height: size.height * 0.025),
+          SizedBox(height: SizeConfig.blockSizeVertical * 3.5),
           Row(
             children: [
               Container(
-                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
+                margin: EdgeInsets.symmetric(
+                    vertical: SizeConfig.blockSizeVertical * 1.2,
+                    horizontal: SizeConfig.blockSizeHorizontal * 7.5),
                 child: Text(
-                  "Your Semster",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                  "Your Semester",
+                  style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 3.4,
+                      fontWeight: FontWeight.normal),
                 ),
               ),
             ],
@@ -203,14 +208,18 @@ class _BodyState extends State<Body> {
               ),
             ),
           ),
-          SizedBox(height: size.height * 0.025),
+          SizedBox(height: SizeConfig.blockSizeVertical * 3.5),
           Row(
             children: [
               Container(
-                margin: EdgeInsets.symmetric(vertical: 5, horizontal: 38),
+                margin: EdgeInsets.symmetric(
+                    vertical: SizeConfig.blockSizeVertical * 1.2,
+                    horizontal: SizeConfig.blockSizeHorizontal * 7.5),
                 child: Text(
                   "Department",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                  style: TextStyle(
+                      fontSize: SizeConfig.safeBlockHorizontal * 3.4,
+                      fontWeight: FontWeight.normal),
                 ),
               ),
             ],
@@ -240,8 +249,8 @@ class _BodyState extends State<Body> {
             children: [
               Container(
                 margin: EdgeInsets.symmetric(
-                    vertical: size.height * .012,
-                    horizontal: size.width * .078),
+                    vertical: SizeConfig.blockSizeVertical * 1.2,
+                    horizontal: SizeConfig.blockSizeHorizontal * 7.5),
                 child: Text(
                   "Your Email",
                   style: TextStyle(
@@ -256,13 +265,13 @@ class _BodyState extends State<Body> {
               icon: Icons.mail,
               hintText: "myemail@gmail.com",
               onChanged: (value) {}),
-          SizedBox(height: size.height * 0.025),
+          SizedBox(height: SizeConfig.blockSizeVertical * 3.5),
           Row(
             children: [
               Container(
                 margin: EdgeInsets.symmetric(
-                    vertical: size.height * .012,
-                    horizontal: size.width * .078),
+                    vertical: SizeConfig.blockSizeVertical * 1.2,
+                    horizontal: SizeConfig.blockSizeHorizontal * 7.5),
                 child: Text(
                   "Password",
                   style: TextStyle(
@@ -282,7 +291,7 @@ class _BodyState extends State<Body> {
                   MaterialPageRoute(builder: (context) => LoginScreen()),
                 );
               }),
-          SizedBox(height: size.height * 0.025),
+          SizedBox(height: SizeConfig.blockSizeVertical * 3.5),
           RoundedButton(
               text: "Register",
               press: () async {

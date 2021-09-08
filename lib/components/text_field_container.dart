@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shelf/size_config.dart';
 
 import '../constants.dart';
 
@@ -18,15 +19,17 @@ class TextFieldContainer extends StatelessWidget {
 // class _TextFieldContainerState extends State<TextFieldContainer> {
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     Size size = MediaQuery.of(context).size;
     return Container(
       margin: EdgeInsets.symmetric(
-        vertical: 10,
+        vertical: SizeConfig.safeBlockVertical * 2.5,
+        horizontal: SizeConfig.safeBlockVertical * 3.5,
       ),
-      width: size.width * 0.85,
+      width: SizeConfig.blockSizeHorizontal * 71,
       padding: EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 5,
+        horizontal: SizeConfig.blockSizeHorizontal * 1.8,
+        vertical: SizeConfig.blockSizeVertical * 0.8,
       ),
       decoration: BoxDecoration(
         color: textFieldColor,
