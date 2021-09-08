@@ -11,18 +11,24 @@ import '../../../constants.dart';
 import 'dart:async';
 
 class VerifyAttendanceScreen extends StatefulWidget {
+  final eventId;
+  const VerifyAttendanceScreen({
+    required this.eventId,
+  });
+
   @override
   _VerifyAttendanceScreenState createState() => _VerifyAttendanceScreenState();
 }
 
 class _VerifyAttendanceScreenState extends State<VerifyAttendanceScreen> {
   List<Welcome> data = [];
-
+  // var verifyid = $widget.eventId;
   PageController controller = PageController();
   Future verifyAttendance() async {
     http.Response response;
     final token_data = await getData('auth_data');
-    final url = '$baseUrl/api/events/4/attendance/';
+    final url = '$baseUrl/api/events/${widget.eventId}/attendance/';
+
     response = await http.get(
       Uri.parse(url),
       headers: {
@@ -39,13 +45,15 @@ class _VerifyAttendanceScreenState extends State<VerifyAttendanceScreen> {
 
   Future attendanceData(int attendance) async {
     http.Response response;
-    final url = '$baseUrl/api/events/4/attendance/';
+    final url = '$baseUrl/api/events/${widget.eventId}/attendance/';
 
     response = await http.post(
-        Uri.http('$baseUrl', '/api/events/4/attendance/'),
+        Uri.http('$baseUrl', '/api/events/${widget.eventId}/attendance/'),
         body: {'attendance': attendance});
+    print(widget.eventId);
     print(response.body);
     print(response.statusCode);
+    print(widget.eventId);
     if (response.statusCode == 200) {
       setState(() {
         data = welcomeFromJson(response.body);
@@ -181,25 +189,21 @@ class _VerifyAttendanceScreenState extends State<VerifyAttendanceScreen> {
                           curve: Curves.ease,
                         );
 
-                        final body = jsonEncode({
-                          'attendance': 2,
-                          'user': data[position].user.toString()
-                        });
+                        // final bodys = jsonEncode(
+                        //     {'attendance': 2, 'user': data[position].user});
 
-                        final token_data = await getData('auth_data');
+                        // final token_data = await getData('auth_data');
 
-                        final response = await http.put(
-                            Uri.parse("$baseUrl/api/events/4/attendance/"),
-                            headers: {
-                              "Accept": "application/json",
-                              "Content-Type":
-                                  "application/x-www-form-urlencoded",
-                              HttpHeaders.authorizationHeader:
-                                  'Bearer ' + token_data!,
-                            },
-                            body: body);
-                        print(response.statusCode);
-                        print(response.body);
+                        // final response = await http.put(
+                        //     Uri.parse(
+                        //         "$baseUrl/api/events/${widget.eventId}/attendance/"),
+                        //     headers: {
+                        //       HttpHeaders.authorizationHeader:
+                        //           'Bearer ' + token_data!,
+                        //     },
+                        //     body: bodys);
+                        // print(response.statusCode);
+                        // print(response.body);
 
                         // controller.jumpTo(position + 1),
                       },
@@ -229,25 +233,41 @@ class _VerifyAttendanceScreenState extends State<VerifyAttendanceScreen> {
                           duration: Duration(seconds: 1),
                           curve: Curves.ease,
                         );
+                        var datauser = data[position].user.toString();
+                        final tokenData = await getData('auth_data');
+                        Map<String, String> headers = {
+                          HttpHeaders.authorizationHeader:
+                              'Bearer ' + tokenData!
+                        };
+                        Uri url = Uri.parse(
+                            "$baseUrl/api/events/${widget.eventId}/attendance/");
 
-                        final body = jsonEncode({
-                          'attendance': 1,
-                          'user': data[position].user.toString()
-                        });
-                        final token_data = await getData('auth_data');
-                        final response = await http.put(
-                            Uri.parse("$baseUrl/api/events/4/attendance/"),
-                            headers: {
-                              "Accept": "application/json",
-                              "Content-Type":
-                                  "application/x-www-form-urlencoded",
-                              HttpHeaders.authorizationHeader:
-                                  'Bearer ' + token_data!
-                            },
-                            body: body);
-                        print(response.statusCode);
-                        print(response.body);
-                        print(data[position].user.toString());
+                        var sendRequest = http.MultipartRequest("PUT", url);
+                        sendRequest.headers.addAll(headers);
+
+                        sendRequest.fields['attendance'] = 1.toString();
+                        sendRequest.fields['user'] = datauser;
+
+                        http.StreamedResponse response =
+                            await sendRequest.send();
+                        final finalResp =
+                            await http.Response.fromStream(response);
+                        print(finalResp.statusCode);
+
+                        // final bodys = jsonEncode(
+                        //     {'attendance': 1, 'user': data[position].user});
+
+                        // final response = await http.put(
+                        //     Uri.parse(
+                        //         "$baseUrl/api/events/${widget.eventId}/attendance/"),
+                        //     headers: {
+                        //       HttpHeaders.authorizationHeader:
+                        //           'Bearer ' + token_data!
+                        //     },
+                        //     body: bodys);
+                        // print(response.statusCode);
+                        // print(response.body);
+                        // print(data[position].user);
                       },
                       child: Text("Accept"),
                       style: TextButton.styleFrom(
