@@ -11,7 +11,10 @@ import 'package:shelf/models/verify_data.dart';
 
 // ignore: camel_case_types
 class submitAttendance extends StatefulWidget {
-  const submitAttendance({Key? key}) : super(key: key);
+  final events;
+  submitAttendance(this.events);
+  //const submitAttendance({Key? key, this.events}) : super(key: key);
+
 
   @override
   _submitAttendanceState createState() => _submitAttendanceState();
@@ -67,6 +70,7 @@ class _submitAttendanceState extends State<submitAttendance> {
                 HttpHeaders.authorizationHeader: 'Bearer ' + token_data!
               },
               body: body);
+      print(widget.events);
       print(response.statusCode);
       print(response.body);
     }
