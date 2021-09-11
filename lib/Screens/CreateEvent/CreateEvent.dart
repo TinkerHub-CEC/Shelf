@@ -1066,7 +1066,7 @@ class _CreateEventState extends State<CreateEvent> {
                                 (time1.hour).toString().padLeft(2, '0') +
                                 ':' +
                                 (time1.minute).toString().padLeft(2, '0') +
-                                ':00Z'))
+                                ':00'))
                             .toString();
                         Datetime2 = (DateTime.parse((_dateTime2.year)
                                     .toString() +
@@ -1078,7 +1078,7 @@ class _CreateEventState extends State<CreateEvent> {
                                 (time2.hour).toString().padLeft(2, '0') +
                                 ':' +
                                 (time2.minute).toString().padLeft(2, '0') +
-                                ':00Z'))
+                                ':00'))
                             .toString();
                         Datetime3 = (DateTime.parse((_dateTime3.year)
                                     .toString() +
@@ -1090,7 +1090,7 @@ class _CreateEventState extends State<CreateEvent> {
                                 (time3.hour).toString().padLeft(2, '0') +
                                 ':' +
                                 (time3.minute).toString().padLeft(2, '0') +
-                                ':00Z'))
+                                ':00'))
                             .toString();
                         Datetime4 = (DateTime.parse((_dateTime4.year)
                                     .toString() +
@@ -1102,7 +1102,7 @@ class _CreateEventState extends State<CreateEvent> {
                                 (time4.hour).toString().padLeft(2, '0') +
                                 ':' +
                                 (time4.minute).toString().padLeft(2, '0') +
-                                ':00Z'))
+                                ':00'))
                             .toString();
                         createEvent(
                           EventnameController.text,
@@ -1235,7 +1235,7 @@ class _CreateEventState extends State<CreateEvent> {
         case 1:
           AttendanceType = 1;
           break;
-        case 0:
+        case 2:
           AttendanceType = 2;
           break;
       }
@@ -1286,7 +1286,7 @@ class _CreateEventState extends State<CreateEvent> {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 3,
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.green,
             textColor: Colors.white,
             fontSize: 16.0);
         Navigator.pushReplacement(
