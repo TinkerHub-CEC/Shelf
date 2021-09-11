@@ -7,6 +7,7 @@ import 'package:shelf/Api/api.dart';
 import 'package:shelf/Screens/EventsDetailsPage/event_screen.dart';
 import 'package:shelf/Screens/SubmitAttendance/submitAttendance.dart';
 import '../../../constants.dart';
+import 'package:shelf/Screens/Upload Image/uploadImage.dart';
 
 class AttendanceEventCard extends StatefulWidget {
   @override
@@ -31,7 +32,7 @@ class _AttendanceEventCardState extends State<AttendanceEventCard> {
     });
     var  UserId = await getValue('auth_user_id');
     print(UserId);
-    final url = Uri.parse('$baseUrl/api/events/active/with_attendance');
+    final url = Uri.parse('$baseUrl/api/events/active/all');
     final data = await getData('auth_data');
     http.Response response= await http.get(
         url,
@@ -80,18 +81,28 @@ class _AttendanceEventCardState extends State<AttendanceEventCard> {
     Size size = MediaQuery.of(context).size;
     var id = events['id'];
     var title = events['title'];
-    var datetime = events['start_datetime'];
-    String date = datetime.substring(0, 10);
-    var description = events['short_description'];
+    //var datetime = events['start_datetime'];
+    //String date = datetime.substring(0, 10);
+    //var description = events['short_description'];
     var image = events['poster'];
-
+    var method =events['attendance_method'];
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context,
-            new MaterialPageRoute(
-              builder: (BuildContext context) => new submitAttendance(events),
-            ));
+        AttendanceMethod() async{
+          if(method==1){
+            return Navigator.push(
+                context,
+                new MaterialPageRoute(
+                  builder: (BuildContext context) =>new submitAttendance(id),
+                ));
+          }
+          return Navigator.push(
+              context,
+              new MaterialPageRoute(
+                builder: (BuildContext context) =>new uploadImage(id),
+              ));
+        }
+        AttendanceMethod();
       },
       child: Container(
         width: size.width * .85,
