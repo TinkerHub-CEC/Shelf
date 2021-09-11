@@ -12,9 +12,10 @@ import 'package:shelf/models/verify_data.dart';
 // ignore: camel_case_types
 class submitAttendance extends StatefulWidget {
   final events;
-  submitAttendance(this.events);
-  //const submitAttendance({Key? key, this.events}) : super(key: key);
 
+  submitAttendance(this.events);
+
+  //const submitAttendance({Key? key, this.events}) : super(key: key);
 
   @override
   _submitAttendanceState createState() => _submitAttendanceState();
@@ -23,6 +24,7 @@ class submitAttendance extends StatefulWidget {
 // ignore: camel_case_types
 class _submitAttendanceState extends State<submitAttendance> {
   var selectedRadio;
+
   @override
   void initState() {
     super.initState();
@@ -36,6 +38,7 @@ class _submitAttendanceState extends State<submitAttendance> {
   }
 
   List<Welcome> data = [];
+
   Future submitAttendance() async {
     http.Response response;
     final token_data = await getData('auth_data');
