@@ -11,7 +11,9 @@ import 'package:shelf/models/verify_data.dart';
 import 'package:image_picker/image_picker.dart';
 
 class uploadImage extends StatefulWidget {
-  const uploadImage({Key? key}) : super(key: key);
+  final id;
+  uploadImage(this.id);
+  //const uploadImage({Key? key}) : super(key: key);
 
   @override
   _uploadImageState createState() => _uploadImageState();
@@ -34,6 +36,8 @@ class _uploadImageState extends State<uploadImage> {
   }
 
   imageUpload() async {
+    var eventid=widget.id;
+    print(eventid);
     final data = await getData('auth_data');
     Map<String, String> headers = {
       HttpHeaders.authorizationHeader: 'Bearer ' + data!
