@@ -25,9 +25,9 @@ class SmallTextFieldContainer extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(
         vertical: SizeConfig.safeBlockVertical * 2.5,
-        horizontal: SizeConfig.safeBlockVertical * 0.5,
+        horizontal: SizeConfig.safeBlockVertical * 2.6,
       ),
-      width: SizeConfig.blockSizeHorizontal * 30,
+      width: SizeConfig.blockSizeHorizontal * 31,
       padding: EdgeInsets.symmetric(
         horizontal: SizeConfig.blockSizeHorizontal * 2.2,
         vertical: SizeConfig.blockSizeVertical * 0.8,

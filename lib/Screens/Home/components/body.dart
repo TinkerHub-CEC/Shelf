@@ -25,22 +25,7 @@ class Body extends StatelessWidget {
           TopBox(),
           SizedBox(height: size.height * 0.04),
           HomeAdminFeatures(),
-          SizedBox(height: size.height * 0.04),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                margin:
-                    EdgeInsets.only(left: SizeConfig.blockSizeHorizontal * 9),
-                child: Text(
-                  "UPCOMING EVENTS",
-                  style: TextStyle(
-                      fontSize: SizeConfig.safeBlockHorizontal * 4.6,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-            ],
-          ),
+
           SizedBox(height: size.height * 0.02),
 
           EventCard(),

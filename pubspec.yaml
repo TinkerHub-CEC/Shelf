@@ -31,8 +31,7 @@ dependencies:
   http: ^0.13.3
   image_picker: ^0.8.0+4
   
-
-
+  intl: ^0.17.0
   shared_preferences: ^2.0.6
   device_preview: ^0.7.0
   jwt_decoder: ^2.0.1
