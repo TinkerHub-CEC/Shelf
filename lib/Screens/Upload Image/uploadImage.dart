@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shelf/components/custom_menu_bar.dart';
 import '../../../constants.dart';
 import 'package:http/http.dart' as http;
@@ -56,8 +57,10 @@ class _uploadImageState extends State<uploadImage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    var outputFormat = DateFormat('dd/MM/yyyy');
     var edatetime = widget.events['end_datetime'];
     String edate = edatetime.substring(0, 10);
+    edate = outputFormat.format(DateTime.parse(edate));
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(

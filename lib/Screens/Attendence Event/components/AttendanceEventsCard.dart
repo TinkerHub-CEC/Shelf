@@ -30,14 +30,15 @@ class _AttendanceEventCardState extends State<AttendanceEventCard> {
     setState(() {
       isLoading = true;
     });
-    var  UserId = await getValue('auth_user_id');
+    var UserId = await getValue('auth_user_id');
     print(UserId);
     final url = Uri.parse('$baseUrl/api/events/active/all');
     final data = await getData('auth_data');
-    http.Response response= await http.get(
-        url,
-        headers: {HttpHeaders.authorizationHeader: 'Bearer '+ data!},);
-     //var response = await http.get(Uri.parse(url));
+    http.Response response = await http.get(
+      url,
+      headers: {HttpHeaders.authorizationHeader: 'Bearer ' + data!},
+    );
+    //var response = await http.get(Uri.parse(url));
 
     print(response.body);
     if (response.statusCode == 200) {
@@ -85,87 +86,86 @@ class _AttendanceEventCardState extends State<AttendanceEventCard> {
     //String date = datetime.substring(0, 10);
     //var description = events['short_description'];
     var image = events['poster'];
-    var method =events['attendance_method'];
+    var method = events['attendance_method'];
     return GestureDetector(
-      onTap: () {
-        AttendanceMethod() async{
-          if(method==1){
+        onTap: () {
+          AttendanceMethod() async {
+            if (method == 1) {
+              return Navigator.push(
+                  context,
+                  new MaterialPageRoute(
+                    builder: (BuildContext context) => new submitAttendance(id),
+                  ));
+            }
             return Navigator.push(
                 context,
                 new MaterialPageRoute(
-                  builder: (BuildContext context) =>new submitAttendance(id),
+                  builder: (BuildContext context) => new uploadImage(events),
                 ));
           }
-          return Navigator.push(
-              context,
-              new MaterialPageRoute(
-                builder: (BuildContext context) =>new uploadImage(id),
-              ));
-        }
-        AttendanceMethod();
-      },
-      child: Container(
-        width: size.width * .85,
-        height: size.height * .12,
-        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: Colors.black),
-            boxShadow: [
-              BoxShadow(
-                  blurRadius: 10,
-                  offset: const Offset(0, 0),
-                  spreadRadius: 5,
-                  color: Colors.black12)
-            ]),
-        child: ListTile(
-          minVerticalPadding: 0,
-         contentPadding: EdgeInsets.zero,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                  width: size.height * .12,
-                  height: size.height * .12,
-                decoration: BoxDecoration(
-              color: Colors.grey[600],
-              borderRadius: BorderRadius.circular(10),),
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child:
-                Image(
-                        fit: BoxFit.fill, image: NetworkImage(image)))),
-              SizedBox(width: size.width*0.04,),
-              Container(
-                width: size.width*.42,
-                 // color: Colors.grey,
-                  //margin: EdgeInsets.all(15),
-                  //alignment: Alignment.center,
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                        fontSize: 20,
-                        //color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  )),
-                Container(
-                  width: size.width * .08,
-                  height: size.width * .08,
-                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                    border: Border.all(color: Colors.black),
-                      borderRadius: BorderRadius.circular(100),
+
+          AttendanceMethod();
+        },
+        child: Container(
+          width: size.width * .85,
+          height: size.height * .12,
+          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.black),
+              boxShadow: [
+                BoxShadow(
+                    blurRadius: 10,
+                    offset: const Offset(0, 0),
+                    spreadRadius: 5,
+                    color: Colors.black12)
+              ]),
+          child: ListTile(
+            minVerticalPadding: 0,
+            contentPadding: EdgeInsets.zero,
+            title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                      width: size.height * .12,
+                      height: size.height * .12,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[600],
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                   child: Icon(
-                     Icons.arrow_forward_outlined
-                   ),
-                ),
-          ]
-                    ),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image(
+                              fit: BoxFit.fill, image: NetworkImage(image)))),
+                  SizedBox(
+                    width: size.width * 0.04,
                   ),
-              )
-    );
+                  Container(
+                      width: size.width * .42,
+                      // color: Colors.grey,
+                      //margin: EdgeInsets.all(15),
+                      //alignment: Alignment.center,
+                      child: Text(
+                        title,
+                        style: TextStyle(
+                            fontSize: 20,
+                            //color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      )),
+                  Container(
+                    width: size.width * .08,
+                    height: size.width * .08,
+                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.black),
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: Icon(Icons.arrow_forward_outlined),
+                  ),
+                ]),
+          ),
+        ));
   }
 }
