@@ -31,7 +31,7 @@ class SmallRoundedButton extends StatelessWidget {
               foregroundColor: MaterialStateProperty.all(textColor),
               backgroundColor: MaterialStateProperty.all(color),
               padding: MaterialStateProperty.all(
-                  EdgeInsets.symmetric(vertical: 20, horizontal: 12)),
+                  EdgeInsets.symmetric(vertical: 20, horizontal: 8)),
             ),
             onPressed: () => press(),
             child: Text(text)),
