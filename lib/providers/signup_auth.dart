@@ -38,7 +38,8 @@ signUp(BuildContext context, String firstname, String lastname, String email,
   jsonResponse = json.decode(response.body);
   if (response.statusCode == 201) {
     final snackBar = SnackBar(
-      content: Text('Sucessfully Registerd'),
+      content: Text(
+          'Registration almost complete. Check the "Spam Folder" for an email to activate your account.'),
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
