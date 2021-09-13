@@ -11,8 +11,9 @@ import 'package:shelf/models/verify_data.dart';
 import 'package:image_picker/image_picker.dart';
 
 class uploadImage extends StatefulWidget {
-  final id;
-  uploadImage(this.id);
+  final events;
+
+  uploadImage(this.events);
   //const uploadImage({Key? key}) : super(key: key);
 
   @override
@@ -20,6 +21,7 @@ class uploadImage extends StatefulWidget {
 }
 
 class _uploadImageState extends State<uploadImage> {
+  List eventdetails = [];
   final picker = ImagePicker();
 
   File? _image;
@@ -36,13 +38,14 @@ class _uploadImageState extends State<uploadImage> {
   }
 
   imageUpload() async {
-    var eventid=widget.id;
+    var eventid = widget.events['id'];
+
     print(eventid);
     final data = await getData('auth_data');
     Map<String, String> headers = {
       HttpHeaders.authorizationHeader: 'Bearer ' + data!
     };
-    Uri url = Uri.parse("$baseUrl/api/events/18/uploadimage/");
+    Uri url = Uri.parse("$baseUrl/api/events/{$eventid}/uploadimage/");
 
     var sendRequest = http.MultipartRequest("PUT", url);
     sendRequest.headers.addAll(headers);
@@ -53,7 +56,8 @@ class _uploadImageState extends State<uploadImage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
+    var edatetime = widget.events['end_datetime'];
+    String edate = edatetime.substring(0, 10);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -123,14 +127,14 @@ class _uploadImageState extends State<uploadImage> {
                 children: [
                   SizedBox(height: size.height * 0.02),
                   Text(
-                    "Event Name",
+                    widget.events['title'],
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: size.height * 0.02,
                   ),
                   Text(
-                    "DD/MM/YYYY",
+                    edate,
                     style: TextStyle(
                       fontSize: 17,
                     ),

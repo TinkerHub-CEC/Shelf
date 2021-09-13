@@ -1,3 +1,4 @@
+import 'dart:html';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -40,9 +41,10 @@ class _submitAttendanceState extends State<submitAttendance> {
   List<Welcome> data = [];
 
   Future submitAttendance() async {
+    var id = widget.events['id'];
     http.Response response;
     final token_data = await getData('auth_data');
-    final url = '$baseUrl/api/events/4/attendance/';
+    final url = '$baseUrl/api/events/$id/attendance/';
     response = await http.get(
       Uri.parse(url),
       headers: {
@@ -58,45 +60,48 @@ class _submitAttendanceState extends State<submitAttendance> {
   }
 
   presentButton(var val) async {
+    var id = widget.events['id'];
     final token_data = await getData('auth_data');
     if (val == 1) {
-      final body = jsonEncode({
-        'attendance': 1,
-        // 'user':.user.toString()
-      });
+      var datauser = widget.events['user'].toString();
+      final tokenData = await getData('auth_data');
+      Map<String, String> headers = {
+        HttpHeaders.authorizationHeader: 'Bearer ' + tokenData!
+      };
+      Uri url = Uri.parse("$baseUrl/api/events/$id/attendance/");
 
-      final response =
-          await http.put(Uri.parse("$baseUrl/api/events/4/attendance/"),
-              headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/x-www-form-urlencoded",
-                HttpHeaders.authorizationHeader: 'Bearer ' + token_data!
-              },
-              body: body);
-      print(widget.events);
-      print(response.statusCode);
-      print(response.body);
+      var sendRequest = http.MultipartRequest("PUT", url);
+      sendRequest.headers.addAll(headers);
+
+      sendRequest.fields['attendance'] = 1.toString();
+      sendRequest.fields[widget.events['user']] = datauser;
+
+      http.StreamedResponse response = await sendRequest.send();
+      final finalResp = await http.Response.fromStream(response);
+      print(finalResp.statusCode);
     }
   }
 
   absentButton(var val) async {
+    var id = widget.events['id'];
     final token_data = await getData('auth_data');
     if (val == 2) {
-      final body = jsonEncode({
-        'attendance': 2,
-        // 'user':.user.toString()
-      });
+      var datauser = widget.events['user'].toString();
+      final tokenData = await getData('auth_data');
+      Map<String, String> headers = {
+        HttpHeaders.authorizationHeader: 'Bearer ' + tokenData!
+      };
+      Uri url = Uri.parse("$baseUrl/api/events/$id/attendance/");
 
-      final response =
-          await http.put(Uri.parse("$baseUrl/api/events/4/attendance/"),
-              headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/x-www-form-urlencoded",
-                HttpHeaders.authorizationHeader: 'Bearer ' + token_data!
-              },
-              body: body);
-      print(response.statusCode);
-      print(response.body);
+      var sendRequest = http.MultipartRequest("PUT", url);
+      sendRequest.headers.addAll(headers);
+
+      sendRequest.fields['attendance'] = 2.toString();
+      sendRequest.fields[widget.events['user']] = datauser;
+
+      http.StreamedResponse response = await sendRequest.send();
+      final finalResp = await http.Response.fromStream(response);
+      print(finalResp.statusCode);
     }
   }
 
@@ -105,6 +110,7 @@ class _submitAttendanceState extends State<submitAttendance> {
     Size size = MediaQuery.of(context).size;
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -157,17 +163,17 @@ class _submitAttendanceState extends State<submitAttendance> {
                 ),
               ),
             ),
-            SizedBox(height: size.height * 0.02),
-            Container(
-              width: size.width * 0.8,
-              height: size.height * 0.07,
-              child: Text(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin euismod nulla sed pellentesque dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                    fontSize: 12, fontWeight: FontWeight.bold, height: 1.5),
-              ),
-            ),
+            // SizedBox(height: size.height * 0.02),
+            // Container(
+            //   width: size.width * 0.8,
+            //   height: size.height * 0.07,
+            //   child: Text(
+            //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin euismod nulla sed pellentesque dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            //     textAlign: TextAlign.left,
+            //     style: TextStyle(
+            //         fontSize: 12, fontWeight: FontWeight.bold, height: 1.5),
+            //   ),
+            // ),
             SizedBox(
               height: size.height * 0.07,
             ),
