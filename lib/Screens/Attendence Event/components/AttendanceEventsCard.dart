@@ -32,7 +32,7 @@ class _AttendanceEventCardState extends State<AttendanceEventCard> {
     });
     var  UserId = await getValue('auth_user_id');
     print(UserId);
-    final url = Uri.parse('$baseUrl/api/events/active/with_attendance');
+    final url = Uri.parse('$baseUrl/api/events/active/all');
     final data = await getData('auth_data');
     http.Response response= await http.get(
         url,
@@ -93,13 +93,13 @@ class _AttendanceEventCardState extends State<AttendanceEventCard> {
             return Navigator.push(
                 context,
                 new MaterialPageRoute(
-                  builder: (BuildContext context) =>new submitAttendance(events),
+                  builder: (BuildContext context) =>new submitAttendance(id),
                 ));
           }
           return Navigator.push(
               context,
               new MaterialPageRoute(
-                builder: (BuildContext context) =>new uploadImage(events),
+                builder: (BuildContext context) =>new uploadImage(id),
               ));
         }
         AttendanceMethod();
