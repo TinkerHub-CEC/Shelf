@@ -32,7 +32,7 @@ class _AttendanceEventCardState extends State<AttendanceEventCard> {
     });
     var  UserId = await getValue('auth_user_id');
     print(UserId);
-    final url = Uri.parse('$baseUrl/api/events/active/with_attendance');
+    final url = Uri.parse('$baseUrl/api/events/active/all');
     final data = await getData('auth_data');
     http.Response response= await http.get(
         url,
@@ -99,15 +99,15 @@ class _AttendanceEventCardState extends State<AttendanceEventCard> {
           return Navigator.push(
               context,
               new MaterialPageRoute(
-                builder: (BuildContext context) =>new uploadImage(events),
+                builder: (BuildContext context) =>new uploadImage(id),
               ));
         }
         AttendanceMethod();
       },
       child: Container(
-        width: size.width * .80,
+        width: size.width * .85,
         height: size.height * .12,
-        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
@@ -138,14 +138,14 @@ class _AttendanceEventCardState extends State<AttendanceEventCard> {
                         fit: BoxFit.fill, image: NetworkImage(image)))),
               SizedBox(width: size.width*0.04,),
               Container(
-                width: size.width*.32,
+                width: size.width*.42,
                  // color: Colors.grey,
                   //margin: EdgeInsets.all(15),
                   //alignment: Alignment.center,
                   child: Text(
                     title,
                     style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 20,
                         //color: Colors.white,
                         fontWeight: FontWeight.bold),
                   )),
