@@ -6,6 +6,7 @@ import 'package:shelf/Api/api.dart';
 import 'package:shelf/Screens/EventsDetailsPage/event_screen.dart';
 import 'package:shelf/size_config.dart';
 import '../../../constants.dart';
+import 'package:intl/intl.dart';
 
 class EventCard extends StatefulWidget {
   @override
@@ -79,10 +80,12 @@ class _EventCardState extends State<EventCard> {
     SizeConfig().init(context);
     Size size = MediaQuery.of(context).size;
     // ignore: unused_local_variable
+    var outputFormat = DateFormat('dd/MM/yyyy');
     var id = events['id'];
     var title = events['title'];
     var datetime = events['start_datetime'];
     String date = datetime.substring(0, 10);
+    date = outputFormat.format(DateTime.parse(date));
     var description = events['short_description'];
     var image = events['poster'];
     return GestureDetector(

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:shelf/Api/api.dart';
 import 'package:shelf/Screens/EventsDetailsPage/event_screen.dart';
 import 'package:shelf/size_config.dart';
@@ -80,12 +81,14 @@ class _RegEventCardState extends State<RegEventCard> {
   Widget getCard(events) {
     print(events);
     SizeConfig().init(context);
+    var outputFormat = DateFormat('dd/MM/yyyy');
     Size size = MediaQuery.of(context).size;
     // ignore: unused_local_variable
     var id = events['id'];
     var title = events['title'];
     var datetime = events['start_datetime'];
     String date = datetime.substring(0, 10);
+    date = outputFormat.format(DateTime.parse(date));
     var description = events['short_description'];
     var image = events['poster'];
     return GestureDetector(
