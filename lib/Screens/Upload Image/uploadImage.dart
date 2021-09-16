@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:shelf/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shelf/components/custom_menu_bar.dart';
@@ -60,7 +60,11 @@ class _uploadImageState extends State<uploadImage> {
     var outputFormat = DateFormat('dd/MM/yyyy');
     var edatetime = widget.events['end_datetime'];
     String edate = edatetime.substring(0, 10);
+
     edate = outputFormat.format(DateTime.parse(edate));
+
+    print(edate);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -108,7 +112,7 @@ class _uploadImageState extends State<uploadImage> {
                       "Upload Documents",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                        fontSize: SizeConfig.safeBlockHorizontal * 4.2,
                       ),
                     ),
                   ],
@@ -131,7 +135,9 @@ class _uploadImageState extends State<uploadImage> {
                   SizedBox(height: size.height * 0.02),
                   Text(
                     widget.events['title'],
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: SizeConfig.safeBlockHorizontal * 5.2,
+                        fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: size.height * 0.02,
@@ -139,7 +145,7 @@ class _uploadImageState extends State<uploadImage> {
                   Text(
                     edate,
                     style: TextStyle(
-                      fontSize: 17,
+                      fontSize: SizeConfig.safeBlockHorizontal * 4.5,
                     ),
                   ),
                   SizedBox(
@@ -161,7 +167,8 @@ class _uploadImageState extends State<uploadImage> {
                         "Upload Files",
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.bold),
+                            fontSize: SizeConfig.safeBlockHorizontal * 4.6,
+                            fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
                         width: size.width * 0.35,
