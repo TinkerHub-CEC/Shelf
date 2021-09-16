@@ -9,6 +9,8 @@ import 'package:shelf/Screens/SubmitAttendance/submitAttendance.dart';
 import '../../../constants.dart';
 import 'package:shelf/Screens/Upload Image/uploadImage.dart';
 
+import '../../../size_config.dart';
+
 class AttendanceEventCard extends StatefulWidget {
   @override
   _AttendanceEventCardState createState() => _AttendanceEventCardState();
@@ -32,7 +34,7 @@ class _AttendanceEventCardState extends State<AttendanceEventCard> {
     });
     var UserId = await getValue('auth_user_id');
     print(UserId);
-    final url = Uri.parse('$baseUrl/api/events/active/all');
+    final url = Uri.parse('$baseUrl/api/events/active/with_attendance');
     final data = await getData('auth_data');
     http.Response response = await http.get(
       url,
@@ -78,6 +80,7 @@ class _AttendanceEventCardState extends State<AttendanceEventCard> {
   }
 
   Widget getCard(events) {
+    SizeConfig().init(context);
     print(events);
     Size size = MediaQuery.of(context).size;
     var id = events['id'];
@@ -94,7 +97,7 @@ class _AttendanceEventCardState extends State<AttendanceEventCard> {
               return Navigator.push(
                   context,
                   new MaterialPageRoute(
-                    builder: (BuildContext context) => new submitAttendance(id),
+                    builder: (BuildContext context) => new submitAttendance(events),
                   ));
             }
             return Navigator.push(
@@ -107,9 +110,9 @@ class _AttendanceEventCardState extends State<AttendanceEventCard> {
           AttendanceMethod();
         },
         child: Container(
-          width: size.width * .85,
+          width: size.width * .80,
           height: size.height * .12,
-          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
@@ -142,21 +145,21 @@ class _AttendanceEventCardState extends State<AttendanceEventCard> {
                     width: size.width * 0.04,
                   ),
                   Container(
-                      width: size.width * .42,
+                      width: size.width * .43,
                       // color: Colors.grey,
                       //margin: EdgeInsets.all(15),
                       //alignment: Alignment.center,
                       child: Text(
                         title,
                         style: TextStyle(
-                            fontSize: 20,
+                            fontSize: SizeConfig.safeBlockHorizontal * 4,
                             //color: Colors.white,
                             fontWeight: FontWeight.bold),
                       )),
                   Container(
                     width: size.width * .08,
                     height: size.width * .08,
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+                    margin: EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       border: Border.all(color: Colors.black),
