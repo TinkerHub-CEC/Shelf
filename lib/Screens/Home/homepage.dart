@@ -41,7 +41,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
   checkLoginStatus() async {
     sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.getString("token") == null &&
-        sharedPreferences.getBool('islogged') == false) {
+        sharedPreferences.getString("email") == null) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
           (Route<dynamic> route) => false);
