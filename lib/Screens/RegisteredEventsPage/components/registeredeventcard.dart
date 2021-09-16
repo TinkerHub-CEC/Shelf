@@ -125,6 +125,7 @@ class _RegEventCardState extends State<RegEventCard> {
                     color: Colors.grey[600],
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
+                        colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.dstATop),
                         fit: BoxFit.scaleDown, image: NetworkImage(image))),
                 child: Container(
                     margin: EdgeInsets.all(15),

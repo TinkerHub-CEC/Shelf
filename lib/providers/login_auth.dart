@@ -38,7 +38,7 @@ Future signIn(BuildContext context, String email, String password) async {
 
   if (response.statusCode == 200) {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-
+    sharedPreferences.setString('email', email);
     storeData('auth_data', jsonResponse['access']);
 
     storeData('token', jsonResponse['refresh']);
@@ -92,11 +92,10 @@ Future signIn(BuildContext context, String email, String password) async {
     // sharedPreferences.setBool(
     //     'isAdminUser', decodedrefreshToken['is_superuser']);
 
-    if (sharedPreferences.getBool('islogged') == true) {
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (BuildContext context) => Homepage()),
-          (Route<dynamic> route) => false);
-    }
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (BuildContext context) => Homepage()),
+        (Route<dynamic> route) => false);
+
     return true;
   } else {
     print(response.body);
