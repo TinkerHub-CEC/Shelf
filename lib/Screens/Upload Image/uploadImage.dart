@@ -46,12 +46,16 @@ class _uploadImageState extends State<uploadImage> {
     Map<String, String> headers = {
       HttpHeaders.authorizationHeader: 'Bearer ' + data!
     };
-    Uri url = Uri.parse("$baseUrl/api/events/{$eventid}/uploadimage/");
+    Uri url = Uri.parse("$baseUrl/api/events/$eventid/uploadimage/");
 
     var sendRequest = http.MultipartRequest("PUT", url);
     sendRequest.headers.addAll(headers);
     sendRequest.files.add(
         await http.MultipartFile.fromPath('photosubmission', _image!.path));
+
+    http.StreamedResponse response = await sendRequest.send();
+    final finalResp = await http.Response.fromStream(response);
+    print(finalResp.statusCode);
   }
 
   @override
