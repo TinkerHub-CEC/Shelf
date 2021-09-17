@@ -46,21 +46,16 @@ class TopBox extends StatelessWidget {
                           Container(
                             width: 26,
                             alignment: Alignment.center,
-                            child: Text(
-                              "A",
-                              style: TextStyle(fontSize: 15),
-                            ),
-                            // child ://CircleAvatar(
-                            // backgroundColor: Colors.white54,
-                            //backgroundImage:
-                            //   AssetImage('assets/images/h_photo.png'),
-                            //radius: 15.0,
-                            //  ),
-                            decoration: BoxDecoration(
+                              child: Icon(
+                                Icons.star_rounded,
+                                color: Color(0xffF7DD14),
+                              ),
+
+                           /* decoration: BoxDecoration(
                                 color: Colors.black12,
                                 shape: BoxShape.circle,
                                 border: Border.all(color: Colors.deepOrange ,width : 1)
-                            ),),
+                            ),*/),
                           SizedBox(width: 10),
                           Container(
                             //color: Colors.black,
