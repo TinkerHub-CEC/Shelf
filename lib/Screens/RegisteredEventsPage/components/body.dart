@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
-import 'package:shelf/Screens/Attendence%20Event/AttendanceEventsPage.dart';
+import 'package:shelf/Screens/AttendenceEvent/AttendanceEventsPage.dart';
+import 'package:shelf/Screens/AttendenceEventAdmin/AttendanceEventsPage.dart';
 import 'package:shelf/Screens/CreateEvent/CreateEvent.dart';
 import 'package:shelf/Screens/RegisteredEventsPage/components/registeredeventcard.dart';
 import 'package:shelf/Screens/Login/login_screen.dart';
