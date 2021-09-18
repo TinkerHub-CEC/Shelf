@@ -1,7 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:shelf/Screens/CreateEvent/CreateEvent.dart';
-import 'package:shelf/Screens/Attendence Event/components/AttendanceEventsCard.dart';
+import 'package:shelf/Screens/AttendenceEventAdmin/components/AttendanceEventsCard.dart';
 import 'package:shelf/Screens/Login/login_screen.dart';
 import 'package:shelf/Screens/Signup/signup_screen.dart';
 import 'package:shelf/components/custom_menu_bar.dart';
@@ -24,9 +24,9 @@ class Body extends StatelessWidget {
         scrollDirection: Axis.vertical,
         children: <Widget>[
           SizedBox(height: size.height * 0.04),
-          CustomMenuBar(text: "Attendence Open"),
+          CustomMenuBar(text: "Admin Attendence Events" ),
           SizedBox(height: size.height * 0.02),
-          AttendanceEventCard(),
+          AttendanceEventAdminCard(),
           SizedBox(height: size.height * 0.02),
         ],
       ),

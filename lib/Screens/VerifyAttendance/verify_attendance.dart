@@ -12,7 +12,7 @@ import 'dart:async';
 
 class VerifyAttendanceScreen extends StatefulWidget {
   final eventId;
-  const VerifyAttendanceScreen({
+  const VerifyAttendanceScreen(id, {
     required this.eventId,
   });
 
