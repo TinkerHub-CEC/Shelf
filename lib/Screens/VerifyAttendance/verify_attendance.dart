@@ -188,7 +188,32 @@ class _VerifyAttendanceScreenState extends State<VerifyAttendanceScreen> {
                           duration: Duration(seconds: 1),
                           curve: Curves.ease,
                         );
+                        var datauser = data[position].user.toString();
+                        final tokenData = await getData('auth_data');
+                        Map<String, String> headers = {
+                          HttpHeaders.authorizationHeader:
+                              'Bearer ' + tokenData!
+                        };
+                        Uri url = Uri.parse(
+                            "$baseUrl/api/events/${widget.eventId}/attendance/");
 
+                        var sendRequest = http.MultipartRequest("PUT", url);
+                        sendRequest.headers.addAll(headers);
+
+                        sendRequest.fields['attendance'] = 2.toString();
+                        sendRequest.fields['user'] = datauser;
+
+                        http.StreamedResponse response =
+                            await sendRequest.send();
+                        final finalResp =
+                            await http.Response.fromStream(response);
+                        print(finalResp.statusCode);
+
+                        if ((position + 1) == data.length) {
+                          Navigator.pop(context, false);
+                        }
+
+                        //*******************/
                         // final bodys = jsonEncode(
                         //     {'attendance': 2, 'user': data[position].user});
 
@@ -205,7 +230,8 @@ class _VerifyAttendanceScreenState extends State<VerifyAttendanceScreen> {
                         // print(response.statusCode);
                         // print(response.body);
 
-                        // controller.jumpTo(position + 1),
+                        // controller.jumpTo(position + 1);
+//*******************/
                       },
                       child: Text("Deny"),
                       style: TextButton.styleFrom(
@@ -253,6 +279,10 @@ class _VerifyAttendanceScreenState extends State<VerifyAttendanceScreen> {
                         final finalResp =
                             await http.Response.fromStream(response);
                         print(finalResp.statusCode);
+
+                        if ((position + 1) == data.length) {
+                          Navigator.pop(context, false);
+                        }
 
                         // final bodys = jsonEncode(
                         //     {'attendance': 1, 'user': data[position].user});
