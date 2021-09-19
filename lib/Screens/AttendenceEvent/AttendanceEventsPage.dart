@@ -1,4 +1,4 @@
-import 'package:shelf/Screens/Attendence Event//components/body.dart';
+import 'package:shelf/Screens/AttendenceEvent//components/body.dart';
 import 'package:flutter/material.dart';
 
 class AttendanceEventsPage extends StatelessWidget {

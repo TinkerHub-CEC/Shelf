@@ -56,16 +56,12 @@ class TopBox extends StatelessWidget {
                         Container(
                           width: size.width* .07,
                           alignment: Alignment.center,
-                          child: Text(
-                            "A",
-                            style: TextStyle(fontSize: 15),
-                          ),
+                            child: Icon(
+                              Icons.star_rounded,
+                              color: Color(0xffF7DD14),
+                            ),
 
-                          decoration: BoxDecoration(
-                              color: Colors.black12,
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                  color: Colors.deepOrange, width: 1)),
+
                         ),
                         SizedBox(width: size.width* .05),
 
