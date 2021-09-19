@@ -28,7 +28,7 @@ Future<void> main() async {
           primaryColor: kPrimaryColor,
           scaffoldBackgroundColor: Colors.white,
         ),
-        home: email == null ? LoginScreen() : Homepage(),
+        home: Homepage(),
       ),
       // ),
     );

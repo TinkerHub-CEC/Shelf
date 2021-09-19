@@ -1,5 +1,4 @@
 import 'dart:io';
-// import 'package:shelf/Screens/Attendence%20Event/components/body.dart';
 import 'package:shelf/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -65,7 +64,7 @@ class _uploadImageState extends State<uploadImage> {
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 3,
           backgroundColor: Colors.grey[800],
-          textColor: Colors.black,
+          textColor: Colors.white,
           fontSize: 16.0);
     }
   }

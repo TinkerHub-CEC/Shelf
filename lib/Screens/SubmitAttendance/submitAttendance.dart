@@ -284,6 +284,15 @@ class _submitAttendanceState extends State<submitAttendance> {
                     presentButton(selectedRadio);
                     absentButton(selectedRadio);
                     print('$selectedRadio');
+
+                    Fluttertoast.showToast(
+                        msg: "Attendance Submitted",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 3,
+                        backgroundColor: Colors.grey[800],
+                        textColor: Colors.white,
+                        fontSize: 16.0);
                   },
                   child: Text("Submit Attendance"),
                   style: TextButton.styleFrom(
