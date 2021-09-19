@@ -138,7 +138,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       await SharedPreferences.getInstance();
                   sharedPreferences.setBool('islogged', false);
                   final d = sharedPreferences.getBool('islogged');
-                  print('logged out: $d');
+                  print('logged out - removing email: $d');
+                  sharedPreferences.remove('email');
                   Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
                           builder: (BuildContext context) => LoginScreen()),

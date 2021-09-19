@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shelf/components/custom_menu_bar.dart';
 import 'package:shelf/providers/confirmation_event_registrations.dart';
+import 'package:shelf/size_config.dart';
 
 class Body extends StatelessWidget {
   final String eventTitle;
@@ -15,32 +16,33 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          SizedBox(height: size.height * 0.07),
+          SizedBox(height: SizeConfig.blockSizeVertical * 7),
           CustomMenuBar(text: "Confirmation"),
           Stack(
             children: [
               Container(
                 margin: EdgeInsets.only(
-                  top: size.height * 0.08,
+                  top: SizeConfig.blockSizeVertical * 8,
                 ),
                 decoration: BoxDecoration(
                   border: Border.all(color: Color(0xffE1E8E8)),
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(18),
                 ),
-                height: size.height * 0.44,
-                width: size.width * 0.80,
+                height: SizeConfig.blockSizeVertical * 44,
+                width: SizeConfig.blockSizeHorizontal * 80,
                 child: Column(
                   children: [
                     Container(
                         padding: EdgeInsets.only(top: size.height * 0.04),
-                        height: size.height * 0.11,
-                        width: size.width * 0.80,
+                        height: SizeConfig.blockSizeVertical * 11,
+                        width: SizeConfig.blockSizeHorizontal * 80,
                         decoration: BoxDecoration(
                           border: Border.all(color: Color(0xffFF8453)),
                           color: Color(0xffFF8453),
@@ -53,7 +55,9 @@ class Body extends StatelessWidget {
                           child: Text("Ticket Booked",
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold)),
+                                  fontSize:
+                                      SizeConfig.safeBlockHorizontal * 4.25,
+                                  fontWeight: FontWeight.bold)),
                         )),
                     Row(
                       children: [
@@ -63,7 +67,7 @@ class Body extends StatelessWidget {
                                 top: size.height * 0.06),
                             child: Text("Name :",
                                 style: TextStyle(
-                                  fontSize: 19,
+                                  fontSize: SizeConfig.safeBlockHorizontal * 4,
                                 ))),
                         Container(
                             margin: EdgeInsets.only(
@@ -71,28 +75,35 @@ class Body extends StatelessWidget {
                                 top: size.height * 0.06),
                             child: Text(eventTitle,
                                 style: TextStyle(
-                                    fontSize: 19,
+                                    fontSize:
+                                        SizeConfig.safeBlockHorizontal * 4,
                                     fontWeight: FontWeight.bold))),
                       ],
                     ),
                     Row(
                       children: [
-                        Container(
-                            margin: EdgeInsets.only(
-                                left: size.width * 0.08,
-                                top: size.height * 0.02),
-                            child: Text("Date   :",
-                                style: TextStyle(
-                                  fontSize: 19,
-                                ))),
-                        Container(
-                            margin: EdgeInsets.only(
-                                left: size.width * 0.10,
-                                top: size.height * 0.02),
-                            child: Text(eventDate,
-                                style: TextStyle(
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.bold))),
+                        Flexible(
+                          child: Container(
+                              margin: EdgeInsets.only(
+                                  left: size.width * 0.08,
+                                  top: size.height * 0.02),
+                              child: Text("Date   :",
+                                  style: TextStyle(
+                                    fontSize:
+                                        SizeConfig.safeBlockHorizontal * 4,
+                                  ))),
+                        ),
+                        Flexible(
+                          child: Container(
+                              margin: EdgeInsets.only(
+                                  left: size.width * 0.10,
+                                  top: size.height * 0.02),
+                              child: Text(eventDate,
+                                  style: TextStyle(
+                                      fontSize:
+                                          SizeConfig.safeBlockHorizontal * 4,
+                                      fontWeight: FontWeight.bold))),
+                        ),
                       ],
                     ),
                     Row(
@@ -103,15 +114,18 @@ class Body extends StatelessWidget {
                           height: size.height * 0.12,
                           child: Image.asset('assets/images/QR-Easter-EGG.png'),
                         ),
-                        Container(
-                            margin: EdgeInsets.only(
-                                left: size.width * 0.08,
-                                top: size.height * 0.03),
-                            child: Text("Admit" + " 01",
-                                style: TextStyle(
-                                    fontSize: 40,
-                                    color: Colors.black.withOpacity(0.25),
-                                    fontWeight: FontWeight.bold))),
+                        Flexible(
+                          child: Container(
+                              margin: EdgeInsets.only(
+                                  left: size.width * 0.08,
+                                  top: size.height * 0.03),
+                              child: Text("Admit" + " 01",
+                                  style: TextStyle(
+                                      fontSize:
+                                          SizeConfig.safeBlockHorizontal * 8,
+                                      color: Colors.black.withOpacity(0.25),
+                                      fontWeight: FontWeight.bold))),
+                        ),
                       ],
                     ),
                   ],

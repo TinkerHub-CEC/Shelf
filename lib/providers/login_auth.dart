@@ -65,6 +65,7 @@ Future signIn(BuildContext context, String email, String password) async {
     final c = await getValue('auth_user_id');
     print('auth_id: $c');
     final snackBar = SnackBar(
+      duration: const Duration(seconds: 5),
       content: Text('Sucessfully Logged In'),
     );
 
@@ -91,7 +92,7 @@ Future signIn(BuildContext context, String email, String password) async {
     print(decodedrefreshToken['is_admin']);
     // sharedPreferences.setBool(
     //     'isAdminUser', decodedrefreshToken['is_superuser']);
-
+    print("Token and email exist. Logging In...");
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (BuildContext context) => Homepage()),
         (Route<dynamic> route) => false);
@@ -100,6 +101,7 @@ Future signIn(BuildContext context, String email, String password) async {
   } else {
     print(response.body);
     final snackBar = SnackBar(
+      duration: const Duration(seconds: 5),
       content: Text('You have given incorrect details'),
     );
 
