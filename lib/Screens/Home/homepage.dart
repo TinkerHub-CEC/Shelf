@@ -20,7 +20,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
   late TabController _tabController;
   late TabController _admintabController;
   late SharedPreferences sharedPreferences;
-
+  var email;
   @override
   void initState() {
     // ignore: todo
@@ -31,22 +31,28 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
     _tabController = new TabController(length: 3, vsync: this);
   }
 
+  checkLoginStatus() async {
+    print("Calling checkLoginStatus");
+    sharedPreferences = await SharedPreferences.getInstance();
+
+    email = sharedPreferences.getString("email");
+
+    print(email);
+    if (sharedPreferences.getString("token") == null || email == null) {
+      print("Logging Out...");
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+          (Route<dynamic> route) => false);
+    }
+  }
+
   @override
   void dispose() {
     // ignore: todo
     // TODO: implement dispose
     super.dispose();
+    checkLoginStatus();
     _tabController.dispose();
-  }
-
-  checkLoginStatus() async {
-    sharedPreferences = await SharedPreferences.getInstance();
-    if (sharedPreferences.getString("token") == null &&
-        sharedPreferences.getString("email") == null) {
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
-          (Route<dynamic> route) => false);
-    }
   }
 
   @override

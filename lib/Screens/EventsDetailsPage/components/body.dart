@@ -22,10 +22,10 @@ class Body extends StatelessWidget {
     var outputFormat = DateFormat('dd/MM/yyyy');
     var timeOutputFormat = DateFormat('MM/dd/yyyy hh:mm a');
     // ignore: non_constant_identifier_names
-    var totseat=events['max_participants'];
+    var totseat = events['max_participants'];
     int _total_seats = totseat;
     // ignore: non_constant_identifier_names
-    var regseat=events['reg_count'];
+    var regseat = events['reg_count'];
     int _seats_filled = regseat;
     print(events);
     Size size = MediaQuery.of(context).size;

@@ -30,7 +30,7 @@ class _EventCardState extends State<EventCard> {
       isLoading = true;
     });
 
-    final url = Uri.parse("$baseUrl/api/events/active/all");
+    final url = Uri.parse("$baseUrl/api/events/");
     final data = await getData('auth_data');
     http.Response response = await http.get(
       url,
@@ -50,6 +50,14 @@ class _EventCardState extends State<EventCard> {
       events = [];
       isLoading = false;
     }
+  }
+
+  @override
+  void dispose() {
+    // ignore: todo
+    // TODO: implement dispose
+    super.dispose();
+    this.fetchEvents();
   }
 
   @override
@@ -122,8 +130,10 @@ class _EventCardState extends State<EventCard> {
                     color: Colors.grey[600],
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
-                      colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.dstATop),
-                        fit: BoxFit.scaleDown, image: NetworkImage(image))),
+                        colorFilter: ColorFilter.mode(
+                            Colors.black.withOpacity(0.5), BlendMode.dstATop),
+                        fit: BoxFit.scaleDown,
+                        image: NetworkImage(image))),
                 child: Container(
                     margin: EdgeInsets.all(15),
                     alignment: Alignment.bottomLeft,
