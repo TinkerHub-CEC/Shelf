@@ -9,12 +9,9 @@ import 'package:shelf/Screens/Upload%20Image/uploadImage.dart';
 import 'package:shelf/constants.dart';
 import 'package:device_preview/device_preview.dart'; //device_preview package
 
-Future<void> main() async {
+void main() {
   //device orientation set to portrait
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  var email = sharedPreferences.getString("email");
-  print(email);
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]).then((_) {
     runApp(
