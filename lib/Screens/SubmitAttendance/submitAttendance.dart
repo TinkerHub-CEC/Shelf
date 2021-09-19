@@ -9,6 +9,8 @@ import 'package:shelf/Api/api.dart';
 import 'dart:async';
 import 'package:shelf/models/verify_data.dart';
 
+import 'package:fluttertoast/fluttertoast.dart';
+
 // ignore: camel_case_types
 class submitAttendance extends StatefulWidget {
   final events;
@@ -60,9 +62,13 @@ class _submitAttendanceState extends State<submitAttendance> {
 
   presentButton(var val) async {
     var id = widget.events['id'];
+    var userId = await getValue('auth_user_id');
+    print(userId);
+    print(id);
     final token_data = await getData('auth_data');
     if (val == 1) {
-      var datauser = widget.events['user'].toString();
+      // var datauser = widget.events['user'].toString();
+      // print(datauser);
       final tokenData = await getData('auth_data');
       Map<String, String> headers = {
         HttpHeaders.authorizationHeader: 'Bearer ' + tokenData!
@@ -73,19 +79,31 @@ class _submitAttendanceState extends State<submitAttendance> {
       sendRequest.headers.addAll(headers);
 
       sendRequest.fields['attendance'] = 1.toString();
-      sendRequest.fields[widget.events['user']] = datauser;
+      sendRequest.fields['user'] = userId.toString();
 
       http.StreamedResponse response = await sendRequest.send();
       final finalResp = await http.Response.fromStream(response);
       print(finalResp.statusCode);
+      if (finalResp.statusCode == 201) {
+        Fluttertoast.showToast(
+            msg: "Attendance Submitted",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 3,
+            backgroundColor: Colors.grey[800],
+            textColor: Colors.black,
+            fontSize: 16.0);
+      }
     }
   }
 
   absentButton(var val) async {
     var id = widget.events['id'];
     final token_data = await getData('auth_data');
+    var userId = await getValue('auth_user_id');
+    print(userId);
     if (val == 2) {
-      var datauser = widget.events['user'].toString();
+      // var datauser = widget.events['user'].toString();
       final tokenData = await getData('auth_data');
       Map<String, String> headers = {
         HttpHeaders.authorizationHeader: 'Bearer ' + tokenData!
@@ -96,11 +114,22 @@ class _submitAttendanceState extends State<submitAttendance> {
       sendRequest.headers.addAll(headers);
 
       sendRequest.fields['attendance'] = 2.toString();
-      sendRequest.fields[widget.events['user']] = datauser;
+      sendRequest.fields['user'] = userId.toString();
 
       http.StreamedResponse response = await sendRequest.send();
       final finalResp = await http.Response.fromStream(response);
       print(finalResp.statusCode);
+      print(finalResp.body);
+      if (finalResp.statusCode == 201) {
+        Fluttertoast.showToast(
+            msg: "Attendance Submitted",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 3,
+            backgroundColor: Colors.grey[800],
+            textColor: Colors.black,
+            fontSize: 16.0);
+      }
     }
   }
 

@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
-import 'package:shelf/Screens/Attendence%20Event/AttendanceEventsPage.dart';
+import 'package:shelf/Screens/AttendenceEvent/AttendanceEventsPage.dart';
+import 'package:shelf/Screens/AttendenceEventAdmin/AttendanceEventsPage.dart';
 import 'package:shelf/Screens/CreateEvent/CreateEvent.dart';
 import 'package:shelf/Screens/RegisteredEventsPage/components/registeredeventcard.dart';
 import 'package:shelf/Screens/Login/login_screen.dart';
@@ -26,7 +27,26 @@ class Body extends StatelessWidget {
         children: <Widget>[
           SizedBox(height: size.height * 0.04),
           CustomMenuBar(text: "Events"),
-          SizedBox(height: size.height * 0.02),
+          //SizedBox(height: size.height * 0.000001),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+             mainAxisAlignment: MainAxisAlignment.center,
+              children:
+              [
+                Container(
+                  height: size.height*0.16,
+                  width: size.width*.6,
+                  child: Center(
+                    child:RoundedButton(text: "Attendance Page", press:(){
+                      Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                            builder: (BuildContext context) => new AttendanceEventsPage(),
+                          ));
+                    },),
+                  ),)
+              ]),
+
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
             children:
@@ -49,26 +69,9 @@ class Body extends StatelessWidget {
           ),)
           ]),
           SizedBox(height: size.height * 0.04),
-          SizedBox(height: size.height * 0.02),
+          //SizedBox(height: size.height * 0.02),
           RegEventCard(),
           SizedBox(height: size.height * 0.04),
-          Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:
-              [
-                Container(
-                  //height: size.height*0.1,
-                  //width: size.width*.5,
-                  child: Center(
-                    child:RoundedButton(text: "Attendance", press:(){
-                      Navigator.push(
-                          context,
-                          new MaterialPageRoute(
-                            builder: (BuildContext context) => new AttendanceEventsPage(),
-                      ));
-                    },),
-                  ),)
-              ]),
         ],
       ),
 

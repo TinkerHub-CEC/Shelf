@@ -22,9 +22,11 @@ class Body extends StatelessWidget {
     var outputFormat = DateFormat('dd/MM/yyyy');
     var timeOutputFormat = DateFormat('MM/dd/yyyy hh:mm a');
     // ignore: non_constant_identifier_names
-    int _total_seats = 120;
+    var totseat=events['max_participants'];
+    int _total_seats = totseat;
     // ignore: non_constant_identifier_names
-    int _seats_filled = 40;
+    var regseat=events['reg_count'];
+    int _seats_filled = regseat;
     print(events);
     Size size = MediaQuery.of(context).size;
     var id = events['id'];
@@ -220,27 +222,27 @@ class Body extends StatelessWidget {
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: SizeConfig.safeBlockHorizontal * 3.2,
+                                fontSize: SizeConfig.safeBlockHorizontal * 3,
                               ),
                             ),
                           ),
                           Container(
                             color: Colors.white,
-                            padding: EdgeInsets.symmetric(
-                              vertical: 6,
-                              horizontal: 11,
-                            ),
+                            //padding: EdgeInsets.symmetric(
+                            //  vertical: 6,
+                            //  horizontal: 11,
+                            //),
                             margin: EdgeInsets.only(
                               left: SizeConfig.blockSizeVertical * 2,
                               right: SizeConfig.blockSizeVertical * 2,
-                              bottom: SizeConfig.blockSizeVertical * 1,
+                              bottom: SizeConfig.blockSizeVertical * 2,
                             ),
                             child: Text(
                               stime,
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: SizeConfig.safeBlockHorizontal * 3.2,
+                                fontSize: SizeConfig.safeBlockHorizontal * 3,
                               ),
                             ),
                           ),
@@ -305,16 +307,16 @@ class Body extends StatelessWidget {
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: SizeConfig.safeBlockHorizontal * 3.2,
+                                fontSize: SizeConfig.safeBlockHorizontal * 3,
                               ),
                             ),
                           ),
                           Container(
                             color: Colors.white,
-                            padding: EdgeInsets.symmetric(
-                              vertical: 6,
-                              horizontal: 11,
-                            ),
+                            //padding: EdgeInsets.symmetric(
+                            //  vertical: 6,
+                            //  horizontal: 11,
+                            //),
                             margin: EdgeInsets.only(
                               left: SizeConfig.blockSizeVertical * 2,
                               right: SizeConfig.blockSizeVertical * 2,
@@ -325,7 +327,7 @@ class Body extends StatelessWidget {
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: SizeConfig.safeBlockHorizontal * 3.2,
+                                fontSize: SizeConfig.safeBlockHorizontal * 3,
                               ),
                             ),
                           ),
@@ -351,7 +353,7 @@ class Body extends StatelessWidget {
                   "Registration Open till",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                    fontSize: SizeConfig.safeBlockHorizontal * 3.1,
                   ),
                 ),
                 Text(
@@ -359,7 +361,7 @@ class Body extends StatelessWidget {
                   style: TextStyle(
                     color: Color(0xffF34336),
                     fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                    fontSize: SizeConfig.safeBlockHorizontal * 3.1,
                   ),
                 ),
               ],

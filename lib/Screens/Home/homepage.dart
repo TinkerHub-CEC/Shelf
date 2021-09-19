@@ -1,4 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shelf/Screens/AttendenceEventAdmin/AttendanceEventsPage.dart';
 
 import 'package:shelf/Screens/CreateEvent/CreateEvent.dart';
 
@@ -41,7 +42,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
   checkLoginStatus() async {
     sharedPreferences = await SharedPreferences.getInstance();
     if (sharedPreferences.getString("token") == null &&
-        sharedPreferences.getBool('islogged') == false) {
+        sharedPreferences.getString("email") == null) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
           (Route<dynamic> route) => false);
@@ -194,7 +195,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                     Body(),
                     // EventScreen(),
                     // AnalyticsScreen(),
-                    ProfilePage(),
+                    AttendanceEventAdminCardPage(),
                   ],
                   physics: NeverScrollableScrollPhysics(),
                   controller: _admintabController,
@@ -274,10 +275,10 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                         // ),
                         Tab(
                           icon: Icon(
-                            Icons.account_circle_outlined,
+                            Icons.mark_chat_read_outlined,
                             size: 24.0,
                           ),
-                          text: "Profile",
+                          text: "Attendance",
                         ),
                       ],
                       controller: _admintabController,

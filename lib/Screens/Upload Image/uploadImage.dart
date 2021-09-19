@@ -1,4 +1,5 @@
 import 'dart:io';
+// import 'package:shelf/Screens/Attendence%20Event/components/body.dart';
 import 'package:shelf/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -10,6 +11,7 @@ import "dart:convert";
 import 'dart:async';
 import 'package:shelf/models/verify_data.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class uploadImage extends StatefulWidget {
   final events;
@@ -46,12 +48,26 @@ class _uploadImageState extends State<uploadImage> {
     Map<String, String> headers = {
       HttpHeaders.authorizationHeader: 'Bearer ' + data!
     };
-    Uri url = Uri.parse("$baseUrl/api/events/{$eventid}/uploadimage/");
+    Uri url = Uri.parse("$baseUrl/api/events/$eventid/uploadimage/");
 
     var sendRequest = http.MultipartRequest("PUT", url);
     sendRequest.headers.addAll(headers);
     sendRequest.files.add(
         await http.MultipartFile.fromPath('photosubmission', _image!.path));
+
+    http.StreamedResponse response = await sendRequest.send();
+    final finalResp = await http.Response.fromStream(response);
+    print(finalResp.statusCode);
+    if (finalResp.statusCode == 201) {
+      Fluttertoast.showToast(
+          msg: "Image uploaded",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.grey[800],
+          textColor: Colors.black,
+          fontSize: 16.0);
+    }
   }
 
   @override
@@ -82,6 +98,7 @@ class _uploadImageState extends State<uploadImage> {
                 //  vertical: 10,
                 //horizontal: 5,
                 //),
+
                 height: size.height * 0.055,
                 width: size.width * 0.8,
                 decoration: BoxDecoration(

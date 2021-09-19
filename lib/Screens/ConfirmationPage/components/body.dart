@@ -153,7 +153,7 @@ class Body extends StatelessWidget {
                 backgroundColor: MaterialStateProperty.all(Color(0xffECECEC)),
               ),
               child: Center(
-                child: Text("It’s All Done !",
+                child: Text("Confirm!",
                     style: TextStyle(
                       fontSize: 17,
                     ),

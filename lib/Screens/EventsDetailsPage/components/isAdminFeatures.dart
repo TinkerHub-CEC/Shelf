@@ -43,17 +43,6 @@ class EventAdminFeatures extends StatelessWidget {
                           );
                         },
                         text: "View Delegates"),
-                    SmallRoundedButton(
-                        press: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => VerifyAttendanceScreen(
-                                      eventId: eventId,
-                                    )),
-                          );
-                        },
-                        text: "Verify Attendance"),
                   ],
                 ));
           } else {
