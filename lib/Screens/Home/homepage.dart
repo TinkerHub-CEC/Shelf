@@ -51,7 +51,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
     // ignore: todo
     // TODO: implement dispose
     super.dispose();
-    checkLoginStatus();
+
     _tabController.dispose();
   }
 
