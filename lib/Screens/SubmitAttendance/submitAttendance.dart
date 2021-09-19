@@ -9,6 +9,8 @@ import 'package:shelf/Api/api.dart';
 import 'dart:async';
 import 'package:shelf/models/verify_data.dart';
 
+import 'package:fluttertoast/fluttertoast.dart';
+
 // ignore: camel_case_types
 class submitAttendance extends StatefulWidget {
   final events;
@@ -255,6 +257,15 @@ class _submitAttendanceState extends State<submitAttendance> {
                     presentButton(selectedRadio);
                     absentButton(selectedRadio);
                     print('$selectedRadio');
+
+                    Fluttertoast.showToast(
+                        msg: "Attendance Submitted",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 3,
+                        backgroundColor: Colors.grey[800],
+                        textColor: Colors.white,
+                        fontSize: 16.0);
                   },
                   child: Text("Submit Attendance"),
                   style: TextButton.styleFrom(
