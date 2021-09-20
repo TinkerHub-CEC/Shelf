@@ -38,8 +38,9 @@ signUp(BuildContext context, String firstname, String lastname, String email,
   jsonResponse = json.decode(response.body);
   if (response.statusCode == 201) {
     final snackBar = SnackBar(
+      duration: const Duration(seconds: 5),
       content: Text(
-          'Registration almost complete. Check the "Spam Folder" for an email to activate your account.'),
+          'Almost there, follow the instructions in the mail just received. Do check the spam folder.'),
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -48,6 +49,7 @@ signUp(BuildContext context, String firstname, String lastname, String email,
         (Route<dynamic> route) => false);
   } else {
     final snackBar = SnackBar(
+      duration: const Duration(seconds: 5),
       content: Text('You have given incorrect details'),
     );
 
