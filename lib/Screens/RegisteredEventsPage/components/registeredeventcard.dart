@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -39,7 +38,7 @@ class _RegEventCardState extends State<RegEventCard> {
       headers: {HttpHeaders.authorizationHeader: 'Bearer ' + data!},
     );
     //var response = await http.get(Uri.parse(url));
-    final body = jsonEncode(response.body);
+    //final body = jsonEncode(response.body);
     print(response.statusCode);
     print(response.body);
     if (response.statusCode == 200) {
