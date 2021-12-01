@@ -1,3 +1,4 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelf/Screens/AttendenceEventAdmin/AttendanceEventsPage.dart';
 
@@ -6,6 +7,7 @@ import 'package:shelf/Screens/CreateEvent/CreateEvent.dart';
 import 'package:shelf/Screens/Home/components/body.dart';
 import 'package:flutter/material.dart';
 import 'package:shelf/Screens/Login/login_screen.dart';
+import 'package:shelf/Screens/ProfilePage/ProfilePagenull.dart';
 import 'package:shelf/Screens/RegisteredEventsPage/registered_events.dart';
 import 'package:shelf/providers/is_user_admin.dart';
 
@@ -59,6 +61,9 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return MaterialApp(
+      theme: ThemeData.light().copyWith(
+        textTheme: GoogleFonts.rubikTextTheme(),
+      ),
       debugShowCheckedModeBanner: false,
       home: FutureBuilder<bool?>(
           future: isUserAdmin(),
@@ -146,6 +151,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                             size: 24.0,
                           ),
                           text: "Profile",
+
                         ),
                       ],
                       controller: _tabController,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; //for using device orientation
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelf/Screens/Home/homepage.dart';
 
@@ -21,7 +22,8 @@ void main() {
       MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Auth',
-        theme: ThemeData(
+        theme: ThemeData.light().copyWith(
+          textTheme: GoogleFonts.rubikTextTheme(),
           primaryColor: kPrimaryColor,
           scaffoldBackgroundColor: Colors.white,
         ),

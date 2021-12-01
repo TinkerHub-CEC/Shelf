@@ -9,7 +9,6 @@ import 'package:shelf/Screens/SubmitAttendance/submitAttendance.dart';
 import 'package:shelf/Screens/VerifyAttendance/verify_attendance.dart';
 import '../../../constants.dart';
 import 'package:shelf/Screens/Upload Image/uploadImage.dart';
-
 import '../../../size_config.dart';
 
 class AttendanceEventAdminCard extends StatefulWidget {
@@ -148,17 +147,17 @@ class _AttendanceEventAdminCardState extends State<AttendanceEventAdminCard> {
                           //color: Colors.white,
                           fontWeight: FontWeight.bold),
                     )),
-                Container(
-                  width: size.width * .08,
-                  height: size.width * .08,
-                  margin: EdgeInsets.symmetric(vertical: 10),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.black),
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: Icon(Icons.arrow_forward_outlined),
-                ),
+                //Container(
+                 // width: size.width * .08,
+                 // height: size.width * .08,
+                 // margin: EdgeInsets.symmetric(vertical: 10),
+                //  decoration: BoxDecoration(
+                //    color: Colors.white,
+                //    border: Border.all(color: Colors.black),
+                 //   borderRadius: BorderRadius.circular(100),
+                 // ),
+                //  child: Icon(Icons.arrow_forward_outlined),
+               // ),
               ]),
         ),
       ),

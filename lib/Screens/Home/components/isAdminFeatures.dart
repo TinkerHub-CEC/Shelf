@@ -23,6 +23,7 @@ class HomeAdminFeatures extends StatelessWidget {
               child: Center(
                 child: Text("All Events",
                     style: TextStyle(
+
                       fontSize: 17,
                     ),
                     textAlign: TextAlign.center),
@@ -42,6 +43,7 @@ class HomeAdminFeatures extends StatelessWidget {
                       child: Text(
                         "UPCOMING EVENTS",
                         style: TextStyle(
+
                             fontSize: SizeConfig.safeBlockHorizontal * 4.6,
                             fontWeight: FontWeight.bold),
                       ),
