@@ -156,17 +156,17 @@ class _AttendanceEventCardState extends State<AttendanceEventCard> {
                             //color: Colors.white,
                             fontWeight: FontWeight.bold),
                       )),
-                  Container(
-                    width: size.width * .08,
-                    height: size.width * .08,
-                    margin: EdgeInsets.symmetric(vertical: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.black),
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    child: Icon(Icons.arrow_forward_outlined),
-                  ),
+                  //Container(
+                  //  width: size.width * .08,
+                  //  height: size.width * .08,
+                  //  margin: EdgeInsets.symmetric(vertical: 10),
+                   // decoration: BoxDecoration(
+                   //   color: Colors.white,
+                   //   border: Border.all(color: Colors.black),
+                    //  borderRadius: BorderRadius.circular(100),
+                    //),
+                  //  child: Icon(Icons.arrow_forward_outlined),
+                 // ),
                 ]),
           ),
         ));

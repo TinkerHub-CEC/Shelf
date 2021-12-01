@@ -131,7 +131,7 @@ class _EventCardState extends State<EventCard> {
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
                         colorFilter: ColorFilter.mode(
-                            Colors.black.withOpacity(0.5), BlendMode.dstATop),
+                            Colors.black.withOpacity(0.5), BlendMode.srcATop),
                         fit: BoxFit.scaleDown,
                         image: NetworkImage(image))),
                 child: Container(
