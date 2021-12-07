@@ -91,6 +91,7 @@ class _ProfiledetailsState extends State<Profiledetails> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return MaterialApp(
 
       home: Scaffold(
@@ -101,14 +102,16 @@ class _ProfiledetailsState extends State<Profiledetails> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Container(
-                  height:1000,
-                  width:1000,
+                  width: size.width * 1,
+                  height: size.height * .90,
+                  //height:1000,
+                   //width:1000,
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    //crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       //SizedBox(height: size.height * 0.07),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(8, 30, 8, 8),
+                        padding: const EdgeInsets.fromLTRB(8, 30, 0, 8),
                         child: Row(
                           //mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -123,7 +126,7 @@ class _ProfiledetailsState extends State<Profiledetails> {
                         children:<Widget>[
 
                           Container(
-                            margin: EdgeInsets.symmetric(vertical: 90, horizontal: 25),
+                            margin: EdgeInsets.symmetric(vertical:size.height * .13, horizontal:size.width * .1,),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               border:Border.all(color:Color(0xffe3e3e3)),
@@ -154,7 +157,7 @@ class _ProfiledetailsState extends State<Profiledetails> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.fromLTRB(
-                                          170.0, 40.0, 10.0, 0.0),
+                                          150.0, 40.0, 10.0, 0.0),
                                       child: Text(snapshot.data!.roll_no),
                                     ),
                                   ],
