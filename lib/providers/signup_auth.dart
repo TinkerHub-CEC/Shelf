@@ -50,7 +50,7 @@ signUp(BuildContext context, String firstname, String lastname, String email,
   } else {
     final snackBar = SnackBar(
       duration: const Duration(seconds: 5),
-      content: Text('You have given incorrect details'),
+      content: Text('Sorry! Could not create account'),
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
