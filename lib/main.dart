@@ -27,7 +27,7 @@ void main() {
           primaryColor: kPrimaryColor,
           scaffoldBackgroundColor: Colors.white,
         ),
-        home: Homepage(),
+        home: LoginScreen(),
       ),
       // ),
     );
