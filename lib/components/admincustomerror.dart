@@ -27,24 +27,24 @@ class Customerror extends StatelessWidget {
               style: TextStyle(
                   fontSize: size.height * 0.03, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: size.height * 0.07),
-            Container(
-              width: size.width * .4,
-              height: size.height * 0.05,
-              child: TextButton(
-                onPressed: () => Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => CreateEvent()),
-                    (Route<dynamic> route) => false),
-                child: Text(
-                  "Create a event",
-                  style: TextStyle(fontSize: 16),
-                ),
-                style: TextButton.styleFrom(
-                    backgroundColor: Color.fromRGBO(255, 122, 69, 1),
-                    primary: Colors.white),
-              ),
-            ),
+            // SizedBox(height: size.height * 0.07),
+            // Container(
+            //   width: size.width * .4,
+            //   height: size.height * 0.05,
+            //   child: TextButton(
+            //     onPressed: () => Navigator.of(context).pushAndRemoveUntil(
+            //         MaterialPageRoute(
+            //             builder: (BuildContext context) => CreateEvent()),
+            //         (Route<dynamic> route) => false),
+            //     child: Text(
+            //       "Create a event",
+            //       style: TextStyle(fontSize: 16),
+            //     ),
+            //     style: TextButton.styleFrom(
+            //         backgroundColor: Color.fromRGBO(255, 122, 69, 1),
+            //         primary: Colors.white),
+            // ),
+            // ),
           ],
         ),
       ),
