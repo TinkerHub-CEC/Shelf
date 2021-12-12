@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:shelf/providers/is_event_registered.dart';
 
 Future registerTheEvent(BuildContext context, var id) async {
   try {
@@ -25,6 +26,7 @@ Future registerTheEvent(BuildContext context, var id) async {
     print(response.body);
     if (response.statusCode == 201) {
       print('success');
+      isEventRegistered(context, id);
       Navigator.of(context).pop();
     } else {
       print('error');
