@@ -45,7 +45,7 @@ Future signIn(BuildContext context, String email, String password) async {
     sharedPreferences.setString('refresh', jsonResponse['refresh']);
     sharedPreferences.setBool('islogged', true);
     final a = await getData('auth_data');
-    final b = await getData('refresh_token');
+    final b = await getData('token');
     final d = sharedPreferences.getBool('islogged');
 
     print('refresh_token: $b');
@@ -72,7 +72,7 @@ Future signIn(BuildContext context, String email, String password) async {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
     bool isTokenExpired = JwtDecoder.isExpired(jsonResponse['refresh']);
-
+    print(isTokenExpired);
     if (isTokenExpired) {
       // The user should authenticate
       print('Token Expired');

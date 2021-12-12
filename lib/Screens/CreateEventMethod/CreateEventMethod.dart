@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:image_picker/image_picker.dart';
-import 'components/topbar.dart';
+import './components/topBar.dart';
 
 enum Attendance { Method1, Method2, None }
 

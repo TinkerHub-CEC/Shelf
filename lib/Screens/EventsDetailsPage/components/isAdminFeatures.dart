@@ -6,6 +6,7 @@ import 'package:shelf/Screens/VerifyAttendance/verify_attendance.dart';
 import 'package:shelf/components/rounded_button.dart';
 import 'package:shelf/components/small_rounded_button.dart';
 import 'package:shelf/components/small_rounded_button_outlined.dart';
+import 'package:shelf/providers/is_event_registered.dart';
 
 import 'package:shelf/providers/is_user_admin.dart';
 
@@ -46,19 +47,30 @@ class EventAdminFeatures extends StatelessWidget {
                   ],
                 ));
           } else {
-            return RoundedButton(
-                text: "Register",
-                press: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ConfirmationScreen(
-                                  eventTitle: title,
-                                  eventDate: sdatetime,
-                                  eventId: eventId,
-                                )),
-                      )
-                    });
+            return FutureBuilder<bool?>(
+                future: isEventRegistered(context, eventId),
+                builder: (context, AsyncSnapshot<bool?> snapshot) {
+                  if (snapshot.data == false) {
+                    return RoundedButton(
+                        text: "Register",
+                        press: () => {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ConfirmationScreen(
+                                          eventTitle: title,
+                                          eventDate: sdatetime,
+                                          eventId: eventId,
+                                        )),
+                              )
+                            });
+                  } else {
+                    return RoundedButton(
+                        text: "Registered",
+                        press: () => {},
+                        color: Colors.grey);
+                  }
+                });
           }
         });
   }

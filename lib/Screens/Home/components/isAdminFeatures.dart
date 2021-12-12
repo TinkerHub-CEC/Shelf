@@ -21,7 +21,7 @@ class HomeAdminFeatures extends StatelessWidget {
           if (snapshot.data == true) {
             return Container(
               child: Center(
-                child: Text("Ongoing Events",
+                child: Text("All Events",
                     style: TextStyle(
 
                       fontSize: 17,

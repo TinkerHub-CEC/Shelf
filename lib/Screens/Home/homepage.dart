@@ -7,7 +7,6 @@ import 'package:shelf/Screens/CreateEvent/CreateEvent.dart';
 import 'package:shelf/Screens/Home/components/body.dart';
 import 'package:flutter/material.dart';
 import 'package:shelf/Screens/Login/login_screen.dart';
-import 'package:shelf/Screens/ProfilePage/ProfilePage.dart';
 
 import 'package:shelf/Screens/RegisteredEventsPage/registered_events.dart';
 import 'package:shelf/providers/is_user_admin.dart';
@@ -54,7 +53,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
     // ignore: todo
     // TODO: implement dispose
     super.dispose();
-    checkLoginStatus();
+
     _tabController.dispose();
   }
 

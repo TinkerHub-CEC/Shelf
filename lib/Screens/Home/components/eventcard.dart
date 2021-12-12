@@ -43,9 +43,8 @@ class _EventCardState extends State<EventCard> {
       var extractData = json.decode(response.body);
       events = extractData;
       //print(events[1]["title"]);
-      setState(() {
-        isLoading = false;
-      });
+
+      isLoading = false;
     } else {
       events = [];
       isLoading = false;
@@ -57,7 +56,6 @@ class _EventCardState extends State<EventCard> {
     // ignore: todo
     // TODO: implement dispose
     super.dispose();
-    this.fetchEvents();
   }
 
   @override

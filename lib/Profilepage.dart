@@ -7,7 +7,6 @@ import 'package:http/http.dart' as http;
 import 'package:random_color/random_color.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 import 'Api/api.dart';
 import 'Screens/Login/login_screen.dart';
 import 'components/custom_menu_bar.dart';
@@ -27,7 +26,6 @@ Future<Details> fetchDetails() async {
     // then parse the JSON.
     print(response.body);
     return Details.fromJson(jsonDecode(response.body));
-
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.
@@ -38,7 +36,7 @@ Future<Details> fetchDetails() async {
 class Details {
   var id;
   var email;
-  var  username;
+  var username;
   var first_name;
   var last_name;
   var roll_no;
@@ -58,20 +56,18 @@ class Details {
 
   factory Details.fromJson(Map<String, dynamic> json) {
     return Details(
-      id: json['id'],
-      email: json['email'],
-      username: json['username'],
-      first_name:  json['first_name'],
-      last_name: json['last_name'],
-      roll_no: json['roll_no'],
-      semester: json['semester'],
-      batch: json['batch']
-
-    );
+        id: json['id'],
+        email: json['email'],
+        username: json['username'],
+        first_name: json['first_name'],
+        last_name: json['last_name'],
+        roll_no: json['roll_no'],
+        semester: json['semester'],
+        batch: json['batch']);
   }
 }
 
-void main() => runApp( Profiledetails());
+void main() => runApp(Profiledetails());
 
 class Profiledetails extends StatefulWidget {
   const Profiledetails({Key? key}) : super(key: key);
@@ -82,7 +78,7 @@ class Profiledetails extends StatefulWidget {
 
 class _ProfiledetailsState extends State<Profiledetails> {
   late Future<Details> futureAlbum;
-  RandomColor _randomColor=RandomColor();
+  RandomColor _randomColor = RandomColor();
   @override
   void initState() {
     super.initState();
@@ -93,9 +89,8 @@ class _ProfiledetailsState extends State<Profiledetails> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return MaterialApp(
-
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-
         body: Center(
           child: FutureBuilder<Details>(
             future: futureAlbum,
@@ -105,7 +100,7 @@ class _ProfiledetailsState extends State<Profiledetails> {
                   width: size.width * 1,
                   height: size.height * .90,
                   //height:1000,
-                   //width:1000,
+                  //width:1000,
                   child: Column(
                     //crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -123,13 +118,15 @@ class _ProfiledetailsState extends State<Profiledetails> {
                         ),
                       ),
                       Stack(
-                        children:<Widget>[
-
+                        children: <Widget>[
                           Container(
-                            margin: EdgeInsets.symmetric(vertical:size.height * .13, horizontal:size.width * .1,),
+                            margin: EdgeInsets.symmetric(
+                              vertical: size.height * .13,
+                              horizontal: size.width * .1,
+                            ),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              border:Border.all(color:Color(0xffe3e3e3)),
+                              border: Border.all(color: Color(0xffe3e3e3)),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Column(
@@ -137,23 +134,27 @@ class _ProfiledetailsState extends State<Profiledetails> {
                                 Center(
                                   child: Padding(
                                     padding: const EdgeInsets.only(top: 30),
-                                    child: Text(snapshot.data!.first_name+' '+snapshot.data!.last_name,
+                                    child: Text(
+                                        snapshot.data!.first_name +
+                                            ' ' +
+                                            snapshot.data!.last_name,
                                         style: TextStyle(
                                           fontSize: 20.0,
                                           fontWeight: FontWeight.bold,
                                         )),
                                   ),
                                 ),
-
-
                                 Center(
                                   child: Text(snapshot.data!.email),
                                 ),
                                 Row(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.fromLTRB(10.0, 40.0, 0.0, 10.0),
-                                      child: Text('S'+snapshot.data!.semester+snapshot.data!.batch),
+                                      padding: const EdgeInsets.fromLTRB(
+                                          10.0, 40.0, 0.0, 10.0),
+                                      child: Text('S' +
+                                          snapshot.data!.semester +
+                                          snapshot.data!.batch),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.fromLTRB(
@@ -171,11 +172,13 @@ class _ProfiledetailsState extends State<Profiledetails> {
                               child: CircleAvatar(
                                 minRadius: 40,
                                 maxRadius: 40,
-                                backgroundColor:
-                                _randomColor.randomColor(),
-                                child: Text('${snapshot.data!.first_name[0]}',
-                                  style: TextStyle(color:Colors.white,
-                                  fontSize: 30,),
+                                backgroundColor: _randomColor.randomColor(),
+                                child: Text(
+                                  '${snapshot.data!.first_name[0]}',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 30,
+                                  ),
                                 ),
                               ),
                             ),
@@ -230,15 +233,16 @@ class _ProfiledetailsState extends State<Profiledetails> {
                         child: TextButton(
                           onPressed: () async {
                             SharedPreferences sharedPreferences =
-                            await SharedPreferences.getInstance();
+                                await SharedPreferences.getInstance();
                             sharedPreferences.setBool('islogged', false);
                             final d = sharedPreferences.getBool('islogged');
                             print('logged out - removing email: $d');
                             sharedPreferences.remove('email');
                             Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
-                                    builder: (BuildContext context) => LoginScreen()),
-                                    (Route<dynamic> route) => false);
+                                    builder: (BuildContext context) =>
+                                        LoginScreen()),
+                                (Route<dynamic> route) => false);
                           },
                           child: Text('Logout'),
                         ),
@@ -246,7 +250,7 @@ class _ProfiledetailsState extends State<Profiledetails> {
                     ],
                   ),
                 );
-                  //Text(snapshot.data!.username);
+                //Text(snapshot.data!.username);
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');
               }

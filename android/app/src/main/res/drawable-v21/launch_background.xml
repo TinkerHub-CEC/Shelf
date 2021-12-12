@@ -7,11 +7,6 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/shelf_logo" />
-    </item>
-    <item android:bottom="50dp"> // setting the image from bottom
-        <bitmap 
-            android:gravity="bottom"
-            android:src="@drawable/from_thcec"/>
+            android:src="@drawable/shelf_from_thcec" />
     </item>
 </layer-list>

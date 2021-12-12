@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shelf/components/custom_menu_bar.dart';
 import 'package:shelf/providers/confirmation_event_registrations.dart';
+import 'package:shelf/providers/is_event_registered.dart';
 import 'package:shelf/size_config.dart';
 
 class Body extends StatelessWidget {
@@ -35,7 +36,7 @@ class Body extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(18),
                 ),
-                height: SizeConfig.blockSizeVertical * 44,
+                height: SizeConfig.blockSizeVertical * 48,
                 width: SizeConfig.blockSizeHorizontal * 80,
                 child: Column(
                   children: [
@@ -69,15 +70,17 @@ class Body extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: SizeConfig.safeBlockHorizontal * 4,
                                 ))),
-                        Container(
-                            margin: EdgeInsets.only(
-                                left: size.width * 0.10,
-                                top: size.height * 0.06),
-                            child: Text(eventTitle,
-                                style: TextStyle(
-                                    fontSize:
-                                        SizeConfig.safeBlockHorizontal * 4,
-                                    fontWeight: FontWeight.bold))),
+                        Expanded(
+                          child: Container(
+                              margin: EdgeInsets.only(
+                                  left: size.width * 0.10,
+                                  top: size.height * 0.06),
+                              child: Text(eventTitle,
+                                  style: TextStyle(
+                                      fontSize:
+                                          SizeConfig.safeBlockHorizontal * 4,
+                                      fontWeight: FontWeight.bold))),
+                        ),
                       ],
                     ),
                     Row(
