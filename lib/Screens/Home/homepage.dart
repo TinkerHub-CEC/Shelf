@@ -7,11 +7,11 @@ import 'package:shelf/Screens/CreateEvent/CreateEvent.dart';
 import 'package:shelf/Screens/Home/components/body.dart';
 import 'package:flutter/material.dart';
 import 'package:shelf/Screens/Login/login_screen.dart';
-import 'package:shelf/Screens/ProfilePage/ProfilePage.dart';
+
 import 'package:shelf/Screens/RegisteredEventsPage/registered_events.dart';
 import 'package:shelf/providers/is_user_admin.dart';
 
-import '../ProfilePage/ProfilePage.dart';
+import '../../Profilepage.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -74,7 +74,7 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
                   children: <Widget>[
                     Body(),
                     RegisteredEventsPage(),
-                    ProfilePage(),
+                    Profiledetails(),
                   ],
                   physics: NeverScrollableScrollPhysics(),
                   controller: _tabController,
