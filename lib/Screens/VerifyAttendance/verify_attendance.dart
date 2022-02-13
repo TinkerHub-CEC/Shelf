@@ -1,18 +1,20 @@
+// ignore_for_file: unused_local_variable, non_constant_identifier_names
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shelf/Api/api.dart';
-import 'package:shelf/Screens/Welcome/welcome_screen.dart';
 import 'package:shelf/components/custom_menu_bar.dart';
 import 'package:shelf/models/verify_data.dart';
-import "dart:convert";
+import 'package:shelf/providers/session_timedout.dart';
 import '../../../constants.dart';
 import 'dart:async';
 
 class VerifyAttendanceScreen extends StatefulWidget {
   final eventId;
-  const VerifyAttendanceScreen(id, {
+  const VerifyAttendanceScreen(
+    id, {
     required this.eventId,
   });
 
@@ -35,6 +37,7 @@ class _VerifyAttendanceScreenState extends State<VerifyAttendanceScreen> {
         HttpHeaders.authorizationHeader: 'Bearer ' + token_data!,
       },
     );
+    print("Verify Attendance Status Code:${response.statusCode}");
     print(response.body);
     if (response.statusCode == 200) {
       setState(() {
@@ -52,13 +55,15 @@ class _VerifyAttendanceScreenState extends State<VerifyAttendanceScreen> {
         body: {'attendance': attendance});
     print(widget.eventId);
     print(response.body);
-    print(response.statusCode);
+    print("Attendance Data Status Code:${response.statusCode}");
     print(widget.eventId);
     if (response.statusCode == 200) {
       setState(() {
         data = welcomeFromJson(response.body);
         print(response.statusCode);
       });
+    } else if (response.statusCode == 401) {
+      sessionTimeOut(context);
     }
   }
 

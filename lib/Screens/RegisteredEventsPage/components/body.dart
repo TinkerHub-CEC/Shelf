@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:shelf/Screens/AttendenceEvent/AttendanceEventsPage.dart';
 import 'package:shelf/Screens/RegisteredEventsPage/components/registeredeventcard.dart';
 import 'package:shelf/components/custom_menu_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:shelf/components/rounded_button.dart';
 
 class Body extends StatelessWidget {
   @override

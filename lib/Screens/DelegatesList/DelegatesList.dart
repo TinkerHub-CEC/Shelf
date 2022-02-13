@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable, non_constant_identifier_names
+
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
@@ -6,15 +8,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelf/Api/api.dart';
 import 'package:shelf/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:http/http.dart' as http;
-import 'dart:math' as math;
-import 'package:flutter/cupertino.dart';
-import 'package:shelf/constants.dart';
 
-import 'package:open_mail_app/open_mail_app.dart';
-
-import 'package:url_launcher/url_launcher.dart';
+import 'package:shelf/providers/session_timedout.dart';
 
 // ignore: must_be_immutable
 
@@ -22,18 +19,13 @@ class DelegatesList extends StatefulWidget {
   @override
   _DelegatesListState createState() => _DelegatesListState();
   final eventId;
-  const DelegatesList(
-      {Key? key,
-        required this.eventId})
-      : super(key: key);
-
+  const DelegatesList({Key? key, required this.eventId}) : super(key: key);
 }
 
 class _DelegatesListState extends State<DelegatesList> {
-
-
-  RandomColor _randomColor=RandomColor();
-  final _random=Random();
+  RandomColor _randomColor = RandomColor();
+  // ignore: unused_field
+  final _random = Random();
   List delegates = [];
   bool isLoading = false;
   @override
@@ -42,14 +34,13 @@ class _DelegatesListState extends State<DelegatesList> {
     // TODO: implement initState
     super.initState();
     this.fetchdelegates();
-
   }
 
   fetchdelegates() async {
     setState(() {
       isLoading = true;
     });
-    var eventid=widget.eventId;
+    var eventid = widget.eventId;
     var url = "$baseUrl/api/events/$eventid/registrations/";
     final data = await getData('auth_data');
     var response = await http.get(
@@ -57,15 +48,17 @@ class _DelegatesListState extends State<DelegatesList> {
       headers: {HttpHeaders.authorizationHeader: 'Bearer ' + data!},
     );
     print(response.body);
+    print("Delegates List Status Code: ${response.statusCode}");
     if (response.statusCode == 200) {
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
-
 
       delegates = json.decode(response.body);
       setState(() {
         isLoading = false;
       });
+    } else if (response.statusCode == 401) {
+      sessionTimeOut(context);
     } else {
       delegates = [];
       isLoading = false;
@@ -112,17 +105,18 @@ class _DelegatesListState extends State<DelegatesList> {
         height: size.height * .08,
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
         decoration: BoxDecoration(
-            color: Colors.white,
-            border:Border.all(color:Color(0xffe3e3e3)),
-            borderRadius: BorderRadius.circular(5),
+          color: Colors.white,
+          border: Border.all(color: Color(0xffe3e3e3)),
+          borderRadius: BorderRadius.circular(5),
 
-            /*boxShadow: [
+          /*boxShadow: [
               BoxShadow(
                   blurRadius: 10,
                   offset: const Offset(0, 0),
                   spreadRadius: 5,
                   color: Colors.black12)
-            ]*/),
+            ]*/
+        ),
         child: ListTile(
           minVerticalPadding: 0,
           contentPadding: EdgeInsets.zero,
@@ -131,10 +125,10 @@ class _DelegatesListState extends State<DelegatesList> {
               Padding(
                 padding: const EdgeInsets.only(left: 12),
                 child: CircleAvatar(
-                  backgroundColor:
-                      _randomColor.randomColor(),
-                  child: Text('${first_name[0]}',
-                  style: TextStyle(color:Colors.white),
+                  backgroundColor: _randomColor.randomColor(),
+                  child: Text(
+                    '${first_name[0]}',
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
               ),
@@ -143,45 +137,42 @@ class _DelegatesListState extends State<DelegatesList> {
                 child: Column(
                   children: [
                     Align(
-                  alignment:Alignment.centerLeft,
+                      alignment: Alignment.centerLeft,
                       child: Container(
                         width: size.width * .40,
                         child: Padding(
-                          padding: const EdgeInsets.fromLTRB(12, 8,0, 0),
+                          padding: const EdgeInsets.fromLTRB(12, 8, 0, 0),
                           child: Text(
-                            first_name+' '+last_name,
-                            style:
-                                TextStyle(fontSize: 17,),
+                            first_name + ' ' + last_name,
+                            style: TextStyle(
+                              fontSize: 17,
+                            ),
                           ),
                         ),
                       ),
-              ),
-
-
-
+                    ),
                     Align(
-                      alignment:Alignment.centerLeft,
-                       child: Container(
-                     width: size.width * .20,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 12 ),
-                        child: Text(
-                          'S' + semester + batch,
-                          style:
-                              TextStyle(fontSize: 17,),
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                        width: size.width * .20,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: Text(
+                            'S' + semester + batch,
+                            style: TextStyle(
+                              fontSize: 17,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
                     ),
                   ],
                 ),
               ),
-            Container(
-                width: size.width * .20,
-                 margin:const EdgeInsets.only(left: 30.0),child: Icon(Icons.check_circle_outline_sharp)),
-
-
-
+              Container(
+                  width: size.width * .20,
+                  margin: const EdgeInsets.only(left: 30.0),
+                  child: Icon(Icons.check_circle_outline_sharp)),
             ],
           ),
         ),
@@ -189,4 +180,3 @@ class _DelegatesListState extends State<DelegatesList> {
     );
   }
 }
-

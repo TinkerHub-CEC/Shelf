@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:shelf/providers/session_timedout.dart';
 
 Future<bool> isEventRegistered(
   BuildContext context,
@@ -28,12 +29,16 @@ Future<bool> isEventRegistered(
 
     print('Response Body: ${response.body}');
     jsonResponse = json.decode(response.body);
+    // ignore: non_constant_identifier_names
     bool registration_status = jsonResponse['registration_status'];
     print(registration_status);
     if (response.statusCode == 200 && registration_status == true) {
       print('success');
       print('true will be the output');
       return true;
+    } else if (response.statusCode == 401) {
+      sessionTimeOut(context);
+      return false;
     } else {
       print('success');
       print('false will be the output');

@@ -1,6 +1,9 @@
+// ignore_for_file: non_constant_identifier_names, unused_local_variable
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:shelf/providers/session_timedout.dart';
 
 import '../../../constants.dart';
 import 'package:http/http.dart' as http;
@@ -53,10 +56,13 @@ class _submitAttendanceState extends State<submitAttendance> {
       },
     );
     print(response.body);
+    print("Submit Attendance Status Code:${response.statusCode}");
     if (response.statusCode == 200) {
       setState(() {
         data = welcomeFromJson(response.body);
       });
+    } else if (response.statusCode == 401) {
+      sessionTimeOut(context);
     }
   }
 

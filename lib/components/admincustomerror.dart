@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shelf/Screens/CreateEvent/CreateEvent.dart';
-import 'package:shelf/Screens/Home/homepage.dart';
-import 'package:shelf/size_config.dart';
+
 
 class Customerror extends StatelessWidget {
   final String text;
