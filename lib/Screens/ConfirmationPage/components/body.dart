@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shelf/components/custom_menu_bar.dart';
 import 'package:shelf/providers/confirmation_event_registrations.dart';
-import 'package:shelf/providers/is_event_registered.dart';
 import 'package:shelf/size_config.dart';
 
 class Body extends StatelessWidget {

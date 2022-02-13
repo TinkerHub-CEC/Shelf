@@ -1,15 +1,13 @@
 import 'dart:convert';
-import 'dart:async';
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shelf/Api/api.dart';
-import 'package:shelf/Screens/EventsDetailsPage/event_screen.dart';
-import 'package:shelf/Screens/SubmitAttendance/submitAttendance.dart';
 import 'package:shelf/Screens/VerifyAttendance/verify_attendance.dart';
 import 'package:shelf/providers/session_timedout.dart';
 import '../../../constants.dart';
-import 'package:shelf/Screens/Upload Image/uploadImage.dart';
+
 import '../../../size_config.dart';
 
 class AttendanceEventAdminCard extends StatefulWidget {
@@ -34,6 +32,7 @@ class _AttendanceEventAdminCardState extends State<AttendanceEventAdminCard> {
     setState(() {
       isLoading = true;
     });
+    // ignore: non_constant_identifier_names
     var UserId = await getValue('auth_user_id');
     print(UserId);
     final url =
@@ -95,6 +94,7 @@ class _AttendanceEventAdminCardState extends State<AttendanceEventAdminCard> {
     //String date = datetime.substring(0, 10);
     //var description = events['short_description'];
     var image = events['poster'];
+    // ignore: unused_local_variable
     var method = events['attendance_method'];
     return GestureDetector(
       onTap: () {

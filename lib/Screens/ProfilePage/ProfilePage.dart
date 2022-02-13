@@ -1,11 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shelf/Screens/Login/login_screen.dart';
-import 'package:shelf/Screens/VerifyAttendance/verify_attendance.dart';
 import 'package:shelf/components/custom_menu_bar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   @override

@@ -1,15 +1,14 @@
+// ignore_for_file: camel_case_types
+
 import 'dart:io';
 import 'package:shelf/providers/session_timedout.dart';
 import 'package:shelf/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:shelf/components/custom_menu_bar.dart';
 import '../../../constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:shelf/Api/api.dart';
-import "dart:convert";
 import 'dart:async';
-import 'package:shelf/models/verify_data.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 

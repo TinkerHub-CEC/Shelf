@@ -13,7 +13,6 @@ class CustomMenuBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    Size size = MediaQuery.of(context).size;
     return Center(
       child: Container(
         margin: EdgeInsets.symmetric(

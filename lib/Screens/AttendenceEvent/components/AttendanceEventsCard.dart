@@ -1,12 +1,14 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:convert';
-import 'dart:async';
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shelf/Api/api.dart';
-import 'package:shelf/Screens/EventsDetailsPage/event_screen.dart';
+
 import 'package:shelf/Screens/SubmitAttendance/submitAttendance.dart';
-import 'package:shelf/providers/login_auth.dart';
+
 import 'package:shelf/providers/session_timedout.dart';
 import '../../../constants.dart';
 import 'package:shelf/Screens/Upload Image/uploadImage.dart';
@@ -38,6 +40,7 @@ class _AttendanceEventCardState extends State<AttendanceEventCard> {
     print(UserId);
     final url = Uri.parse('$baseUrl/api/events/active/with_attendance');
     final data = await getData('auth_data');
+    // ignore: unused_local_variable
     final token = await getData('token');
     http.Response response = await http.get(
       url,
@@ -89,6 +92,7 @@ class _AttendanceEventCardState extends State<AttendanceEventCard> {
     SizeConfig().init(context);
     print(events);
     Size size = MediaQuery.of(context).size;
+    // ignore: unused_local_variable
     var id = events['id'];
     var title = events['title'];
     //var datetime = events['start_datetime'];

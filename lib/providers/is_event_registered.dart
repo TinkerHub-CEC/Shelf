@@ -29,6 +29,7 @@ Future<bool> isEventRegistered(
 
     print('Response Body: ${response.body}');
     jsonResponse = json.decode(response.body);
+    // ignore: non_constant_identifier_names
     bool registration_status = jsonResponse['registration_status'];
     print(registration_status);
     if (response.statusCode == 200 && registration_status == true) {

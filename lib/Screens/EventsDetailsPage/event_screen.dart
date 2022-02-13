@@ -1,7 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelf/Screens/EventsDetailsPage/components/body.dart';
 import 'package:flutter/material.dart';
-import 'package:shelf/Screens/Login/login_screen.dart';
 
 class EventScreen extends StatefulWidget {
   EventScreen(this.events);

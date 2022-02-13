@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import, unused_local_variable, duplicate_ignore
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';

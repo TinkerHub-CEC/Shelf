@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 
 class TopBox extends StatelessWidget {
   @override
@@ -21,7 +19,7 @@ class TopBox extends StatelessWidget {
                     Container(
                       //padding: EdgeInsets.symmetric(),
                       alignment: Alignment.center,
-                      width: size.width *.89,// .75,
+                      width: size.width * .89, // .75,
                       height: size.height * .07,
                       decoration: BoxDecoration(
                         //color: Colors.black12,
@@ -46,21 +44,22 @@ class TopBox extends StatelessWidget {
                           Container(
                             width: 26,
                             alignment: Alignment.center,
-                              child: Icon(
-                                Icons.star_rounded,
-                                color: Color(0xffF7DD14),
-                              ),
+                            child: Icon(
+                              Icons.star_rounded,
+                              color: Color(0xffF7DD14),
+                            ),
 
-                           /* decoration: BoxDecoration(
+                            /* decoration: BoxDecoration(
                                 color: Colors.black12,
                                 shape: BoxShape.circle,
                                 border: Border.all(color: Colors.deepOrange ,width : 1)
-                            ),*/),
+                            ),*/
+                          ),
                           SizedBox(width: 10),
                           Container(
-                            //color: Colors.black,
+                              //color: Colors.black,
                               alignment: Alignment.centerLeft,
-                              width: size.width *.73,// .58,
+                              width: size.width * .73, // .58,
                               height: 30,
                               //color: Colors.red,
                               child: Text("Create Event",

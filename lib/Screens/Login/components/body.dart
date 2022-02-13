@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shelf/Screens/Login/components/background.dart';
 import 'package:shelf/Screens/Signup/signup_screen.dart';
 import 'package:shelf/components/already_have_an_account.dart';
 import 'package:shelf/components/rounded_button.dart';

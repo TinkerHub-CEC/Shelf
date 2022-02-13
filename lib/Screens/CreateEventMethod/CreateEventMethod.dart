@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:image_picker/image_picker.dart';
@@ -20,6 +19,7 @@ class _CreateEventMethodState extends State<CreateEventMethod> {
   // ignore: unused_field
   File? _image;
   Future getImage() async {
+    // ignore: deprecated_member_use
     final image = await picker.getImage(source: ImageSource.gallery);
     setState(() {
       if (image != null) {

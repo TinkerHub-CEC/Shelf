@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable, non_constant_identifier_names
+
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
@@ -6,16 +8,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelf/Api/api.dart';
 import 'package:shelf/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:http/http.dart' as http;
-import 'dart:math' as math;
-import 'package:flutter/cupertino.dart';
-import 'package:shelf/constants.dart';
 
-import 'package:open_mail_app/open_mail_app.dart';
 import 'package:shelf/providers/session_timedout.dart';
-
-import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
 
@@ -28,6 +24,7 @@ class DelegatesList extends StatefulWidget {
 
 class _DelegatesListState extends State<DelegatesList> {
   RandomColor _randomColor = RandomColor();
+  // ignore: unused_field
   final _random = Random();
   List delegates = [];
   bool isLoading = false;

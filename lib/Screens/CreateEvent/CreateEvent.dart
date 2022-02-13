@@ -1,13 +1,14 @@
+// ignore_for_file: non_constant_identifier_names, unused_field, deprecated_member_use, duplicate_ignore
+
 import 'dart:async';
-import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:shelf/Screens/CreateEventMethod/components/topBar.dart';
 import 'package:shelf/constants.dart';
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:shelf/Screens/Home/homepage.dart';
 import 'package:shelf/Api/api.dart';
@@ -160,6 +161,7 @@ class _CreateEventState extends State<CreateEvent> {
     }
   }
 
+  // ignore: unused_element
   Widget _date32Validator() {
     if (((_dateTime3.month == _dateTime2.month) &&
             (_dateTime3.year == _dateTime2.year) &&
@@ -231,6 +233,7 @@ class _CreateEventState extends State<CreateEvent> {
   File? _image;
 
   Future getImage() async {
+    // ignore: deprecated_member_use
     final image = await picker.getImage(source: ImageSource.gallery);
     setState(() {
       if (image != null) {

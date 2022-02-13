@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, duplicate_ignore
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -30,9 +32,7 @@ Future<Details> fetchDetails(BuildContext context) async {
     print(response.body);
     return Details.fromJson(jsonDecode(response.body));
   } else if (response.statusCode == 401) {
-    setState() {
-      sessionTimeOut(context);
-    }
+    sessionTimeOut(context);
 
     throw Exception('Session Timed Out Error');
   } else {
@@ -42,21 +42,25 @@ Future<Details> fetchDetails(BuildContext context) async {
   }
 }
 
+// ignore: duplicate_ignore
 class Details {
   var id;
   var email;
   var username;
   var first_name;
   var last_name;
+  // ignore: non_constant_identifier_names
   var roll_no;
   var semester;
   var batch;
 
+  // ignore: duplicate_ignore
   Details({
     required this.id,
     required this.email,
     required this.username,
     required this.first_name,
+    // ignore: non_constant_identifier_names
     required this.last_name,
     required this.roll_no,
     required this.semester,

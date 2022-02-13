@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TopBox extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -32,16 +30,16 @@ class TopBox extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         IconButton(
-                          onPressed: (
-
-                             ) { print("object");
-                           },
-                          icon: Icon(Icons.star_rounded,
-                             size:size.width*.07,
+                          onPressed: () {
+                            print("object");
+                          },
+                          icon: Icon(
+                            Icons.star_rounded,
+                            size: size.width * .07,
                             color: Colors.yellow,
-                           ),
-                         ),
-                       // SizedBox(width: size.width* .05),
+                          ),
+                        ),
+                        // SizedBox(width: size.width* .05),
                         //Container(
                         //  width: size.width* .07,
                         //  alignment: Alignment.center,
@@ -49,21 +47,21 @@ class TopBox extends StatelessWidget {
                         //    "A",
                         //    style: TextStyle(fontSize: 15),
                         //  ),
-                          // child ://CircleAvatar(
-                          // backgroundColor: Colors.white54,
-                          //backgroundImage:
-                          //   AssetImage('assets/images/h_photo.png'),
-                          //radius: 15.0,
-                          //  ),
-                         // decoration: BoxDecoration(
-                           //   color: Colors.black12,
-                            //  shape: BoxShape.circle,
-                           //   border: Border.all(
-                           //       color: Colors.deepOrange, width: 1)),
+                        // child ://CircleAvatar(
+                        // backgroundColor: Colors.white54,
+                        //backgroundImage:
+                        //   AssetImage('assets/images/h_photo.png'),
+                        //radius: 15.0,
+                        //  ),
+                        // decoration: BoxDecoration(
+                        //   color: Colors.black12,
+                        //  shape: BoxShape.circle,
+                        //   border: Border.all(
+                        //       color: Colors.deepOrange, width: 1)),
                         //),
                         //SizedBox(width: size.width* .05),
                         Container(
-                          //color: Colors.black,
+                            //color: Colors.black,
                             alignment: Alignment.centerLeft,
                             width: size.width * .70, // .58,
                             height: 30,
