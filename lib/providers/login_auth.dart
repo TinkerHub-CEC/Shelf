@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelf/Api/api.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shelf/Screens/Home/homepage.dart';
+import 'package:shelf/Screens/Login/login_screen.dart';
 import '../constants.dart';
 
 Future signIn(BuildContext context, String email, String password) async {
@@ -35,8 +37,15 @@ Future signIn(BuildContext context, String email, String password) async {
 
   print('Response Status: ${response.statusCode}');
   print('Response Body: ${response.body}');
+  if (response.statusCode == 401) {
+    final snackBar = SnackBar(
+      duration: const Duration(seconds: 5),
+      content: Text('You have given incorrect details'),
+    );
 
-  if (response.statusCode == 200) {
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    accessWithRefresh(jsonResponse['refresh']);
+  } else if (response.statusCode == 200) {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.setString('email', email);
     storeData('auth_data', jsonResponse['access']);
@@ -64,18 +73,15 @@ Future signIn(BuildContext context, String email, String password) async {
 
     final c = await getValue('auth_user_id');
     print('auth_id: $c');
-    final snackBar = SnackBar(
-      duration: const Duration(seconds: 5),
-      content: Text('Sucessfully Logged In'),
-    );
-
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
     bool isTokenExpired = JwtDecoder.isExpired(jsonResponse['refresh']);
     print(isTokenExpired);
     if (isTokenExpired) {
       // The user should authenticate
       print('Token Expired');
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (BuildContext context) => Homepage()),
+          (Route<dynamic> route) => false);
     }
 
     // /* getExpirationDate() - this method returns the expiration date of the token */
@@ -93,19 +99,26 @@ Future signIn(BuildContext context, String email, String password) async {
     // sharedPreferences.setBool(
     //     'isAdminUser', decodedrefreshToken['is_superuser']);
     print("Token and email exist. Logging In...");
-    Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (BuildContext context) => Homepage()),
-        (Route<dynamic> route) => false);
+    final snackBar = SnackBar(
+      duration: const Duration(seconds: 5),
+      content: Text('Sucessfully Logged In'),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+    Timer(Duration(seconds: 5), () {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (BuildContext context) => Homepage()),
+          (Route<dynamic> route) => false);
+    });
 
     return true;
   } else {
     print(response.body);
-    final snackBar = SnackBar(
-      duration: const Duration(seconds: 5),
-      content: Text('You have given incorrect details'),
-    );
 
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+        (Route<dynamic> route) => false);
   }
 }
 
@@ -127,10 +140,17 @@ Future accessWithRefresh(String data) async {
   );
   final body = jsonDecode(response.body);
   print(response.body);
-  if (response.statusCode == 200) {
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  if (response.statusCode == 201) {
     storeData('auth_data', body['access']);
+    print("Getting new access token");
     return true;
   } else {
+    sharedPreferences.remove('auth_data');
+    sharedPreferences.remove('token');
+    sharedPreferences.remove('email');
+    sharedPreferences.remove('islogged');
+    print("Removed all data");
     return false;
   }
 }
