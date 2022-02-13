@@ -18,16 +18,9 @@ class _EventScreenState extends State<EventScreen> {
     // ignore: todo
     // TODO: implement initState
     super.initState();
-    checkLoginStatus();
-  }
-
-  checkLoginStatus() async {
-    sharedPreferences = await SharedPreferences.getInstance();
-    if (sharedPreferences.getString("token") == null) {
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
-          (Route<dynamic> route) => false);
-    }
+    setState(() {
+      print("initState");
+    });
   }
 
   @override

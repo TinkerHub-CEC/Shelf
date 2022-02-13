@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:shelf/providers/session_timedout.dart';
 
 Future<bool> isEventRegistered(
   BuildContext context,
@@ -34,6 +35,9 @@ Future<bool> isEventRegistered(
       print('success');
       print('true will be the output');
       return true;
+    } else if (response.statusCode == 401) {
+      sessionTimeOut(context);
+      return false;
     } else {
       print('success');
       print('false will be the output');
