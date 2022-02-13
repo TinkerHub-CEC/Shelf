@@ -34,13 +34,18 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
   }
 
   checkLoginStatus() async {
-    print("Calling checkLoginStatus");
+    print("Calling checkLoginStatus from Homepage");
     sharedPreferences = await SharedPreferences.getInstance();
 
     email = sharedPreferences.getString("email");
 
     print(email);
-    if (sharedPreferences.getString("token") == null || email == null) {
+    print("Logged in");
+    print(sharedPreferences.getString("auth_data"));
+    print(sharedPreferences.getString("token"));
+    print(sharedPreferences.getBool("islogged"));
+    print(sharedPreferences.getString("email"));
+    if (sharedPreferences.getString("auth_data") == null || email == null) {
       print("Logging Out...");
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
@@ -53,252 +58,190 @@ class _HomepageState extends State<Homepage> with TickerProviderStateMixin {
     // ignore: todo
     // TODO: implement dispose
     super.dispose();
-
-    _tabController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return MaterialApp(
-      theme: ThemeData.light().copyWith(
-        textTheme: GoogleFonts.rubikTextTheme(),
-      ),
-      debugShowCheckedModeBanner: false,
-      home: FutureBuilder<bool?>(
-          future: isUserAdmin(),
-          builder: (BuildContext context, AsyncSnapshot<bool?> snapshot) {
-            if (snapshot.data == false) {
-              return Scaffold(
-                body: TabBarView(
-                  children: <Widget>[
-                    Body(),
-                    RegisteredEventsPage(),
-                    Profiledetails(),
+    return FutureBuilder<bool?>(
+        future: isUserAdmin(),
+        builder: (BuildContext context, AsyncSnapshot<bool?> snapshot) {
+          if (snapshot.data == false) {
+            return Scaffold(
+              body: TabBarView(
+                children: <Widget>[
+                  Body(),
+                  RegisteredEventsPage(),
+                  Profiledetails(),
+                ],
+                physics: NeverScrollableScrollPhysics(),
+                controller: _tabController,
+              ),
+              bottomNavigationBar: Container(
+                decoration: BoxDecoration(
+                  //Border.all
+
+                  border: Border.all(
+                      color: Colors.grey,
+                      width: 1.0,
+                      style: BorderStyle.none), //Border.all
+
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(50.0),
+                    topRight: Radius.circular(50.0),
+                    bottomLeft: Radius.circular(50.0),
+                    bottomRight: Radius.circular(50.0),
+                  ),
+                ),
+                child: TabBar(
+                  labelColor: Colors.black,
+                  unselectedLabelColor: Color(0xFF949494),
+                  labelStyle: TextStyle(fontSize: 10.0),
+                  indicator: UnderlineTabIndicator(
+                    borderSide: BorderSide(color: Colors.black, width: 0.0),
+                    insets: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 10.0),
+                  ),
+                  indicatorColor: Colors.black,
+                  tabs: <Widget>[
+                    Tab(
+                      icon: Icon(
+                        Icons.home,
+                        size: 24.0,
+                      ),
+                      text: "Home",
+                    ),
+                    Tab(
+                      icon: Icon(
+                        Icons.emoji_events,
+                        size: 24.0,
+                      ),
+                      text: "Event",
+                    ),
+                    Tab(
+                      icon: Icon(
+                        Icons.account_circle_outlined,
+                        size: 24.0,
+                      ),
+                      text: "Profile",
+                    ),
                   ],
-                  physics: NeverScrollableScrollPhysics(),
                   controller: _tabController,
                 ),
-                bottomNavigationBar: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(
-                    32,
-                  )),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      //Border.all
-
-                      border: Border.all(
-                          color: Colors.grey,
-                          width: 1.0,
-                          style: BorderStyle.none), //Border.all
-
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(50.0),
-                        topRight: Radius.circular(50.0),
-                        bottomLeft: Radius.circular(50.0),
-                        bottomRight: Radius.circular(50.0),
-                      ),
-                      boxShadow: [
-                        //background color of box
-                        BoxShadow(
-                          color: Colors.grey,
-                          offset: const Offset(
-                            5.0,
-                            5.0,
-                          ),
-                          blurRadius: 400,
-                          spreadRadius: -8.0,
-                        ),
-
-                        BoxShadow(
-                          color: Colors.white,
-                          blurRadius: 0.0, // soften the shadow
-                          spreadRadius: 0.0, //extend the shadow
-                          offset: Offset(
-                            0.0, // Move to right 10  horizontally
-                            0.0, // Move to bottom 10 Vertically
-                          ),
-                        )
-                      ],
-                    ),
-                    child: TabBar(
-                      labelColor: Colors.black,
-                      unselectedLabelColor: Color(0xFF949494),
-                      labelStyle: TextStyle(fontSize: 10.0),
-                      indicator: UnderlineTabIndicator(
-                        borderSide: BorderSide(color: Colors.black, width: 0.0),
-                        insets: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 10.0),
-                      ),
-                      indicatorColor: Colors.black,
-                      tabs: <Widget>[
-                        Tab(
-                          icon: Icon(
-                            Icons.home,
-                            size: 24.0,
-                          ),
-                          text: "Home",
-                        ),
-                        Tab(
-                          icon: Icon(
-                            Icons.emoji_events,
-                            size: 24.0,
-                          ),
-                          text: "Event",
-                        ),
-                        Tab(
-                          icon: Icon(
-                            Icons.account_circle_outlined,
-                            size: 24.0,
-                          ),
-                          text: "Profile",
-                        ),
-                      ],
-                      controller: _tabController,
-                    ),
-                  ),
-                ),
-              );
-            } else {
-              return Scaffold(
-                floatingActionButtonLocation:
-                    FloatingActionButtonLocation.endDocked,
-                floatingActionButton: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(width: size.width * 0.06),
-                          Center(
-                            child: Container(
-                              margin: EdgeInsets.symmetric(
-                                vertical: 28,
-                              ),
-                              height: size.height * 0.1,
-                              width: size.width * 0.13,
-                              child: FloatingActionButton(
-                                backgroundColor: Colors.white,
-                                child: Container(
-                                  child: Icon(
-                                    Icons.add_circle,
-                                    color: Color(0xffFF7A45),
-                                    size: 48,
-                                  ),
+              ),
+            );
+          } else {
+            return Scaffold(
+              floatingActionButtonLocation:
+                  FloatingActionButtonLocation.endDocked,
+              floatingActionButton: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(width: size.width * 0.06),
+                        Center(
+                          child: Container(
+                            margin: EdgeInsets.symmetric(
+                              vertical: 28,
+                            ),
+                            height: size.height * 0.1,
+                            width: size.width * 0.13,
+                            child: FloatingActionButton(
+                              backgroundColor: Colors.white,
+                              child: Container(
+                                child: Icon(
+                                  Icons.add_circle,
+                                  color: Color(0xffFF7A45),
+                                  size: 48,
                                 ),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => CreateEvent()),
-                                  );
-                                },
                               ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => CreateEvent()),
+                                );
+                              },
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                body: TabBarView(
-                  children: <Widget>[
-                    Body(),
-                    // EventScreen(),
-                    // AnalyticsScreen(),
-                    AttendanceEventAdminCardPage(),
-                  ],
-                  physics: NeverScrollableScrollPhysics(),
-                  controller: _admintabController,
-                ),
-                bottomNavigationBar: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(
-                    32,
-                  )),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      //Border.all
-
-                      border: Border.all(
-                          color: Colors.grey,
-                          width: 1.0,
-                          style: BorderStyle.none), //Border.all
-
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(50.0),
-                        topRight: Radius.circular(50.0),
-                        bottomLeft: Radius.circular(50.0),
-                        bottomRight: Radius.circular(50.0),
-                      ),
-                      boxShadow: [
-                        //background color of box
-                        BoxShadow(
-                          color: Colors.grey,
-                          offset: const Offset(
-                            5.0,
-                            5.0,
-                          ),
-                          blurRadius: 400,
-                          spreadRadius: -8.0,
-                        ),
-
-                        BoxShadow(
-                          color: Colors.white,
-                          blurRadius: 0.0, // soften the shadow
-                          spreadRadius: 0.0, //extend the shadow
-                          offset: Offset(
-                            0.0, // Move to right 10  horizontally
-                            0.0, // Move to bottom 10 Vertically
-                          ),
-                        )
-                      ],
-                    ),
-                    child: TabBar(
-                      labelColor: Colors.black,
-                      unselectedLabelColor: Color(0xFF949494),
-                      labelStyle: TextStyle(fontSize: 10.0),
-                      indicator: UnderlineTabIndicator(
-                        borderSide: BorderSide(color: Colors.black, width: 0.0),
-                        insets: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 10.0),
-                      ),
-                      indicatorColor: Colors.black,
-                      tabs: <Widget>[
-                        Tab(
-                          icon: Icon(
-                            Icons.home,
-                            size: 24.0,
-                          ),
-                          text: "Home",
-                        ),
-                        // Tab(
-                        //   icon: Icon(
-                        //     Icons.emoji_events,
-                        //     size: 24.0,
-                        //   ),
-                        //   text: "Event",
-                        // ),
-                        // Tab(
-                        //   icon: Icon(
-                        //     Icons.analytics_outlined,
-                        //     size: 24.0,
-                        //   ),
-                        //   text: "Analytics",
-                        // ),
-                        Tab(
-                          icon: Icon(
-                            Icons.mark_chat_read_outlined,
-                            size: 24.0,
-                          ),
-                          text: "Attendance",
                         ),
                       ],
-                      controller: _admintabController,
                     ),
                   ),
+                ],
+              ),
+              body: TabBarView(
+                children: <Widget>[
+                  Body(),
+                  // EventScreen(),
+                  // AnalyticsScreen(),
+                  AttendanceEventAdminCardPage(),
+                ],
+                physics: NeverScrollableScrollPhysics(),
+                controller: _admintabController,
+              ),
+              bottomNavigationBar: Container(
+                decoration: BoxDecoration(
+                  //Border.all
+
+                  border: Border.all(
+                      color: Colors.grey,
+                      width: 1.0,
+                      style: BorderStyle.none), //Border.all
+
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(50.0),
+                    topRight: Radius.circular(50.0),
+                    bottomLeft: Radius.circular(50.0),
+                    bottomRight: Radius.circular(50.0),
+                  ),
                 ),
-              );
-            }
-          }),
-    );
+                child: TabBar(
+                  labelColor: Colors.black,
+                  unselectedLabelColor: Color(0xFF949494),
+                  labelStyle: TextStyle(fontSize: 10.0),
+                  indicator: UnderlineTabIndicator(
+                    borderSide: BorderSide(color: Colors.black, width: 0.0),
+                    insets: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 10.0),
+                  ),
+                  indicatorColor: Colors.black,
+                  tabs: <Widget>[
+                    Tab(
+                      icon: Icon(
+                        Icons.home,
+                        size: 24.0,
+                      ),
+                      text: "Home",
+                    ),
+                    // Tab(
+                    //   icon: Icon(
+                    //     Icons.emoji_events,
+                    //     size: 24.0,
+                    //   ),
+                    //   text: "Event",
+                    // ),
+                    // Tab(
+                    //   icon: Icon(
+                    //     Icons.analytics_outlined,
+                    //     size: 24.0,
+                    //   ),
+                    //   text: "Analytics",
+                    // ),
+                    Tab(
+                      icon: Icon(
+                        Icons.mark_chat_read_outlined,
+                        size: 24.0,
+                      ),
+                      text: "Attendance",
+                    ),
+                  ],
+                  controller: _admintabController,
+                ),
+              ),
+            );
+          }
+        });
   }
 }

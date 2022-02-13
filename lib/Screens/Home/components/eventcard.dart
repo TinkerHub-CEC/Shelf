@@ -1,9 +1,14 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelf/Api/api.dart';
 import 'package:shelf/Screens/EventsDetailsPage/event_screen.dart';
+import 'package:shelf/Screens/Login/login_screen.dart';
+import 'package:shelf/providers/login_auth.dart';
+import 'package:shelf/providers/session_timedout.dart';
 import 'package:shelf/size_config.dart';
 import '../../../constants.dart';
 import 'package:intl/intl.dart';
@@ -32,6 +37,7 @@ class _EventCardState extends State<EventCard> {
 
     final url = Uri.parse("$baseUrl/api/events/");
     final data = await getData('auth_data');
+    final token = await getData('token');
     http.Response response = await http.get(
       url,
       headers: {HttpHeaders.authorizationHeader: 'Bearer ' + data!},
@@ -39,12 +45,17 @@ class _EventCardState extends State<EventCard> {
     //var response = await http.get(Uri.parse(url));
 
     print(response.body);
+    print("Home Events Status Code:${response.statusCode}");
     if (response.statusCode == 200) {
       var extractData = json.decode(response.body);
       events = extractData;
       //print(events[1]["title"]);
       setState(() {
         isLoading = false;
+      });
+    } else if (response.statusCode == 401) {
+      setState(() async {
+        sessionTimeOut(context);
       });
     } else {
       events = [];
