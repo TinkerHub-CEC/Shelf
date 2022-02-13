@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:shelf/Api/api.dart';
 import 'package:shelf/Screens/EventsDetailsPage/event_screen.dart';
+import 'package:shelf/providers/session_timedout.dart';
 import 'package:shelf/size_config.dart';
 import '../../../constants.dart';
 
@@ -39,7 +40,7 @@ class _RegEventCardState extends State<RegEventCard> {
     );
     //var response = await http.get(Uri.parse(url));
     //final body = jsonEncode(response.body);
-    print(response.statusCode);
+    print("Registerd Events Status Code:${response.statusCode}");
     print(response.body);
     if (response.statusCode == 200) {
       var extractData = json.decode(response.body);
@@ -48,6 +49,8 @@ class _RegEventCardState extends State<RegEventCard> {
       setState(() {
         isLoading = false;
       });
+    } else if (response.statusCode == 401) {
+      sessionTimeOut(context);
     } else {
       events = [];
       isLoading = false;
@@ -124,8 +127,10 @@ class _RegEventCardState extends State<RegEventCard> {
                     color: Colors.grey[600],
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
-                        colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.dstATop),
-                        fit: BoxFit.scaleDown, image: NetworkImage(image))),
+                        colorFilter: ColorFilter.mode(
+                            Colors.black.withOpacity(0.5), BlendMode.dstATop),
+                        fit: BoxFit.scaleDown,
+                        image: NetworkImage(image))),
                 child: Container(
                     margin: EdgeInsets.all(15),
                     alignment: Alignment.bottomLeft,

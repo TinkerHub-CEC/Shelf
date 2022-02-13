@@ -7,6 +7,7 @@ import 'package:shelf/Api/api.dart';
 import 'package:shelf/Screens/EventsDetailsPage/event_screen.dart';
 import 'package:shelf/Screens/SubmitAttendance/submitAttendance.dart';
 import 'package:shelf/Screens/VerifyAttendance/verify_attendance.dart';
+import 'package:shelf/providers/session_timedout.dart';
 import '../../../constants.dart';
 import 'package:shelf/Screens/Upload Image/uploadImage.dart';
 import '../../../size_config.dart';
@@ -45,6 +46,7 @@ class _AttendanceEventAdminCardState extends State<AttendanceEventAdminCard> {
     //var response = await http.get(Uri.parse(url));
 
     print(response.body);
+    print("Attendance Events Card Status Code:${response.statusCode}");
     if (response.statusCode == 200) {
       var extractData = json.decode(response.body);
       events = extractData;
@@ -52,6 +54,8 @@ class _AttendanceEventAdminCardState extends State<AttendanceEventAdminCard> {
       setState(() {
         isLoading = false;
       });
+    } else if (response.statusCode == 401) {
+      sessionTimeOut(context);
     } else {
       events = [];
       isLoading = false;
@@ -148,16 +152,16 @@ class _AttendanceEventAdminCardState extends State<AttendanceEventAdminCard> {
                           fontWeight: FontWeight.bold),
                     )),
                 //Container(
-                 // width: size.width * .08,
-                 // height: size.width * .08,
-                 // margin: EdgeInsets.symmetric(vertical: 10),
+                // width: size.width * .08,
+                // height: size.width * .08,
+                // margin: EdgeInsets.symmetric(vertical: 10),
                 //  decoration: BoxDecoration(
                 //    color: Colors.white,
                 //    border: Border.all(color: Colors.black),
-                 //   borderRadius: BorderRadius.circular(100),
-                 // ),
+                //   borderRadius: BorderRadius.circular(100),
+                // ),
                 //  child: Icon(Icons.arrow_forward_outlined),
-               // ),
+                // ),
               ]),
         ),
       ),

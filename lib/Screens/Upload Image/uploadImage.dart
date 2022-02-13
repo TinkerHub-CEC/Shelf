@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:shelf/providers/session_timedout.dart';
 import 'package:shelf/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -56,7 +57,7 @@ class _uploadImageState extends State<uploadImage> {
 
     http.StreamedResponse response = await sendRequest.send();
     final finalResp = await http.Response.fromStream(response);
-    print(finalResp.statusCode);
+    print("Upload Image Status Code:${finalResp.statusCode}");
     if (finalResp.statusCode == 201) {
       Fluttertoast.showToast(
           msg: "Image uploaded",
@@ -66,6 +67,8 @@ class _uploadImageState extends State<uploadImage> {
           backgroundColor: Colors.grey[800],
           textColor: Colors.white,
           fontSize: 16.0);
+    } else if (response.statusCode == 401) {
+      sessionTimeOut(context);
     }
   }
 

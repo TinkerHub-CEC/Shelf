@@ -11,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shelf/Screens/Home/homepage.dart';
 import 'package:shelf/Api/api.dart';
+import 'package:shelf/providers/session_timedout.dart';
 
 enum Attendance { Method1, Method2, None }
 
@@ -287,9 +288,7 @@ class _CreateEventState extends State<CreateEvent> {
   }
 
   Widget build(BuildContext context) {
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    Size size = MediaQuery.of(context).size;
 
     return MaterialApp(
       home: SafeArea(
@@ -356,7 +355,7 @@ class _CreateEventState extends State<CreateEvent> {
                                       decoration: InputDecoration(
                                           hintText: "Event Name",
                                           contentPadding:
-                                          const EdgeInsets.only(left: 12),
+                                              const EdgeInsets.only(left: 12),
                                           /* labelText:'Event Name',*/
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: const BorderSide(
@@ -423,7 +422,7 @@ class _CreateEventState extends State<CreateEvent> {
                                       decoration: InputDecoration(
                                           hintText: "Short Description",
                                           contentPadding:
-                                          const EdgeInsets.only(left: 12),
+                                              const EdgeInsets.only(left: 12),
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: const BorderSide(
                                                 color: Colors.deepOrange,
@@ -490,8 +489,8 @@ class _CreateEventState extends State<CreateEvent> {
                                       decoration: InputDecoration(
                                           hintText: "Long Description",
                                           contentPadding:
-                                          const EdgeInsets.fromLTRB(
-                                              12.0, 12.0, 0.0, 0.0),
+                                              const EdgeInsets.fromLTRB(
+                                                  12.0, 12.0, 0.0, 0.0),
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: const BorderSide(
                                                 color: Colors.deepOrange,
@@ -559,7 +558,7 @@ class _CreateEventState extends State<CreateEvent> {
                                       decoration: InputDecoration(
                                           hintText: "Max Participants",
                                           contentPadding:
-                                          const EdgeInsets.only(left: 12),
+                                              const EdgeInsets.only(left: 12),
                                           /*labelText:'Max Participants',*/
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: const BorderSide(
@@ -630,7 +629,7 @@ class _CreateEventState extends State<CreateEvent> {
                                       decoration: InputDecoration(
                                           hintText: "Venue",
                                           contentPadding:
-                                          const EdgeInsets.only(left: 12),
+                                              const EdgeInsets.only(left: 12),
                                           /*labelText:'Venue',*/
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: const BorderSide(
@@ -694,21 +693,17 @@ class _CreateEventState extends State<CreateEvent> {
                                             ),
                                             Padding(
                                               padding:
-                                              const EdgeInsets.all(8.0),
+                                                  const EdgeInsets.all(8.0),
                                               child: Text(
-                                                  '${_dateTime1
-                                                      .day}/${_dateTime1
-                                                      .month}/${_dateTime1
-                                                      .year}'),
+                                                  '${_dateTime1.day}/${_dateTime1.month}/${_dateTime1.year}'),
                                             ),
                                             Text(
-                                                '${time1.hour}:${time1
-                                                    .minute}'),
+                                                '${time1.hour}:${time1.minute}'),
                                           ],
                                         ),
                                         Padding(
                                           padding:
-                                          const EdgeInsets.only(left: 150),
+                                              const EdgeInsets.only(left: 150),
                                           child: Row(
                                             children: [
                                               IconButton(
@@ -731,25 +726,21 @@ class _CreateEventState extends State<CreateEvent> {
                                               padding: const EdgeInsets.only(
                                                   left: 15.0),
                                               child:
-                                              Text('Registration ends:  '),
+                                                  Text('Registration ends:  '),
                                             ),
                                             Padding(
                                               padding:
-                                              const EdgeInsets.all(8.0),
+                                                  const EdgeInsets.all(8.0),
                                               child: Text(
-                                                  '${_dateTime2
-                                                      .day}/${_dateTime2
-                                                      .month}/${_dateTime2
-                                                      .year}'),
+                                                  '${_dateTime2.day}/${_dateTime2.month}/${_dateTime2.year}'),
                                             ),
                                             Text(
-                                                '${time2.hour}:${time2
-                                                    .minute}'),
+                                                '${time2.hour}:${time2.minute}'),
                                           ],
                                         ),
                                         Padding(
                                           padding:
-                                          const EdgeInsets.only(left: 150),
+                                              const EdgeInsets.only(left: 150),
                                           child: Row(
                                             children: [
                                               IconButton(
@@ -786,21 +777,17 @@ class _CreateEventState extends State<CreateEvent> {
                                             ),
                                             Padding(
                                               padding:
-                                              const EdgeInsets.all(8.0),
+                                                  const EdgeInsets.all(8.0),
                                               child: Text(
-                                                  '${_dateTime3
-                                                      .day}/${_dateTime3
-                                                      .month}/${_dateTime3
-                                                      .year}'),
+                                                  '${_dateTime3.day}/${_dateTime3.month}/${_dateTime3.year}'),
                                             ),
                                             Text(
-                                                '${time3.hour}:${time3
-                                                    .minute}'),
+                                                '${time3.hour}:${time3.minute}'),
                                           ],
                                         ),
                                         Padding(
                                           padding:
-                                          const EdgeInsets.only(left: 150),
+                                              const EdgeInsets.only(left: 150),
                                           child: Row(
                                             children: [
                                               IconButton(
@@ -828,22 +815,18 @@ class _CreateEventState extends State<CreateEvent> {
                                               ),
                                               Padding(
                                                 padding:
-                                                const EdgeInsets.all(8.0),
+                                                    const EdgeInsets.all(8.0),
                                                 child: Text(
-                                                    '${_dateTime4
-                                                        .day}/${_dateTime4
-                                                        .month}/${_dateTime4
-                                                        .year}'),
+                                                    '${_dateTime4.day}/${_dateTime4.month}/${_dateTime4.year}'),
                                               ),
                                               Text(
-                                                  '${time4.hour}:${time4
-                                                      .minute}'),
+                                                  '${time4.hour}:${time4.minute}'),
                                             ],
                                           ),
                                         ),
                                         Padding(
                                           padding:
-                                          const EdgeInsets.only(left: 150),
+                                              const EdgeInsets.only(left: 150),
                                           child: Row(
                                             children: [
                                               IconButton(
@@ -989,7 +972,7 @@ class _CreateEventState extends State<CreateEvent> {
                                 children: [
                                   Padding(
                                     padding:
-                                    const EdgeInsets.fromLTRB(25, 12, 0, 0),
+                                        const EdgeInsets.fromLTRB(25, 12, 0, 0),
                                     child: Text(
                                       'Attendance',
                                       style: TextStyle(
@@ -1008,7 +991,7 @@ class _CreateEventState extends State<CreateEvent> {
                                   ),
                                   ListTile(
                                     title:
-                                    const Text('CheckBox Marking Method'),
+                                        const Text('CheckBox Marking Method'),
                                     leading: Radio(
                                       value: 1,
                                       groupValue: Type,
@@ -1040,122 +1023,149 @@ class _CreateEventState extends State<CreateEvent> {
                     ],
                   ),
                 ),
-              isLoading?Padding(
-                padding: const EdgeInsets.fromLTRB(123, 63, 120, 52),
-                child: Center(
-                    child: CircularProgressIndicator(
-                      valueColor: new AlwaysStoppedAnimation<Color>(kPrimaryColor),
-                    )),
-              ):  Padding(
-                  padding: const EdgeInsets.fromLTRB(123, 63, 120, 52),
-                  child: Container(
-                    width: 140,
-                    height: 50,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.white,
-                        side: BorderSide(
-                          width: 1.0,
-                          color: Color(0xffff7a45),
-                        ),
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(50.0))),
-                      ),
-                      child: Text('Create',
-                          style: TextStyle(
-                            color: Colors.black,
-                          )),
-                      onPressed: () {
-                        if (_Form.currentState!.validate()) {
-                          setState(() {
-                            isValidForm = true;
-                            isLoading = true;
-                          });
-                        } else {
-                          setState(() {
-                            isValidForm = false;
-                          });
-                        }
-                        if (_Form.currentState!.validate()) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(isValidForm
-                                  ? ''
-                                  : "please fix errors and submit")));
-                        }
+                isLoading
+                    ? Padding(
+                        padding: const EdgeInsets.fromLTRB(123, 63, 120, 52),
+                        child: Center(
+                            child: CircularProgressIndicator(
+                          valueColor:
+                              new AlwaysStoppedAnimation<Color>(kPrimaryColor),
+                        )),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.fromLTRB(123, 63, 120, 52),
+                        child: Container(
+                          width: 140,
+                          height: 50,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.white,
+                              side: BorderSide(
+                                width: 1.0,
+                                color: Color(0xffff7a45),
+                              ),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(50.0))),
+                            ),
+                            child: Text('Create',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                )),
+                            onPressed: () {
+                              if (_Form.currentState!.validate()) {
+                                setState(() {
+                                  isValidForm = true;
+                                  isLoading = true;
+                                });
+                              } else {
+                                setState(() {
+                                  isValidForm = false;
+                                });
+                              }
+                              if (_Form.currentState!.validate()) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text(isValidForm
+                                            ? ''
+                                            : "please fix errors and submit")));
+                              }
 
-                        Datetime1 = (DateTime.parse((_dateTime1.year)
-                            .toString() +
-                            '-' +
-                            (_dateTime1.month).toString().padLeft(2, '0') +
-                            '-' +
-                            (_dateTime1.day).toString().padLeft(2, '0') +
-                            'T' +
-                            (time1.hour).toString().padLeft(2, '0') +
-                            ':' +
-                            (time1.minute).toString().padLeft(2, '0') +
-                            ':00'))
-                            .toString();
-                        Datetime2 = (DateTime.parse((_dateTime2.year)
-                            .toString() +
-                            '-' +
-                            (_dateTime2.month).toString().padLeft(2, '0') +
-                            '-' +
-                            (_dateTime2.day).toString().padLeft(2, '0') +
-                            'T' +
-                            (time2.hour).toString().padLeft(2, '0') +
-                            ':' +
-                            (time2.minute).toString().padLeft(2, '0') +
-                            ':00'))
-                            .toString();
-                        Datetime3 = (DateTime.parse((_dateTime3.year)
-                            .toString() +
-                            '-' +
-                            (_dateTime3.month).toString().padLeft(2, '0') +
-                            '-' +
-                            (_dateTime3.day).toString().padLeft(2, '0') +
-                            'T' +
-                            (time3.hour).toString().padLeft(2, '0') +
-                            ':' +
-                            (time3.minute).toString().padLeft(2, '0') +
-                            ':00'))
-                            .toString();
-                        Datetime4 = (DateTime.parse((_dateTime4.year)
-                            .toString() +
-                            '-' +
-                            (_dateTime4.month).toString().padLeft(2, '0') +
-                            '-' +
-                            (_dateTime4.day).toString().padLeft(2, '0') +
-                            'T' +
-                            (time4.hour).toString().padLeft(2, '0') +
-                            ':' +
-                            (time4.minute).toString().padLeft(2, '0') +
-                            ':00'))
-                            .toString();
-                        createEvent(
-                          EventnameController.text,
-                          Datetime3,
-                          Datetime4,
-                          VenueController.text,
-                          MaxParticipantsController.text,
-                          ShortDescriptionController.text,
-                          LongDescriptionController.text,
-                          _image,
-                          Datetime1,
-                          Datetime2,
-                          AttendanceType,
-                        );
-                      },
-                    ),
-                  ),
-                ),
+                              Datetime1 = (DateTime.parse((_dateTime1.year)
+                                          .toString() +
+                                      '-' +
+                                      (_dateTime1.month)
+                                          .toString()
+                                          .padLeft(2, '0') +
+                                      '-' +
+                                      (_dateTime1.day)
+                                          .toString()
+                                          .padLeft(2, '0') +
+                                      'T' +
+                                      (time1.hour).toString().padLeft(2, '0') +
+                                      ':' +
+                                      (time1.minute)
+                                          .toString()
+                                          .padLeft(2, '0') +
+                                      ':00'))
+                                  .toString();
+                              Datetime2 = (DateTime.parse((_dateTime2.year)
+                                          .toString() +
+                                      '-' +
+                                      (_dateTime2.month)
+                                          .toString()
+                                          .padLeft(2, '0') +
+                                      '-' +
+                                      (_dateTime2.day)
+                                          .toString()
+                                          .padLeft(2, '0') +
+                                      'T' +
+                                      (time2.hour).toString().padLeft(2, '0') +
+                                      ':' +
+                                      (time2.minute)
+                                          .toString()
+                                          .padLeft(2, '0') +
+                                      ':00'))
+                                  .toString();
+                              Datetime3 = (DateTime.parse((_dateTime3.year)
+                                          .toString() +
+                                      '-' +
+                                      (_dateTime3.month)
+                                          .toString()
+                                          .padLeft(2, '0') +
+                                      '-' +
+                                      (_dateTime3.day)
+                                          .toString()
+                                          .padLeft(2, '0') +
+                                      'T' +
+                                      (time3.hour).toString().padLeft(2, '0') +
+                                      ':' +
+                                      (time3.minute)
+                                          .toString()
+                                          .padLeft(2, '0') +
+                                      ':00'))
+                                  .toString();
+                              Datetime4 = (DateTime.parse((_dateTime4.year)
+                                          .toString() +
+                                      '-' +
+                                      (_dateTime4.month)
+                                          .toString()
+                                          .padLeft(2, '0') +
+                                      '-' +
+                                      (_dateTime4.day)
+                                          .toString()
+                                          .padLeft(2, '0') +
+                                      'T' +
+                                      (time4.hour).toString().padLeft(2, '0') +
+                                      ':' +
+                                      (time4.minute)
+                                          .toString()
+                                          .padLeft(2, '0') +
+                                      ':00'))
+                                  .toString();
+                              createEvent(
+                                EventnameController.text,
+                                Datetime3,
+                                Datetime4,
+                                VenueController.text,
+                                MaxParticipantsController.text,
+                                ShortDescriptionController.text,
+                                LongDescriptionController.text,
+                                _image,
+                                Datetime1,
+                                Datetime2,
+                                AttendanceType,
+                              );
+                            },
+                          ),
+                        ),
+                      ),
               ],
             ),
           ),
         ),
       ),
     );
-
   }
 
   Future _pickDate1(BuildContext context) async {
@@ -1308,6 +1318,8 @@ class _CreateEventState extends State<CreateEvent> {
           .add(await http.MultipartFile.fromPath('poster', _image!.path));
       http.StreamedResponse response = await sendRequest.send();
       final finalResp = await http.Response.fromStream(response);
+
+      print("Create Events Status Code:${finalResp.statusCode}");
       print(finalResp.body);
       if (finalResp.statusCode == 201) {
         setState(() {
@@ -1325,6 +1337,8 @@ class _CreateEventState extends State<CreateEvent> {
           context,
           MaterialPageRoute(builder: (context) => Homepage()),
         );
+      } else if (response.statusCode == 401) {
+        sessionTimeOut(context);
       } else {
         setState(() {
           isLoading = false;

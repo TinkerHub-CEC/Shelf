@@ -6,13 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:random_color/random_color.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shelf/providers/session_timedout.dart';
 
 import 'Api/api.dart';
 import 'Screens/Login/login_screen.dart';
 import 'components/custom_menu_bar.dart';
 import 'constants.dart';
 
-Future<Details> fetchDetails() async {
+Future<Details> fetchDetails(BuildContext context) async {
   var userId = await getValue('auth_user_id');
   var url = "$baseUrl/api/users/$userId/";
   final data = await getData('auth_data');
@@ -21,11 +22,19 @@ Future<Details> fetchDetails() async {
     headers: {HttpHeaders.authorizationHeader: 'Bearer ' + data!},
   );
 
+  print("Fetch Profile Details Status Code:${response.statusCode}");
+
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
     print(response.body);
     return Details.fromJson(jsonDecode(response.body));
+  } else if (response.statusCode == 401) {
+    setState() {
+      sessionTimeOut(context);
+    }
+
+    throw Exception('Session Timed Out Error');
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.
@@ -79,10 +88,27 @@ class Profiledetails extends StatefulWidget {
 class _ProfiledetailsState extends State<Profiledetails> {
   late Future<Details> futureAlbum;
   RandomColor _randomColor = RandomColor();
+  late SharedPreferences sharedPreferences;
+  var email;
   @override
   void initState() {
     super.initState();
-    futureAlbum = fetchDetails();
+    futureAlbum = fetchDetails(context);
+  }
+
+  checkLoginStatus() async {
+    print("Calling checkLoginStatus from ProfilePage");
+    sharedPreferences = await SharedPreferences.getInstance();
+
+    email = sharedPreferences.getString("email");
+
+    print(email);
+    if (sharedPreferences.getString("auth_data") == null || email == null) {
+      print("Logging Out...");
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+          (Route<dynamic> route) => false);
+    }
   }
 
   @override
@@ -232,17 +258,21 @@ class _ProfiledetailsState extends State<Profiledetails> {
                       Center(
                         child: TextButton(
                           onPressed: () async {
-                            SharedPreferences sharedPreferences =
-                                await SharedPreferences.getInstance();
-                            sharedPreferences.setBool('islogged', false);
-                            final d = sharedPreferences.getBool('islogged');
-                            print('logged out - removing email: $d');
-                            sharedPreferences.remove('email');
-                            Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        LoginScreen()),
-                                (Route<dynamic> route) => false);
+                            Timer(Duration(seconds: 5), () async {
+                              SharedPreferences sharedPreferences =
+                                  await SharedPreferences.getInstance();
+
+                              sharedPreferences.remove('email');
+                              sharedPreferences.remove('auth_data');
+                              sharedPreferences.remove('token');
+                              sharedPreferences.remove('islogged');
+                              print(sharedPreferences.getString("auth_data"));
+                              print(sharedPreferences.getString("token"));
+                              print(sharedPreferences.getBool("islogged"));
+                              print(sharedPreferences.getString("email"));
+
+                              checkLoginStatus();
+                            });
                           },
                           child: Text('Logout'),
                         ),

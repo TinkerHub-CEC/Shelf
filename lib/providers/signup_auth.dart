@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -36,6 +37,8 @@ signUp(BuildContext context, String firstname, String lastname, String email,
   var response = await http.post(Uri.parse("$baseUrl/api/users/"),
       body: msg, headers: headers);
   jsonResponse = json.decode(response.body);
+
+  print("Sign Up Status Code:${response.statusCode}");
   if (response.statusCode == 201) {
     final snackBar = SnackBar(
       duration: const Duration(seconds: 5),
@@ -44,9 +47,11 @@ signUp(BuildContext context, String firstname, String lastname, String email,
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
-        (Route<dynamic> route) => false);
+    Timer(Duration(seconds: 5), () {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+          (Route<dynamic> route) => false);
+    });
   } else {
     final snackBar = SnackBar(
       duration: const Duration(seconds: 5),
@@ -54,9 +59,11 @@ signUp(BuildContext context, String firstname, String lastname, String email,
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
-        (Route<dynamic> route) => false);
+    Timer(Duration(seconds: 5), () {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+          (Route<dynamic> route) => false);
+    });
   }
   // String refreshToken = jsonResponse['refresh'];
   // Map<String, dynamic> decodedToken = JwtDecoder.decode(yourToken);

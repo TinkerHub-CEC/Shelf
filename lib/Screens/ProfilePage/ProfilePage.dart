@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelf/Screens/Login/login_screen.dart';
@@ -15,15 +17,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-  }
-
-  checkLoginStatus() async {
-    sharedPreferences = await SharedPreferences.getInstance();
-    if (sharedPreferences.getString("token") == null) {
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
-          (Route<dynamic> route) => false);
-    }
   }
 
   @override
@@ -133,21 +126,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             Center(
               child: TextButton(
-                onPressed: () async {
-                  SharedPreferences sharedPreferences =
-                      await SharedPreferences.getInstance();
-                  sharedPreferences.setBool('islogged', false);
-                  final d = sharedPreferences.getBool('islogged');
-                  print('logged out - removing email: $d');
-                  sharedPreferences.remove('email');
-                  sharedPreferences.remove('auth_data');
-                  sharedPreferences.remove('token');
-                  print('logged out - removing token: $d');
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => LoginScreen()),
-                      (Route<dynamic> route) => false);
-                },
+                onPressed: () async {},
                 child: Text('Logout'),
               ),
             ),
